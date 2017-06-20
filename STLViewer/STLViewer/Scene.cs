@@ -20,37 +20,103 @@ namespace STLViewer
 {
     public partial class FormMain : Form
     {
-        
+        // ============================================================================================
+        // Глобальные переменные
+        // ============================================================================================
+        #region Глобальные переменные
+        float zoom; // масштаб модели
+        float xAxisRotation; // вращение вокруг оси x
+        float yAxisRotation; // вращение вокруг оси y
+        float far; // глубина перспективы
+        int xAxisRotationLast;
+        int yAxisRotationLast;
+        List<Face> model = new List<Face>(); // Текуща модель STL модель
+        float[] offset_model = new float[3]; // Смещение от центра модели
+        #endregion
+        // ============================================================================================
+        // Реализация методов
+        // ============================================================================================
+
         /// <summary>
-        /// Инициализация виджета
+        /// Метод инициализации переменных
+        /// </summary>
+        private void Init()
+        {
+            zoom = 1;
+            far = 200;
+            // ===
+            xAxisRotation = 0;
+            yAxisRotation = 0;
+            xAxisRotationLast = 0;
+            yAxisRotationLast = 0;
+            // ===
+            offset_model[0] = 0;
+            offset_model[1] = 0;
+            offset_model[2] = 0;
+
+        }
+
+        /// <summary>
+        /// Инициализация сцены
         /// </summary>
         private void InitScene()
         {
-            // инициализация Glut 
-            Glut.glutInit();
-            Glut.glutInitDisplayMode(Glut.GLUT_RGB | Glut.GLUT_DOUBLE | Glut.GLUT_DEPTH);
-            // отчитка окна 
-            Gl.glClearColor(0, 0, 0, 1);
-            // установка порта вывода в соответствии с размерами элемента anT 
-            Gl.glViewport(0, 0, SceneWidget.Width, SceneWidget.Height);
-            // настройка проекции 
-            Gl.glMatrixMode(Gl.GL_PROJECTION);
-            Gl.glLoadIdentity();
-            Glu.gluPerspective(45, (float)SceneWidget.Width / (float)SceneWidget.Height, 0.1, 210);
-            Gl.glMatrixMode(Gl.GL_MODELVIEW);
-            Gl.glLoadIdentity();
-            // настройка параметров OpenGL для визуализации 
-            Gl.glEnable(Gl.GL_DEPTH_TEST);
+            // инициализация Glut
+            Glut.glutInit(); 
+            Glut.glutInitDisplayMode(Glut.GLUT_RGBA | Glut.GLUT_DEPTH | Glut.GLUT_DOUBLE); 
+            // Разрешить плавное цветовое сглаживание
+            Gl.glShadeModel(Gl.GL_SMOOTH); 
+            // Разрешить тест глубины
+            Gl.glEnable(Gl.GL_DEPTH_TEST); 
+            // Разрешить очистку буфера глубины
+            Gl.glClearDepth(1.0f); 
+            // Определение типа теста глубины 
+            Gl.glDepthFunc(Gl.GL_LEQUAL); 
+            // Слегка улучшим вывод перспективы
+            Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
+            // Разрешаем смешивание
+            Gl.glEnable(Gl.GL_BLEND); 
+            // Устанавливаем тип смешивания 
+            Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
         }
 
-        private void DrawModel()
+        /// <summary>
+        /// Метод изменяет размер сцены
+        /// </summary>
+        private void ResizeScene()
+        {
+            // Предупредим деление на нуль
+            if (SceneWidget.Height == 0)
+            {
+                SceneWidget.Height = 1;
+            }
+            // Сбрасываем текущую область просмотра
+            Gl.glViewport(0, 0, SceneWidget.Width, SceneWidget.Height);
+            // Выбираем матрицу проекций
+            Gl.glMatrixMode(Gl.GL_PROJECTION);
+            // Сбрасываем выбранную матрицу
+            Gl.glLoadIdentity();
+            // Вычисляем новые геометрические размеры сцены
+            Glu.gluPerspective(45.0f, (float)SceneWidget.Width / (float)SceneWidget.Height, 0.1f, far);
+            // Выбираем матрицу вида модели
+            Gl.glMatrixMode(Gl.GL_MODELVIEW);
+            // Сбрасываем ее; 
+            Gl.glLoadIdentity();
+        }
+
+        /// <summary>
+        /// Метод отрисовывает сцену
+        /// </summary>
+        private void DrawScene()
         {
             // Выходим, если модель не загружена
             if (model.Count == 0) return;
 
             //
-            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT); Gl.glLoadIdentity();
-            
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+
+            Gl.glPushMatrix();
+
             // описываем свойства материала модели
             float[] color = new float[4] { 1, 0, 0, 1 };
             // красный цвет   
@@ -61,8 +127,8 @@ namespace STLViewer
 
             // описываем источник света в сцене
             float[] ambient = { 255, 0, 0, 1 };
-            float[] pos = { 0, 0, 0, 1 };
-            float[] dir = { 0.5f, 0.0f, 1.0f };
+            float[] pos = { 0, 0, 0, 10 };
+            float[] dir = { 0.7f, 0.3f, 0.7f };
             Gl.glEnable(Gl.GL_LIGHTING);
             Gl.glEnable(Gl.GL_LIGHT0);
             Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, pos);
@@ -70,16 +136,24 @@ namespace STLViewer
 
             //----------------------------   
             Gl.glPushMatrix();
-            Gl.glTranslated(0, 0, -100);
 
-            Gl.glRotatef(45, 0.0f, 1.0f, 0.0f);
-            Gl.glRotatef(5, 1.0f, 0.0f, 0.0f);
+            // Выставляем модель по центру сцены
+            Gl.glTranslated(offset_model[0] / zoom, offset_model[1] / zoom, -(((offset_model[2] * 4) + 50) / zoom));
 
-            Gl.glScalef(0.5f, 0.5f, 0.5f);
+            // Смещаем модель на центр вращения
+            Gl.glTranslatef(-offset_model[0], -offset_model[1], -offset_model[2]);
 
+            // Вращаем модель
+            Gl.glRotatef(xAxisRotation, 0.0f, 1.0f, 0.0f);
+            Gl.glRotatef(yAxisRotation, 1.0f, 0.0f, 0.0f);
+
+            // Возвращаем модель на место
+            Gl.glTranslatef(-offset_model[0], -offset_model[1], -offset_model[2]);
+
+            // Масштабируем модель
+            Gl.glScalef(zoom, zoom, zoom);
 
             // ===== рисуем модель =====
-
             foreach (var face in model)
             {
                 // ===== рисуем треугольник ====
@@ -90,14 +164,152 @@ namespace STLViewer
                 Gl.glVertex3d(face.vertex3[0], face.vertex3[1], face.vertex3[2]);
                 Gl.glEnd();
             }
-
-
-
-
-
             Gl.glPopMatrix();
             Gl.glFlush();
             SceneWidget.Invalidate();
+        }
+
+        /// <summary>
+        /// Метод возвращает центр модели
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private float[] ModelCenter(List<Face> model)
+        {
+            float[] offset = new float[3];
+            float[] max = new float[3];
+            float[] min = new float[3];
+
+            // Обнуляем переменные
+            for(int i=0; i<3; i++)
+            {
+                offset[i] = 0;
+                max[i] = 0;
+                min[i] = 0;
+            }
+
+            // Перебираем все грани модели
+            foreach (var face in model)
+            {
+                // Перебираем по осям координат
+                for (int i = 0; i < 3; i++)
+                {
+                    // max
+                    if (face.vertex1[i] > max[i]) max[i] = face.vertex1[i];
+                    if (face.vertex2[i] > max[i]) max[i] = face.vertex2[i];
+                    if (face.vertex3[i] > max[i]) max[i] = face.vertex3[i];
+
+                    // min
+                    if (face.vertex1[i] < min[i]) min[i] = face.vertex1[i];
+                    if (face.vertex2[i] < min[i]) min[i] = face.vertex2[i];
+                    if (face.vertex3[i] < min[i]) min[i] = face.vertex3[i];
+                }
+            }
+
+            // Получаем смещение по осям до центра модели
+            for (int i = 0; i < 3; i++)
+            {
+                offset[i] = (max[i] - min[i]) / 2;
+            }
+
+            // Возвращаем полученный результат
+            return offset;
+        }
+
+        // ============================================================================================
+        // События виджета
+        // ============================================================================================
+
+        /// <summary>
+        /// Событие изменения размера виджета
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SceneWidget_Resize(object sender, EventArgs e)
+        {
+            ResizeScene();
+            DrawScene();
+        }
+
+        /// <summary>
+        /// Событие отрисовки виджета
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SceneWidget_Paint(object sender, PaintEventArgs e)
+        {
+            DrawScene();
+        }
+
+        /// <summary>
+        /// Событие вращения колеси мыши
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SceneWidget_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                zoom += (float)0.1;
+            }
+            else
+            {
+                zoom -= (float)0.1;
+            }
+            DrawScene();
+        }
+
+        /// <summary>
+        /// Событие перемещения мыши по виджету
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SceneWidget_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                xAxisRotation += (180 * (e.X - xAxisRotationLast) / SceneWidget.Width);
+                yAxisRotation += (180 * (e.Y - yAxisRotationLast) / SceneWidget.Height);
+                xAxisRotationLast = e.X;
+                yAxisRotationLast = e.Y;
+                DrawScene();
+            }
+            else
+            {
+                xAxisRotationLast = e.X;
+                yAxisRotationLast = e.Y;
+            }
+        }
+
+        /// <summary>
+        /// Событие нажатой клавиши на виджите
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SceneWidget_KeyDown(object sender, KeyEventArgs e)
+        {
+            float speed = 10;
+            if (e.KeyCode == Keys.W)
+            {
+                yAxisRotation -= (180 * speed / SceneWidget.Height);
+                DrawScene();
+            }
+
+            if (e.KeyCode == Keys.S)
+            {
+                yAxisRotation += (180 * speed / SceneWidget.Height);
+                DrawScene();
+            }
+
+            if(e.KeyCode == Keys.A)
+            {
+                xAxisRotation -= (180 * speed / SceneWidget.Width);
+            }
+
+            if (e.KeyCode == Keys.D)
+            {
+                xAxisRotation += (180 * speed / SceneWidget.Width);
+            }
         }
     }
 }

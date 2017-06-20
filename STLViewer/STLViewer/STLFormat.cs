@@ -33,6 +33,7 @@ namespace STLViewer
                     char[] name_char;
                     name_char = reader.ReadChars(80);
                     string name = new string(name_char); // название модели
+                    
                     //возвращаем название модели
                     model_name = name;
 
