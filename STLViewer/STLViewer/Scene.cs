@@ -32,6 +32,8 @@ namespace STLViewer
         int yAxisRotationLast;
         List<Face> model = new List<Face>(); // Текуща модель STL модель
         float[] offset_model = new float[3]; // Смещение от центра модели
+        Color color_model = new Color(); // Цвет модели
+        Color color_background = new Color(); // Цвет фона
         #endregion
         // ============================================================================================
         // Реализация методов
@@ -53,7 +55,9 @@ namespace STLViewer
             offset_model[0] = 0;
             offset_model[1] = 0;
             offset_model[2] = 0;
-
+            // ===
+            color_model = Color.Blue;
+            color_background = Color.White;
         }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace STLViewer
         {
             // инициализация Glut
             Glut.glutInit(); 
-            Glut.glutInitDisplayMode(Glut.GLUT_RGBA | Glut.GLUT_DEPTH | Glut.GLUT_DOUBLE); 
+            Glut.glutInitDisplayMode(Glut.GLUT_RGBA | Glut.GLUT_DEPTH | Glut.GLUT_DOUBLE);
             // Разрешить плавное цветовое сглаживание
             Gl.glShadeModel(Gl.GL_SMOOTH); 
             // Разрешить тест глубины
@@ -112,13 +116,15 @@ namespace STLViewer
             // Выходим, если модель не загружена
             if (model.Count == 0) return;
 
-            //
+            // Задаем цвет заднего фона
+            Gl.glClearColor(color_background.R / 255, color_background.G / 255, color_background.B / 255, color_background.A / 255);
+            // Очищаем 
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 
             Gl.glPushMatrix();
 
             // описываем свойства материала модели
-            float[] color = new float[4] { 1, 0, 0, 1 };
+            float[] color = new float[4] { color_model.R/255, color_model.G/255, color_model.B/255 ,color_model.A/255};
             // красный цвет   
             float[] shininess = new float[1] { 30 };
             Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_DIFFUSE, color); // цвет модели 
@@ -230,8 +236,9 @@ namespace STLViewer
         /// * Метод возвращает модель на центр экрана
         /// </summary>
         private void ViewOptimizate()
-        { 
-        
+        {
+            // -- To Do
+            MessageBox.Show("Заглушка ViewOptimizate");
         }
 
         /// <summary>
@@ -249,6 +256,45 @@ namespace STLViewer
             model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
             this.Text = name; // получаем имя модели
             offset_model = ModelCenter(model); // получаем центр модели
+            DrawScene(); // отрисовываем модель
+        }
+
+        /// <summary>
+        /// Метод устанавливает цвет модель
+        /// </summary>
+        private void SetColorModel()
+        {
+            if (colorDialog.ShowDialog() == DialogResult.Cancel)
+            {
+                DrawScene(); // === Отрисовываем сцену
+                return;
+            }
+            //Text = "Model Color: " + colorDialog.Color.Name +
+            //       " R:" + colorDialog.Color.R.ToString() +
+            //       " G:" + colorDialog.Color.G.ToString() +
+            //       " B:" + colorDialog.Color.B.ToString();
+
+            color_model = colorDialog.Color;
+            DrawScene(); // === Отрисовываем сцену
+        }
+
+        /// <summary>
+        /// Метод устанавливает цвет фона
+        /// </summary>
+        private void SetColorBackground()
+        {
+            if (colorDialog.ShowDialog() == DialogResult.Cancel)
+            {
+                DrawScene(); // === Отрисовываем сцену
+                return;
+            }
+            //Text = "Back Color: " + colorDialog.Color.Name +
+            //       " R:" + colorDialog.Color.R.ToString() +
+            //       " G:" + colorDialog.Color.G.ToString() +
+            //       " B:" + colorDialog.Color.B.ToString();
+
+            color_background = colorDialog.Color;
+            DrawScene(); // === Отрисовываем сцену
         }
 
         /// <summary>

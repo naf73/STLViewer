@@ -32,8 +32,14 @@ namespace STLViewer
             DrawScene();
         }
 
+        /// <summary>
+        /// Событие происходит при загрузке формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
+            #region Тестовый кусок (нужно убрать на release)
             string path_to_model;
             path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_cube.stl";
             path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_part.stl";
@@ -46,29 +52,22 @@ namespace STLViewer
             
             // Отрисовка модели
             DrawScene();
+            #endregion
         }
 
+        #region События элементов главного меню Main Menu
+
+        #region Пункт меню "File"
+
         /// <summary>
-        /// Возвращает модель в изначальное положение
+        /// Окрыть модель
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            ViewReset(); // Сброс вида сцены
-        }
-
-        /// <summary>
-        /// Открывает новую модель
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void OpenModel_MenuItem_Click(object sender, EventArgs e)
         {
             OpenModel();
         }
-
-        #region Items Main Menu
 
         /// <summary>
         /// Экспорт в картинку
@@ -80,6 +79,121 @@ namespace STLViewer
             ExportPicture();
         }
 
+        /// <summary>
+        /// * Открыть окно настроек программы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Settings_MenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Закрыть приложение
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Close_MenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         #endregion
+
+        #region Пункт меню "View"
+
+        /// <summary>
+        /// Сброс текущего вида сцены к первоначальному виду сцены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetViiew_MenuItem_Click(object sender, EventArgs e)
+        {
+            ViewReset();
+        }
+
+        /// <summary>
+        /// Оптимизация текущего вида (возвращение модели на центр сцены)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OptimizateView_MenuItem_Click(object sender, EventArgs e)
+        {
+            ViewOptimizate();
+        }
+
+        /// <summary>
+        /// Настройка цвета модели
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColorModel_MenuItem_Click(object sender, EventArgs e)
+        {
+            SetColorModel();
+        }
+
+        /// <summary>
+        /// Настройка цвета заднего фона
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColorBackground_MenuItem_Click(object sender, EventArgs e)
+        {
+            SetColorBackground();
+        }
+        #endregion
+
+        #region Пункт меню "Help"
+
+        /// <summary>
+        /// Показать справку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowHelp_MenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Показать окно о программе
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void About_MenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Меню смены локализации
+
+        /// <summary>
+        /// Выбран язык English
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void English_SelectItem_Click(object sender, EventArgs e)
+        {
+            SelectLanguage.Text = English_SelectItem.Text;
+        }
+
+        /// <summary>
+        /// Выбран язык Русский
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Rus_SelectItem_Click(object sender, EventArgs e)
+        {
+            SelectLanguage.Text = Rus_SelectItem.Text;
+        }
+
+        #endregion
+
+
     }
 }
