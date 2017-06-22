@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел1");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Узел11");
@@ -83,6 +84,12 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.TreeBDView = new System.Windows.Forms.TreeView();
+            this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.AddItem_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveItem_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpLevel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.DownLevel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.Rename_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.SceneWidget = new Tao.Platform.Windows.SimpleOpenGlControl();
             this.MainMenu.SuspendLayout();
             this.statusLine.SuspendLayout();
@@ -90,6 +97,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.contextMenuTreeView.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileModelDialog
@@ -248,14 +256,14 @@
             // ShowHelp_MenuItem
             // 
             this.ShowHelp_MenuItem.Name = "ShowHelp_MenuItem";
-            this.ShowHelp_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ShowHelp_MenuItem.Size = new System.Drawing.Size(143, 22);
             this.ShowHelp_MenuItem.Text = "Show Help ...";
             this.ShowHelp_MenuItem.Click += new System.EventHandler(this.ShowHelp_MenuItem_Click);
             // 
             // About_MenuItem
             // 
             this.About_MenuItem.Name = "About_MenuItem";
-            this.About_MenuItem.Size = new System.Drawing.Size(152, 22);
+            this.About_MenuItem.Size = new System.Drawing.Size(143, 22);
             this.About_MenuItem.Text = "About ...";
             this.About_MenuItem.Click += new System.EventHandler(this.About_MenuItem_Click);
             // 
@@ -321,6 +329,7 @@
             // 
             // TreeBDView
             // 
+            this.TreeBDView.ContextMenuStrip = this.contextMenuTreeView;
             this.TreeBDView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TreeBDView.Location = new System.Drawing.Point(0, 0);
             this.TreeBDView.Name = "TreeBDView";
@@ -352,6 +361,54 @@
             treeNode12});
             this.TreeBDView.Size = new System.Drawing.Size(259, 402);
             this.TreeBDView.TabIndex = 3;
+            this.TreeBDView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
+            this.TreeBDView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);
+            // 
+            // contextMenuTreeView
+            // 
+            this.contextMenuTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddItem_ContextMenuTreeDBView,
+            this.RemoveItem_ContextMenuTreeDBView,
+            this.UpLevel_ContextMenuTreeDBView,
+            this.DownLevel_ContextMenuTreeDBView,
+            this.Rename_ContextMenuTreeDBView});
+            this.contextMenuTreeView.Name = "contextMenuTreeView";
+            this.contextMenuTreeView.Size = new System.Drawing.Size(145, 114);
+            // 
+            // AddItem_ContextMenuTreeDBView
+            // 
+            this.AddItem_ContextMenuTreeDBView.Name = "AddItem_ContextMenuTreeDBView";
+            this.AddItem_ContextMenuTreeDBView.Size = new System.Drawing.Size(144, 22);
+            this.AddItem_ContextMenuTreeDBView.Text = "Add Item";
+            this.AddItem_ContextMenuTreeDBView.Click += new System.EventHandler(this.AddItem_ContextMenuTreeDBView_Click);
+            // 
+            // RemoveItem_ContextMenuTreeDBView
+            // 
+            this.RemoveItem_ContextMenuTreeDBView.Name = "RemoveItem_ContextMenuTreeDBView";
+            this.RemoveItem_ContextMenuTreeDBView.Size = new System.Drawing.Size(144, 22);
+            this.RemoveItem_ContextMenuTreeDBView.Text = "Remove Item";
+            this.RemoveItem_ContextMenuTreeDBView.Click += new System.EventHandler(this.RemoveItem_ContextMenuTreeDBView_Click);
+            // 
+            // UpLevel_ContextMenuTreeDBView
+            // 
+            this.UpLevel_ContextMenuTreeDBView.Name = "UpLevel_ContextMenuTreeDBView";
+            this.UpLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(144, 22);
+            this.UpLevel_ContextMenuTreeDBView.Text = "Up level";
+            this.UpLevel_ContextMenuTreeDBView.Click += new System.EventHandler(this.UpLevel_ContextMenuTreeDBView_Click);
+            // 
+            // DownLevel_ContextMenuTreeDBView
+            // 
+            this.DownLevel_ContextMenuTreeDBView.Name = "DownLevel_ContextMenuTreeDBView";
+            this.DownLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(144, 22);
+            this.DownLevel_ContextMenuTreeDBView.Text = "Down level";
+            this.DownLevel_ContextMenuTreeDBView.Click += new System.EventHandler(this.DownLevel_ContextMenuTreeDBView_Click);
+            // 
+            // Rename_ContextMenuTreeDBView
+            // 
+            this.Rename_ContextMenuTreeDBView.Name = "Rename_ContextMenuTreeDBView";
+            this.Rename_ContextMenuTreeDBView.Size = new System.Drawing.Size(144, 22);
+            this.Rename_ContextMenuTreeDBView.Text = "Rename";
+            this.Rename_ContextMenuTreeDBView.Click += new System.EventHandler(this.Rename_ContextMenuTreeDBView_Click);
             // 
             // SceneWidget
             // 
@@ -397,6 +454,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.contextMenuTreeView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,6 +492,12 @@
         private System.Windows.Forms.ToolStripMenuItem RemoveModel_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem UpLevel_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem DownLevel_MenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuTreeView;
+        private System.Windows.Forms.ToolStripMenuItem AddItem_ContextMenuTreeDBView;
+        private System.Windows.Forms.ToolStripMenuItem RemoveItem_ContextMenuTreeDBView;
+        private System.Windows.Forms.ToolStripMenuItem UpLevel_ContextMenuTreeDBView;
+        private System.Windows.Forms.ToolStripMenuItem DownLevel_ContextMenuTreeDBView;
+        private System.Windows.Forms.ToolStripMenuItem Rename_ContextMenuTreeDBView;
     }
 }
 

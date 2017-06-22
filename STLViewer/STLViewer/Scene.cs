@@ -18,6 +18,9 @@ using Tao.Platform.Windows;
 
 namespace STLViewer
 {
+    /// <summary>
+    /// Класс главного окна программы
+    /// </summary>
     public partial class FormMain : Form
     {
         // ============================================================================================
