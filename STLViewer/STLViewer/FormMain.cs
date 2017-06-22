@@ -33,7 +33,13 @@ namespace STLViewer
             // === Аргументы переданные приложению
 
             // --- To Do
-
+            if(args.Length == 1)
+            {
+                string name; // имя модели
+                model = STLFormat.LoadBinary(args[0], out name);
+                this.Text = name; // получаем имя модели
+                offset_model = ModelCenter(model); // получаем центр модели
+            }
             // ===
 
             DrawScene();

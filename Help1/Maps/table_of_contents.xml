@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<map xmlns:xsi="http://www.w3.org/2001/XInclude">
+  <topicref type="topic" id="429086874845826" build="ALL" modified="2017-06-22T20:02:38.910Z" icon="0" href="Introduction">
+    <caption translate="true">Верхнее меню</caption>
+    <topicref type="topic" id="429086991656094" build="ALL" modified="2017-06-22T20:03:50.430Z" icon="0" href="Welcome_topic">
+      <caption translate="true">Файл</caption>
+      <topicref type="topic" id="429089150408480" build="ALL" modified="2017-06-22T20:04:45.540Z" icon="0" href="Topic">
+        <caption translate="true">Открыть</caption>
+      </topicref>
+      <topicref type="topic" id="429090301916350" build="ALL" modified="2017-06-22T20:15:39.257Z" icon="0" href="Экспорткартины">
+        <caption translate="true">Экспорт картины</caption>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="429087920294222" build="ALL" modified="2017-06-22T20:17:33.540Z" icon="0" href="Topic2">
+      <caption translate="true">Вид</caption>
+      <topicref type="topic" id="429089667336360" build="ALL" modified="2017-06-22T20:18:07.028Z" icon="0" href="Topic3">
+        <caption translate="true">Сбросить вид</caption>
+      </topicref>
+      <topicref type="topic" id="429090233408654" build="ALL" modified="2017-06-22T20:19:04.023Z" icon="0" href="Topic4">
+        <caption translate="true">Оптимизировать вид</caption>
+      </topicref>
+    </topicref>
+  </topicref>
+</map>
