@@ -199,8 +199,8 @@ namespace STLViewer
             SelectLanguage.Text = Rus_SelectItem.Text;
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

@@ -72,12 +72,17 @@
             this.SelectLanguage = new System.Windows.Forms.ToolStripDropDownButton();
             this.Rus_SelectItem = new System.Windows.Forms.ToolStripMenuItem();
             this.English_SelectItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.SceneWidget = new Tao.Platform.Windows.SimpleOpenGlControl();
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.SceneWidget = new Tao.Platform.Windows.SimpleOpenGlControl();
             this.MainMenu.SuspendLayout();
             this.statusLine.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileModelDialog
@@ -92,7 +97,7 @@
             this.Help_MenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(930, 24);
+            this.MainMenu.Size = new System.Drawing.Size(777, 24);
             this.MainMenu.TabIndex = 0;
             this.MainMenu.Text = "menuStrip1";
             // 
@@ -202,9 +207,9 @@
             this.statusLine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.SelectLanguage});
-            this.statusLine.Location = new System.Drawing.Point(0, 508);
+            this.statusLine.Location = new System.Drawing.Point(0, 426);
             this.statusLine.Name = "statusLine";
-            this.statusLine.Size = new System.Drawing.Size(930, 22);
+            this.statusLine.Size = new System.Drawing.Size(777, 22);
             this.statusLine.TabIndex = 1;
             this.statusLine.Text = "statusStrip1";
             // 
@@ -229,21 +234,38 @@
             // Rus_SelectItem
             // 
             this.Rus_SelectItem.Name = "Rus_SelectItem";
-            this.Rus_SelectItem.Size = new System.Drawing.Size(152, 22);
+            this.Rus_SelectItem.Size = new System.Drawing.Size(119, 22);
             this.Rus_SelectItem.Text = "Русский";
             this.Rus_SelectItem.Click += new System.EventHandler(this.Rus_SelectItem_Click);
             // 
             // English_SelectItem
             // 
             this.English_SelectItem.Name = "English_SelectItem";
-            this.English_SelectItem.Size = new System.Drawing.Size(152, 22);
+            this.English_SelectItem.Size = new System.Drawing.Size(119, 22);
             this.English_SelectItem.Text = "English";
             this.English_SelectItem.Click += new System.EventHandler(this.English_SelectItem_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.SceneWidget);
+            this.splitContainer1.Size = new System.Drawing.Size(777, 402);
+            this.splitContainer1.SplitterDistance = 259;
+            this.splitContainer1.TabIndex = 5;
+            // 
             // treeView1
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.Location = new System.Drawing.Point(0, 24);
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             treeNode1.Name = "Узел1";
             treeNode1.Text = "Узел1";
@@ -271,8 +293,8 @@
             treeNode12.Text = "Узел0";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode12});
-            this.treeView1.Size = new System.Drawing.Size(257, 484);
-            this.treeView1.TabIndex = 2;
+            this.treeView1.Size = new System.Drawing.Size(259, 402);
+            this.treeView1.TabIndex = 3;
             // 
             // SceneWidget
             // 
@@ -285,12 +307,13 @@
             this.SceneWidget.ColorBits = ((byte)(32));
             this.SceneWidget.DepthBits = ((byte)(16));
             this.SceneWidget.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SceneWidget.Location = new System.Drawing.Point(257, 24);
+            this.SceneWidget.Location = new System.Drawing.Point(0, 0);
             this.SceneWidget.Name = "SceneWidget";
-            this.SceneWidget.Size = new System.Drawing.Size(673, 484);
+            this.SceneWidget.Size = new System.Drawing.Size(514, 402);
             this.SceneWidget.StencilBits = ((byte)(0));
-            this.SceneWidget.TabIndex = 4;
+            this.SceneWidget.TabIndex = 5;
             this.SceneWidget.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SceneWidget_KeyDown);
+            this.SceneWidget.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SceneWidget_MouseMove);
             this.SceneWidget.Resize += new System.EventHandler(this.SceneWidget_Resize);
             // 
             // FormMain
@@ -298,9 +321,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(930, 530);
-            this.Controls.Add(this.SceneWidget);
-            this.Controls.Add(this.treeView1);
+            this.ClientSize = new System.Drawing.Size(777, 448);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusLine);
             this.Controls.Add(this.MainMenu);
             this.DoubleBuffered = true;
@@ -313,6 +335,10 @@
             this.MainMenu.PerformLayout();
             this.statusLine.ResumeLayout(false);
             this.statusLine.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,13 +361,14 @@
         private System.Windows.Forms.ToolStripDropDownButton SelectLanguage;
         private System.Windows.Forms.ToolStripMenuItem Rus_SelectItem;
         private System.Windows.Forms.ToolStripMenuItem English_SelectItem;
-        private System.Windows.Forms.TreeView treeView1;
-        private Tao.Platform.Windows.SimpleOpenGlControl SceneWidget;
         private System.Windows.Forms.ToolStripMenuItem Close_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem ColorModel_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem ColorBackground_MenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileModelDialog;
         private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TreeView treeView1;
+        private Tao.Platform.Windows.SimpleOpenGlControl SceneWidget;
     }
 }
 
