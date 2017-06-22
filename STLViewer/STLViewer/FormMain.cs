@@ -16,7 +16,7 @@ namespace STLViewer
         /// <summary>
         /// Констуктор формы
         /// </summary>
-        public FormMain()
+        public FormMain(string[] args)
         {
             InitializeComponent();
             // Инициализация переменных для 3D движка
@@ -29,6 +29,13 @@ namespace STLViewer
             // Инициализация сцены
             InitScene();
             ResizeScene();
+
+            // === Аргументы переданные приложению
+
+            // --- To Do
+
+            // ===
+
             DrawScene();
         }
 
