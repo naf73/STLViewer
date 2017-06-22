@@ -227,6 +227,14 @@ namespace STLViewer
         }
 
         /// <summary>
+        /// * Метод возвращает модель на центр экрана
+        /// </summary>
+        private void ViewOptimizate()
+        { 
+        
+        }
+
+        /// <summary>
         /// Метод открывает диалоговое окно "Окрыт файл" и загружает файл модели в 3D движек
         /// </summary>
         private void OpenModel()
@@ -241,6 +249,36 @@ namespace STLViewer
             model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
             this.Text = name; // получаем имя модели
             offset_model = ModelCenter(model); // получаем центр модели
+        }
+
+        /// <summary>
+        /// Метод экпортирует текущий вид модели в файл bmp
+        /// </summary>
+        private void ExportBMP(string path)
+        {
+            int eHeigth = SceneWidget.Height;
+            int eWidth = SceneWidget.Width;
+            Rectangle area = new Rectangle(0, 0, eWidth, eHeigth);
+            Bitmap bmp = new Bitmap(eWidth, eHeigth);
+            System.Drawing.Imaging.BitmapData data = bmp.LockBits(area, System.Drawing.Imaging.ImageLockMode.WriteOnly,
+                System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            Gl.glReadBuffer(Gl.GL_FRONT);
+            Gl.glReadPixels(0, 0, 800, 600, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, data.Scan0);
+            bmp.UnlockBits(data);
+            bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            bmp.Save(path);
+        }
+
+        /// <summary>
+        /// Метод экспорта текущего вида модели в картинки
+        /// </summary>
+        private void ExportPicture()
+        {
+            saveFileModelDialog.Filter = "BMP files(*.bmp)|*.bmp|All files(*.*)|*.*";
+            saveFileModelDialog.FileName = "";
+            if (saveFileModelDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            ExportBMP(openFileModelDialog.FileName);
         }
 
         // ============================================================================================
