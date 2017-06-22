@@ -47,18 +47,18 @@ namespace STLViewer
         private void FormMain_Load(object sender, EventArgs e)
         {
             #region Тестовый кусок (нужно убрать на release)
-            string path_to_model;
-            path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_cube.stl";
-            path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_part.stl";
-            // Загружаем stl модель
-            // тестовый пример
-            string name; // имя модели
-            model = STLFormat.LoadBinary(path_to_model, out name);
-            this.Text = name; // получаем имя модели
-            offset_model = ModelCenter(model); // получаем центр модели
+            //string path_to_model;
+            //path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_cube.stl";
+            //path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_part.stl";
+            //// Загружаем stl модель
+            //// тестовый пример
+            //string name; // имя модели
+            //model = STLFormat.LoadBinary(path_to_model, out name);
+            //this.Text = name; // получаем имя модели
+            //offset_model = ModelCenter(model); // получаем центр модели
             
-            // Отрисовка модели
-            DrawScene();
+            //// Отрисовка модели
+            //DrawScene();
             #endregion
         }
 
@@ -170,7 +170,8 @@ namespace STLViewer
         /// <param name="e"></param>
         private void About_MenuItem_Click(object sender, EventArgs e)
         {
-
+            AboutSTLViewer about = new AboutSTLViewer();
+            about.ShowDialog();
         }
 
         #endregion
