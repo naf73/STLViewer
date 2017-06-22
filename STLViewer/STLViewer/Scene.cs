@@ -350,7 +350,9 @@ namespace STLViewer
         private void SceneWidget_Paint(object sender, PaintEventArgs e)
         {
             DrawScene();
+            // ====
             MainMenu.Refresh();
+            statusLine.Refresh();
         }
 
         /// <summary>
