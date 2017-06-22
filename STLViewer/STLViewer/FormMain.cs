@@ -55,9 +55,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void btnReset_Click(object sender, EventArgs e)
         {
-            Init(); // обнуляем переменные сцены
-            offset_model = ModelCenter(model); // получаем центр модели
-            DrawScene(); // отрисовываем модель
+            ViewReset(); // Сброс вида сцены
         }
 
         /// <summary>
@@ -67,16 +65,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            openFileModelDialog.Filter = "STL files(*.stl)|*.stl|All files(*.*)|*.*";
-            openFileModelDialog.FileName = "";
-            if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
-                return;
-            // получаем выбранный файл
-            string name; // имя модели
-            model.Clear(); // очищаем текущую модель
-            model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
-            this.Text = name; // получаем имя модели
-            offset_model = ModelCenter(model); // получаем центр модели
+            OpenModel();
         }
     }
 }

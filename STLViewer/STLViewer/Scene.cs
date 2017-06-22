@@ -216,6 +216,33 @@ namespace STLViewer
             return offset;
         }
 
+        /// <summary>
+        /// Метод преобразует модель на сцене в начало состояние (как при загрузке файла)
+        /// </summary>
+        private void ViewReset() 
+        {
+            Init(); // обнуляем переменные сцены
+            offset_model = ModelCenter(model); // получаем центр модели
+            DrawScene(); // отрисовываем модель
+        }
+
+        /// <summary>
+        /// Метод открывает диалоговое окно "Окрыт файл" и загружает файл модели в 3D движек
+        /// </summary>
+        private void OpenModel()
+        {
+            openFileModelDialog.Filter = "STL files(*.stl)|*.stl|All files(*.*)|*.*";
+            openFileModelDialog.FileName = "";
+            if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string name; // имя модели
+            model.Clear(); // очищаем текущую модель
+            model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
+            this.Text = name; // получаем имя модели
+            offset_model = ModelCenter(model); // получаем центр модели
+        }
+
         // ============================================================================================
         // События виджета
         // ============================================================================================
@@ -239,6 +266,7 @@ namespace STLViewer
         private void SceneWidget_Paint(object sender, PaintEventArgs e)
         {
             DrawScene();
+            MainMenu.Refresh();
         }
 
         /// <summary>
@@ -304,11 +332,13 @@ namespace STLViewer
             if(e.KeyCode == Keys.A)
             {
                 xAxisRotation -= (180 * speed / SceneWidget.Width);
+                DrawScene();
             }
 
             if (e.KeyCode == Keys.D)
             {
                 xAxisRotation += (180 * speed / SceneWidget.Width);
+                DrawScene();
             }
         }
     }
