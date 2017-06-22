@@ -67,5 +67,19 @@ namespace STLViewer
         {
             OpenModel();
         }
+
+        #region Items Main Menu
+
+        /// <summary>
+        /// Экспорт в картинку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportPicture_MenuItem_Click(object sender, EventArgs e)
+        {
+            ExportPicture();
+        }
+
+        #endregion
     }
 }

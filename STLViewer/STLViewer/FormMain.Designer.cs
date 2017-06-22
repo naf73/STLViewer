@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Узел1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Узел11");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Узел7", new System.Windows.Forms.TreeNode[] {
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Узел8");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Узел10");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Узел9", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Узел2", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Узел3");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Узел6");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Узел5", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Узел4", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Узел0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode7,
-            treeNode8,
-            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Узел1");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Узел11");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Узел7", new System.Windows.Forms.TreeNode[] {
+            treeNode14});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Узел8");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Узел10");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Узел9", new System.Windows.Forms.TreeNode[] {
+            treeNode17});
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Узел2", new System.Windows.Forms.TreeNode[] {
+            treeNode15,
+            treeNode16,
+            treeNode18});
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Узел3");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Узел6");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Узел5", new System.Windows.Forms.TreeNode[] {
+            treeNode21});
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Узел4", new System.Windows.Forms.TreeNode[] {
+            treeNode22});
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Узел0", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode19,
+            treeNode20,
+            treeNode23});
             this.openFileModelDialog = new System.Windows.Forms.OpenFileDialog();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.File_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,6 +118,7 @@
             this.ExportPicture_MenuItem.Name = "ExportPicture_MenuItem";
             this.ExportPicture_MenuItem.Size = new System.Drawing.Size(159, 22);
             this.ExportPicture_MenuItem.Text = "Export Picture ...";
+            this.ExportPicture_MenuItem.Click += new System.EventHandler(this.ExportPicture_MenuItem_Click);
             // 
             // Settings_MenuItem
             // 
@@ -215,32 +216,32 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView1.Location = new System.Drawing.Point(0, 24);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Узел1";
-            treeNode1.Text = "Узел1";
-            treeNode2.Name = "Узел11";
-            treeNode2.Text = "Узел11";
-            treeNode3.Name = "Узел7";
-            treeNode3.Text = "Узел7";
-            treeNode4.Name = "Узел8";
-            treeNode4.Text = "Узел8";
-            treeNode5.Name = "Узел10";
-            treeNode5.Text = "Узел10";
-            treeNode6.Name = "Узел9";
-            treeNode6.Text = "Узел9";
-            treeNode7.Name = "Узел2";
-            treeNode7.Text = "Узел2";
-            treeNode8.Name = "Узел3";
-            treeNode8.Text = "Узел3";
-            treeNode9.Name = "Узел6";
-            treeNode9.Text = "Узел6";
-            treeNode10.Name = "Узел5";
-            treeNode10.Text = "Узел5";
-            treeNode11.Name = "Узел4";
-            treeNode11.Text = "Узел4";
-            treeNode12.Name = "Узел0";
-            treeNode12.Text = "Узел0";
+            treeNode13.Name = "Узел1";
+            treeNode13.Text = "Узел1";
+            treeNode14.Name = "Узел11";
+            treeNode14.Text = "Узел11";
+            treeNode15.Name = "Узел7";
+            treeNode15.Text = "Узел7";
+            treeNode16.Name = "Узел8";
+            treeNode16.Text = "Узел8";
+            treeNode17.Name = "Узел10";
+            treeNode17.Text = "Узел10";
+            treeNode18.Name = "Узел9";
+            treeNode18.Text = "Узел9";
+            treeNode19.Name = "Узел2";
+            treeNode19.Text = "Узел2";
+            treeNode20.Name = "Узел3";
+            treeNode20.Text = "Узел3";
+            treeNode21.Name = "Узел6";
+            treeNode21.Text = "Узел6";
+            treeNode22.Name = "Узел5";
+            treeNode22.Text = "Узел5";
+            treeNode23.Name = "Узел4";
+            treeNode23.Text = "Узел4";
+            treeNode24.Name = "Узел0";
+            treeNode24.Text = "Узел0";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12});
+            treeNode24});
             this.treeView1.Size = new System.Drawing.Size(257, 484);
             this.treeView1.TabIndex = 2;
             // 

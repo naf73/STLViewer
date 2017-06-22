@@ -263,7 +263,7 @@ namespace STLViewer
             System.Drawing.Imaging.BitmapData data = bmp.LockBits(area, System.Drawing.Imaging.ImageLockMode.WriteOnly,
                 System.Drawing.Imaging.PixelFormat.Format24bppRgb);
             Gl.glReadBuffer(Gl.GL_FRONT);
-            Gl.glReadPixels(0, 0, 800, 600, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, data.Scan0);
+            Gl.glReadPixels(0, 0, eWidth, eHeigth, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, data.Scan0);
             bmp.UnlockBits(data);
             bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
             bmp.Save(path);
@@ -278,7 +278,7 @@ namespace STLViewer
             saveFileModelDialog.FileName = "";
             if (saveFileModelDialog.ShowDialog() == DialogResult.Cancel)
                 return;
-            ExportBMP(openFileModelDialog.FileName);
+            ExportBMP(saveFileModelDialog.FileName);
         }
 
         // ============================================================================================
