@@ -12,23 +12,43 @@ namespace STLViewer
         #region События TeeDBView
         
         /// <summary>
-        /// Событие добавления новго узла
+        /// Событие добавления нового узла тип группа
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddItem_ContextMenuTreeDBView_Click(object sender, EventArgs e)
+        private void AddGroup_ContextMenuTreeDBView_Click(object sender, EventArgs e)
         {
-            AddNode();
+            AddNodeGroup();
         }
 
         /// <summary>
-        /// Событие удаление выбранного узла
+        /// Событие удаление выбранного узла тип группа
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RemoveItem_ContextMenuTreeDBView_Click(object sender, EventArgs e)
+        private void RemoveGroup_ContextMenuTreeDBView_Click(object sender, EventArgs e)
         {
-            RemoveNode();
+            RemoveNodeGroup();
+        }
+
+        /// <summary>
+        /// Событие добавления нового узла тип модель
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddModel_ContextMenuTreeDBView_Click(object sender, EventArgs e)
+        {
+            AddNodeModel();
+        }
+
+        /// <summary>
+        /// Событие удаление выбранного узла тип модель
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RemoveModel_ContextMenuTreeDBView_Click(object sender, EventArgs e)
+        {
+            RemoveNodeModel();
         }
 
         /// <summary>
@@ -159,24 +179,58 @@ namespace STLViewer
             }
         }
 
+
+
+        #region Методы для объекта группа моделей
+
         /// <summary>
-        /// Метод удаляет выделенный узел
+        /// Метод добавляет в дерево узел тип группа
         /// </summary>
-        private void RemoveNode()
+        private void AddNodeGroup()
         {
-            if (TreeDBView.SelectedNode == null)
-                return;
-            if (MessageBox.Show("Удалить элемент?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                TreeDBView.SelectedNode.Remove();
+            // --- Дерево
+            TreeNode node = new TreeNode("Введите текст");
+            node.ImageIndex = 0;
+            if (TreeDBView.SelectedNode != null)
+            {
+
+                TreeDBView.SelectedNode.Nodes.Add(node);
+                TreeDBView.SelectedNode.Expand();
+            }
+            else
+            {
+                TreeDBView.Nodes.Add(node);
+            }
+            TreeDBView.LabelEdit = true;
+            node.BeginEdit();
+            // --- БД
+            // --- To Do
         }
 
         /// <summary>
-        /// Метод добавляет узел в дерево
+        /// Метод удаляет выделенный узел тип группа
         /// </summary>
-        private void AddNode()
+        private void RemoveNodeGroup()
         {
-            TreeNode node = new TreeNode("Введите текст");
+            // --- Дерево
+            if (TreeDBView.SelectedNode == null)
+                return;
+            if (MessageBox.Show("Удалить группу?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                TreeDBView.SelectedNode.Remove();
+            // --- БД
+            // --- To Do
 
+        }
+        #endregion
+
+        /// <summary>
+        /// Метод добавляет в дерево модель
+        /// </summary>
+        private void AddNodeModel()
+        {
+            // --- Дерево
+            TreeNode node = new TreeNode("Введите текст");
+            node.ImageIndex = 1;
             if (TreeDBView.SelectedNode != null)
             {
 
@@ -189,7 +243,27 @@ namespace STLViewer
 
             TreeDBView.LabelEdit = true;
             node.BeginEdit();
+            // --- БД
+            // --- To Do
         }
 
+        /// <summary>
+        /// Метод удаляет выделенный узел тип модель
+        /// </summary>
+        private void RemoveNodeModel()
+        {
+            // --- Дерево
+            if (TreeDBView.SelectedNode == null)
+                return;
+            
+            // Удаляем только узлы только типа модель
+            if (TreeDBView.SelectedNode.ImageIndex == 1)
+            {
+                if (MessageBox.Show("Удалить модель?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    TreeDBView.SelectedNode.Remove();
+                // --- БД
+                // --- To Do
+            }
+        }
     }
 }

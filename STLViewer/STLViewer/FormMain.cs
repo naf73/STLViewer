@@ -62,10 +62,12 @@ namespace STLViewer
             //model = STLFormat.LoadBinary(path_to_model, out name);
             //this.Text = name; // получаем имя модели
             //offset_model = ModelCenter(model); // получаем центр модели
-            
+
             //// Отрисовка модели
             //DrawScene();
             #endregion
+
+            ScanRootDir(@"D:\\Simbirsoft\\Summer_Intensity\\STLViewer\\test_db_models");
         }
 
         #region События элементов главного меню Main Menu
@@ -157,6 +159,70 @@ namespace STLViewer
         }
         #endregion
 
+        #region Пункт меню "Database"
+
+        /// <summary>
+        /// Добавление нового узла в дерево тип группа
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddGroup_MenuItem_Click(object sender, EventArgs e)
+        {
+            AddNodeGroup();
+        }
+
+        /// <summary>
+        /// Удаление выбранного узла в дереве тип группа
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RemoveGroup_MenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveNodeGroup();
+        }
+
+        /// <summary>
+        /// Добавление нового узла в дерево тип модель
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddModel_MenuItem_Click(object sender, EventArgs e)
+        {
+            // --- To Do
+        }
+
+        /// <summary>
+        /// Удаление выбранного узла в дереве тип модель
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RemoveModel_MenuItem_Click(object sender, EventArgs e)
+        {
+            // --- To Do
+        }
+
+        /// <summary>
+        /// Перемещение узла на 1 уровень вверх
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpLevel_MenuItem_Click(object sender, EventArgs e)
+        {
+            UpLevelNode();
+        }
+
+        /// <summary>
+        /// Перемещение узла на 1 уровень ввниз
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DownLevel_MenuItem_Click(object sender, EventArgs e)
+        {
+            DownLevelNode();
+        }
+
+        #endregion
+
         #region Пункт меню "Help"
 
         /// <summary>
@@ -166,7 +232,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void ShowHelp_MenuItem_Click(object sender, EventArgs e)
         {
-
+            // --- To Do
         }
 
         /// <summary>
@@ -194,6 +260,7 @@ namespace STLViewer
         private void English_SelectItem_Click(object sender, EventArgs e)
         {
             SelectLanguage.Text = English_SelectItem.Text;
+            // --- To Do
         }
 
         /// <summary>
@@ -204,11 +271,13 @@ namespace STLViewer
         private void Rus_SelectItem_Click(object sender, EventArgs e)
         {
             SelectLanguage.Text = Rus_SelectItem.Text;
+            // --- To Do
         }
 
 
-        #endregion
 
-        
+
+
+        #endregion
     }
 }
