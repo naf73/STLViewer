@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Diagnostics;
+using System.IO;
 
 namespace STLViewer
 {
@@ -235,7 +236,12 @@ namespace STLViewer
         /// <param name="e"></param>
         private void ShowHelp_MenuItem_Click(object sender, EventArgs e)
         {
-            // --- To Do
+            String helpPath = Application.StartupPath.ToString() + "\\helperStl.chm";
+            if(File.Exists(helpPath))
+            {
+            
+                Process.Start(helpPath);
+            }
         }
 
         /// <summary>
