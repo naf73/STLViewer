@@ -83,7 +83,7 @@
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.TreeBDView = new System.Windows.Forms.TreeView();
+            this.TreeDBView = new System.Windows.Forms.TreeView();
             this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddItem_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveItem_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
@@ -318,7 +318,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.TreeBDView);
+            this.splitContainer1.Panel1.Controls.Add(this.TreeDBView);
             // 
             // splitContainer1.Panel2
             // 
@@ -327,12 +327,12 @@
             this.splitContainer1.SplitterDistance = 259;
             this.splitContainer1.TabIndex = 5;
             // 
-            // TreeBDView
+            // TreeDBView
             // 
-            this.TreeBDView.ContextMenuStrip = this.contextMenuTreeView;
-            this.TreeBDView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TreeBDView.Location = new System.Drawing.Point(0, 0);
-            this.TreeBDView.Name = "TreeBDView";
+            this.TreeDBView.ContextMenuStrip = this.contextMenuTreeView;
+            this.TreeDBView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TreeDBView.Location = new System.Drawing.Point(0, 0);
+            this.TreeDBView.Name = "TreeDBView";
             treeNode1.Name = "Узел1";
             treeNode1.Text = "Узел1";
             treeNode2.Name = "Узел11";
@@ -357,12 +357,12 @@
             treeNode11.Text = "Узел4";
             treeNode12.Name = "Узел0";
             treeNode12.Text = "Узел0";
-            this.TreeBDView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.TreeDBView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode12});
-            this.TreeBDView.Size = new System.Drawing.Size(259, 402);
-            this.TreeBDView.TabIndex = 3;
-            this.TreeBDView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
-            this.TreeBDView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);
+            this.TreeDBView.Size = new System.Drawing.Size(259, 402);
+            this.TreeDBView.TabIndex = 3;
+            this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
+            this.TreeDBView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);
             // 
             // contextMenuTreeView
             // 
@@ -483,7 +483,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileModelDialog;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView TreeBDView;
+        private System.Windows.Forms.TreeView TreeDBView;
         private Tao.Platform.Windows.SimpleOpenGlControl SceneWidget;
         private System.Windows.Forms.ToolStripMenuItem Database_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddGroup_MenuItem;
