@@ -12,6 +12,49 @@ namespace STLViewer
         #region События TeeDBView
         
         /// <summary>
+        /// Событие после выбора узла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeDBView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // --- To Do
+            // можно использовать под загрузку картинки
+            if (TreeDBView.SelectedNode == null)
+                return;
+
+            if (TreeDBView.SelectedNode.ImageIndex == 3)
+            {
+                Init();
+                string name; // имя модели
+                model = STLFormat.LoadBinary(TreeDBView.SelectedNode.Name, out name);
+                NameLoadModel.Text = "Loaded model: " + name; // получаем имя модели
+                offset_model = ModelCenter(model); // получаем центр модели
+                DrawScene();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeDBView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+          // --- To Do
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeDBView_DoubleClick(object sender, EventArgs e)
+        {
+               // --- Empty Rezerv
+        }
+
+        /// <summary>
         /// Событие добавления нового узла тип группа
         /// </summary>
         /// <param name="sender"></param>

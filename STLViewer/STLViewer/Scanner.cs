@@ -75,11 +75,9 @@ namespace STLViewer
             //Добавляем новый узел в коллекцию Nodes
             //с именем текущей директории и указанием ключа 
             //со значением "Folder".
-            TreeNode curNode = addInMe.Add("Folder", directoryInfo.Name);
+            TreeNode curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, 1);
 
-            //addInMe.Add(directoryInfo.FullName, directoryInfo.Name, 
-            //тут можно указать номер картинки для узла из imageCollection);
-
+            //addInMe.Add("group", directoryInfo.Name);
             //Перебираем папки.
             foreach (System.IO.DirectoryInfo subdir in directoryInfo.GetDirectories())
             {
@@ -94,10 +92,11 @@ namespace STLViewer
                 //Добавляем новый узел в коллекцию Nodes
                 //С именем текущей директории и указанием ключа 
                 //со значением "File".
-                curNode.Nodes.Add("File", file.Name);
-
-                //curNode.Nodes.Add("File", file.Name, 
-                //тут можно указать номер картинки для узла из imageCollection);  
+                //curNode.Nodes.Add("Model", file.Name);
+                if (file.Extension == ".stl")
+                {
+                    curNode.Nodes.Add(file.FullName, file.Name, 3);
+                }
             }
         }
 

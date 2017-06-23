@@ -58,6 +58,7 @@
             this.SelectLanguage = new System.Windows.Forms.ToolStripDropDownButton();
             this.Rus_SelectItem = new System.Windows.Forms.ToolStripMenuItem();
             this.English_SelectItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NameLoadModel = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -265,7 +266,8 @@
             // 
             this.statusLine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.SelectLanguage});
+            this.SelectLanguage,
+            this.NameLoadModel});
             this.statusLine.Location = new System.Drawing.Point(0, 426);
             this.statusLine.Name = "statusLine";
             this.statusLine.Size = new System.Drawing.Size(777, 22);
@@ -304,6 +306,12 @@
             this.English_SelectItem.Text = "English";
             this.English_SelectItem.Click += new System.EventHandler(this.English_SelectItem_Click);
             // 
+            // NameLoadModel
+            // 
+            this.NameLoadModel.Name = "NameLoadModel";
+            this.NameLoadModel.Size = new System.Drawing.Size(86, 17);
+            this.NameLoadModel.Text = "Loaded model:";
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -333,6 +341,9 @@
             this.TreeDBView.Size = new System.Drawing.Size(259, 402);
             this.TreeDBView.TabIndex = 3;
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
+            this.TreeDBView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeDBView_BeforeSelect);
+            this.TreeDBView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterSelect);
+            this.TreeDBView.DoubleClick += new System.EventHandler(this.TreeDBView_DoubleClick);
             this.TreeDBView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);
             // 
             // contextMenuTreeView
@@ -401,8 +412,10 @@
             // 
             this.imageListDB.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListDB.ImageStream")));
             this.imageListDB.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListDB.Images.SetKeyName(0, "assembly.png");
-            this.imageListDB.Images.SetKeyName(1, "part.png");
+            this.imageListDB.Images.SetKeyName(0, "assembly_empty.png");
+            this.imageListDB.Images.SetKeyName(1, "assembly.png");
+            this.imageListDB.Images.SetKeyName(2, "part_empty.png");
+            this.imageListDB.Images.SetKeyName(3, "part.png");
             // 
             // SceneWidget
             // 
@@ -438,7 +451,7 @@
             this.MainMenuStrip = this.MainMenu;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "STLViewer";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
@@ -496,6 +509,7 @@
         private System.Windows.Forms.ToolStripMenuItem AddModel_ContextMenuTreeDBView;
         private System.Windows.Forms.ToolStripMenuItem RemoveModel_ContextMenuTreeDBView;
         private System.Windows.Forms.ImageList imageListDB;
+        private System.Windows.Forms.ToolStripStatusLabel NameLoadModel;
     }
 }
 

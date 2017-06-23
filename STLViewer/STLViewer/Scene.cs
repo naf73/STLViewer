@@ -59,8 +59,6 @@ namespace STLViewer
             offset_model[1] = 0;
             offset_model[2] = 0;
             // ===
-            color_model = Color.Blue;
-            color_background = Color.White;
         }
 
         /// <summary>
@@ -241,7 +239,6 @@ namespace STLViewer
         private void ViewOptimizate()
         {
             // -- To Do
-            MessageBox.Show("Заглушка ViewOptimizate");
         }
 
         /// <summary>
@@ -257,7 +254,7 @@ namespace STLViewer
             string name; // имя модели
             model.Clear(); // очищаем текущую модель
             model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
-            this.Text = name; // получаем имя модели
+            NameLoadModel.Text = "Loaded model: " + name; // получаем имя модели
             offset_model = ModelCenter(model); // получаем центр модели
             DrawScene(); // отрисовываем модель
         }

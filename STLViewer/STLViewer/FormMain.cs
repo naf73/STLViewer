@@ -30,10 +30,14 @@ namespace STLViewer
             InitScene();
             ResizeScene();
 
+            // === Инициализация цвета
+            color_model = Color.Blue;
+            color_background = Color.White;
+
             // === Аргументы переданные приложению
 
             // --- To Do
-            if(args.Length == 1)
+            if (args.Length == 1)
             {
                 string name; // имя модели
                 model = STLFormat.LoadBinary(args[0], out name);
@@ -66,7 +70,6 @@ namespace STLViewer
             //// Отрисовка модели
             //DrawScene();
             #endregion
-
             ScanRootDir(@"D:\\Simbirsoft\\Summer_Intensity\\STLViewer\\test_db_models");
         }
 
@@ -278,6 +281,10 @@ namespace STLViewer
 
 
 
+
+
+
         #endregion
+
     }
 }
