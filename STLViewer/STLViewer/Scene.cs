@@ -254,7 +254,7 @@ namespace STLViewer
             string name; // имя модели
             model.Clear(); // очищаем текущую модель
             model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
-            NameLoadModel.Text = "Loaded model: " + name; // получаем имя модели
+            NameLoadModel.Text = name; // получаем имя модели
             offset_model = ModelCenter(model); // получаем центр модели
             DrawScene(); // отрисовываем модель
         }

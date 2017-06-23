@@ -28,7 +28,7 @@ namespace STLViewer
                 Init();
                 string name; // имя модели
                 model = STLFormat.LoadBinary(TreeDBView.SelectedNode.Name, out name);
-                NameLoadModel.Text = "Loaded model: " + name; // получаем имя модели
+                NameLoadModel.Text = name; // получаем имя модели
                 offset_model = ModelCenter(model); // получаем центр модели
                 DrawScene();
             }

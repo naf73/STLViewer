@@ -73,6 +73,7 @@
             this.Rename_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListDB = new System.Windows.Forms.ImageList(this.components);
             this.SceneWidget = new Tao.Platform.Windows.SimpleOpenGlControl();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainMenu.SuspendLayout();
             this.statusLine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -267,6 +268,7 @@
             this.statusLine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.SelectLanguage,
+            this.toolStripStatusLabel2,
             this.NameLoadModel});
             this.statusLine.Location = new System.Drawing.Point(0, 426);
             this.statusLine.Name = "statusLine";
@@ -295,22 +297,22 @@
             // Rus_SelectItem
             // 
             this.Rus_SelectItem.Name = "Rus_SelectItem";
-            this.Rus_SelectItem.Size = new System.Drawing.Size(119, 22);
+            this.Rus_SelectItem.Size = new System.Drawing.Size(152, 22);
             this.Rus_SelectItem.Text = "Русский";
             this.Rus_SelectItem.Click += new System.EventHandler(this.Rus_SelectItem_Click);
             // 
             // English_SelectItem
             // 
             this.English_SelectItem.Name = "English_SelectItem";
-            this.English_SelectItem.Size = new System.Drawing.Size(119, 22);
+            this.English_SelectItem.Size = new System.Drawing.Size(152, 22);
             this.English_SelectItem.Text = "English";
             this.English_SelectItem.Click += new System.EventHandler(this.English_SelectItem_Click);
             // 
             // NameLoadModel
             // 
             this.NameLoadModel.Name = "NameLoadModel";
-            this.NameLoadModel.Size = new System.Drawing.Size(86, 17);
-            this.NameLoadModel.Text = "Loaded model:";
+            this.NameLoadModel.Size = new System.Drawing.Size(41, 17);
+            this.NameLoadModel.Text = "Empty";
             // 
             // splitContainer1
             // 
@@ -438,6 +440,12 @@
             this.SceneWidget.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SceneWidget_MouseMove);
             this.SceneWidget.Resize += new System.EventHandler(this.SceneWidget_Resize);
             // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(89, 17);
+            this.toolStripStatusLabel2.Text = "Loaded model: ";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -510,6 +518,7 @@
         private System.Windows.Forms.ToolStripMenuItem RemoveModel_ContextMenuTreeDBView;
         private System.Windows.Forms.ImageList imageListDB;
         private System.Windows.Forms.ToolStripStatusLabel NameLoadModel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
 
