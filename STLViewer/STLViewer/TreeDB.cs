@@ -123,9 +123,7 @@ namespace STLViewer
                             node.Name = Path.Combine(node.Parent.Name, node.Text + ".stl");
                         }
                     }
-
                     // ===
-
                 }
                 else
                 { 
@@ -133,7 +131,6 @@ namespace STLViewer
                     TreeDBView.SelectedNode = e.Node;
                     Directory.CreateDirectory(e.Node.Name);
                 }
-                
              }
             // ==== модель
             if (TreeDBView.SelectedNode.ImageIndex == 2)
