@@ -399,6 +399,8 @@ namespace STLViewer
         private void SceneWidget_KeyDown(object sender, KeyEventArgs e)
         {
             float speed = 10;
+
+            #region Вращение модели
             if (e.KeyCode == Keys.W)
             {
                 yAxisRotation -= (180 * speed / SceneWidget.Height);
@@ -422,7 +424,24 @@ namespace STLViewer
                 xAxisRotation += (180 * speed / SceneWidget.Width);
                 DrawScene();
             }
+            #endregion
 
+            #region Масштабирование модели
+            if (e.KeyCode == Keys.E)
+            {
+                zoom += (float)0.01;
+                DrawScene();
+            }
+
+            if (e.KeyCode == Keys.Q)
+            {
+                zoom -= (float)0.01;
+                DrawScene();
+            }
+
+            #endregion
+
+            // === Вызов справки по программе
             if (e.KeyCode == Keys.F1)
             {
                 ShowHelp();
