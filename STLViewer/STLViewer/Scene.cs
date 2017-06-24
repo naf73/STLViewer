@@ -264,15 +264,13 @@ namespace STLViewer
         /// </summary>
         private void SetColorModel()
         {
+            SceneWidget.Hide();
             if (colorDialog.ShowDialog() == DialogResult.Cancel)
             {
                 DrawScene(); // === Отрисовываем сцену
                 return;
             }
-            //Text = "Model Color: " + colorDialog.Color.Name +
-            //       " R:" + colorDialog.Color.R.ToString() +
-            //       " G:" + colorDialog.Color.G.ToString() +
-            //       " B:" + colorDialog.Color.B.ToString();
+            SceneWidget.Show();
 
             color_model = colorDialog.Color;
             DrawScene(); // === Отрисовываем сцену
@@ -283,15 +281,13 @@ namespace STLViewer
         /// </summary>
         private void SetColorBackground()
         {
+            SceneWidget.Hide();
             if (colorDialog.ShowDialog() == DialogResult.Cancel)
             {
                 DrawScene(); // === Отрисовываем сцену
                 return;
             }
-            //Text = "Back Color: " + colorDialog.Color.Name +
-            //       " R:" + colorDialog.Color.R.ToString() +
-            //       " G:" + colorDialog.Color.G.ToString() +
-            //       " B:" + colorDialog.Color.B.ToString();
+            SceneWidget.Show();
 
             color_background = colorDialog.Color;
             DrawScene(); // === Отрисовываем сцену
@@ -426,6 +422,12 @@ namespace STLViewer
                 xAxisRotation += (180 * speed / SceneWidget.Width);
                 DrawScene();
             }
+
+            if (e.KeyCode == Keys.F1)
+            {
+                ShowHelp();
+            }
+                
         }
     }
 }

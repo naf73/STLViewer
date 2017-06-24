@@ -141,6 +141,12 @@ namespace STLViewer
         /// <param name="e"></param>
         private void TreeBDView_KeyUp(object sender, KeyEventArgs e)
         {
+            // ---
+            if (e.KeyCode == Keys.F1)
+            {
+                ShowHelp();
+            }
+            // ---
             if (e.KeyCode == Keys.F2)
             {
                 RenameNode();

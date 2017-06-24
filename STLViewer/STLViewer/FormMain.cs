@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Resources;
 
 namespace STLViewer
 {
@@ -236,12 +237,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void ShowHelp_MenuItem_Click(object sender, EventArgs e)
         {
-            String helpPath = Application.StartupPath.ToString() + "\\helperStl.chm";
-            if(File.Exists(helpPath))
-            {
-            
-                Process.Start(helpPath);
-            }
+            ShowHelp();
         }
 
         /// <summary>
@@ -269,7 +265,7 @@ namespace STLViewer
         private void English_SelectItem_Click(object sender, EventArgs e)
         {
             SelectLanguage.Text = English_SelectItem.Text;
-            // --- To Do
+            TranslateToEn();
         }
 
         /// <summary>
@@ -280,17 +276,25 @@ namespace STLViewer
         private void Rus_SelectItem_Click(object sender, EventArgs e)
         {
             SelectLanguage.Text = Rus_SelectItem.Text;
-            // --- To Do
+            TranslateToRu();
         }
 
 
 
-
-
-
-
-
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ShowHelp()
+        {
+            String helpPath = Application.StartupPath.ToString() + "\\helperStl.chm";
+            if (File.Exists(helpPath))
+            {
+
+                Process.Start(helpPath);
+            }
+        }
 
     }
 }
