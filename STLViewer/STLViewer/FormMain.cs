@@ -149,6 +149,27 @@ namespace STLViewer
         {
             SetColorBackground();
         }
+
+        /// <summary>
+        /// Скрывает легенду
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnHideLegend_Click(object sender, EventArgs e)
+        {
+            panelLegend.Visible = false;
+        }
+
+        /// <summary>
+        /// Показать легенду
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowLegend_MenuItem_Click(object sender, EventArgs e)
+        {
+            panelLegend.Visible = true;
+        }
+
         #endregion
 
         #region Пункт меню "Database"
@@ -285,5 +306,7 @@ namespace STLViewer
 
 
         #endregion
+
+        
     }
 }

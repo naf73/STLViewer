@@ -41,6 +41,9 @@
             this.DownLevel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.Rename_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListDB = new System.Windows.Forms.ImageList(this.components);
+            this.panelLegend = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnHideLegend = new System.Windows.Forms.Button();
             this.SceneWidget = new Tao.Platform.Windows.SimpleOpenGlControl();
             this.openFileModelDialog = new System.Windows.Forms.OpenFileDialog();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
@@ -54,6 +57,7 @@
             this.OptimizateView_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorModel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorBackground_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowLegend_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Database_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddGroup_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveGroup_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +83,8 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.contextMenuTreeView.SuspendLayout();
+            this.panelLegend.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.MainMenu.SuspendLayout();
             this.statusLine.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +98,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.TreeDBView);
+            this.splitContainer1.Panel1.Controls.Add(this.panelLegend);
             // 
             // splitContainer1.Panel2
             // 
@@ -109,8 +116,8 @@
             this.TreeDBView.Location = new System.Drawing.Point(0, 0);
             this.TreeDBView.Name = "TreeDBView";
             this.TreeDBView.SelectedImageIndex = 0;
-            this.TreeDBView.Size = new System.Drawing.Size(259, 402);
-            this.TreeDBView.TabIndex = 3;
+            this.TreeDBView.Size = new System.Drawing.Size(259, 300);
+            this.TreeDBView.TabIndex = 5;
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
             this.TreeDBView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeDBView_BeforeSelect);
             this.TreeDBView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterSelect);
@@ -187,6 +194,38 @@
             this.imageListDB.Images.SetKeyName(1, "assembly.png");
             this.imageListDB.Images.SetKeyName(2, "part_empty.png");
             this.imageListDB.Images.SetKeyName(3, "part.png");
+            // 
+            // panelLegend
+            // 
+            this.panelLegend.Controls.Add(this.pictureBox1);
+            this.panelLegend.Controls.Add(this.btnHideLegend);
+            this.panelLegend.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelLegend.Location = new System.Drawing.Point(0, 300);
+            this.panelLegend.Name = "panelLegend";
+            this.panelLegend.Size = new System.Drawing.Size(259, 102);
+            this.panelLegend.TabIndex = 4;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 23);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(259, 79);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnHideLegend
+            // 
+            this.btnHideLegend.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHideLegend.Location = new System.Drawing.Point(0, 0);
+            this.btnHideLegend.Name = "btnHideLegend";
+            this.btnHideLegend.Size = new System.Drawing.Size(259, 23);
+            this.btnHideLegend.TabIndex = 0;
+            this.btnHideLegend.Text = "Hide legend";
+            this.btnHideLegend.UseVisualStyleBackColor = true;
+            this.btnHideLegend.Click += new System.EventHandler(this.btnHideLegend_Click);
             // 
             // SceneWidget
             // 
@@ -271,7 +310,8 @@
             this.ResetViiew_MenuItem,
             this.OptimizateView_MenuItem,
             this.ColorModel_MenuItem,
-            this.ColorBackground_MenuItem});
+            this.ColorBackground_MenuItem,
+            this.ShowLegend_MenuItem});
             this.View_MenuItem.Name = "View_MenuItem";
             this.View_MenuItem.Size = new System.Drawing.Size(44, 20);
             this.View_MenuItem.Text = "View";
@@ -303,6 +343,13 @@
             this.ColorBackground_MenuItem.Size = new System.Drawing.Size(182, 22);
             this.ColorBackground_MenuItem.Text = "Color Background ...";
             this.ColorBackground_MenuItem.Click += new System.EventHandler(this.ColorBackground_MenuItem_Click);
+            // 
+            // ShowLegend_MenuItem
+            // 
+            this.ShowLegend_MenuItem.Name = "ShowLegend_MenuItem";
+            this.ShowLegend_MenuItem.Size = new System.Drawing.Size(182, 22);
+            this.ShowLegend_MenuItem.Text = "Show legend";
+            this.ShowLegend_MenuItem.Click += new System.EventHandler(this.ShowLegend_MenuItem_Click);
             // 
             // Database_MenuItem
             // 
@@ -423,14 +470,14 @@
             // Rus_SelectItem
             // 
             this.Rus_SelectItem.Name = "Rus_SelectItem";
-            this.Rus_SelectItem.Size = new System.Drawing.Size(152, 22);
+            this.Rus_SelectItem.Size = new System.Drawing.Size(119, 22);
             this.Rus_SelectItem.Text = "Русский";
             this.Rus_SelectItem.Click += new System.EventHandler(this.Rus_SelectItem_Click);
             // 
             // English_SelectItem
             // 
             this.English_SelectItem.Name = "English_SelectItem";
-            this.English_SelectItem.Size = new System.Drawing.Size(152, 22);
+            this.English_SelectItem.Size = new System.Drawing.Size(119, 22);
             this.English_SelectItem.Text = "English";
             this.English_SelectItem.Click += new System.EventHandler(this.English_SelectItem_Click);
             // 
@@ -467,6 +514,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.contextMenuTreeView.ResumeLayout(false);
+            this.panelLegend.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             this.statusLine.ResumeLayout(false);
@@ -499,7 +548,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileModelDialog;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView TreeDBView;
         private Tao.Platform.Windows.SimpleOpenGlControl SceneWidget;
         private System.Windows.Forms.ToolStripMenuItem Database_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddGroup_MenuItem;
@@ -520,6 +568,11 @@
         private System.Windows.Forms.ImageList imageListDB;
         private System.Windows.Forms.ToolStripStatusLabel NameLoadModel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.TreeView TreeDBView;
+        private System.Windows.Forms.Panel panelLegend;
+        private System.Windows.Forms.Button btnHideLegend;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem ShowLegend_MenuItem;
     }
 }
 

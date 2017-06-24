@@ -38,6 +38,7 @@ namespace STLViewer
             About_MenuItem.Text = "About";
             toolStripStatusLabel1.Text = "Language: ";
             toolStripStatusLabel2.Text = "Loaded model: ";
+            btnHideLegend.Text = "Hide legend";
         }
     }
 }
