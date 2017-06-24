@@ -75,15 +75,8 @@ namespace STLViewer
         /// <param name="e"></param>
         private void OpenModel_MenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
                 OpenModel();
                 SceneWidget.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка формата файла",Text,MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
         }
 
         /// <summary>
@@ -354,6 +347,5 @@ namespace STLViewer
         }
 
         #endregion
-
     }
 }

@@ -282,17 +282,25 @@ namespace STLViewer
         /// </summary>
         private void OpenModel()
         {
+            SceneWidget.Hide();
             openFileModelDialog.Filter = "STL files(*.stl)|*.stl|All files(*.*)|*.*";
             openFileModelDialog.FileName = "";
             if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
                 return;
             // получаем выбранный файл
-            string name; // имя модели
-            model.Clear(); // очищаем текущую модель
-            model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
-            NameLoadModel.Text = name; // получаем имя модели
-            offset_model = ModelCenter(model); // получаем центр модели
-            DrawScene(); // отрисовываем модель
+            try
+            {
+                string name; // имя модели
+                model.Clear(); // очищаем текущую модель
+                model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
+                NameLoadModel.Text = name; // получаем имя модели
+                offset_model = ModelCenter(model); // получаем центр модели
+                DrawScene(); // отрисовываем модель
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка формата файла", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>

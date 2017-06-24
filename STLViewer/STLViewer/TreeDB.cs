@@ -19,6 +19,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void TreeDBView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            log.Text = e.Node.Name;
             // ================================================================================
             #region Настройка отображения пунктов главного и контектсного меню
             // ================================================================================
@@ -100,7 +101,7 @@ namespace STLViewer
         private void TreeBDView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             TreeDBView.LabelEdit = false;
-            // ====
+            // ==== группа
             if (TreeDBView.SelectedNode.ImageIndex == 1)
             {
                 if (Directory.Exists(e.Node.Name))
@@ -109,10 +110,20 @@ namespace STLViewer
                     e.Node.Name = Path.Combine(e.Node.Parent.Name, e.Label);
                     TreeDBView.SelectedNode = e.Node;
                     Directory.Move(last_name, e.Node.Name);
-                    
+
                     // === Меняем все дочерним элементам поле Name
 
-                    // -- To Do
+                    foreach (TreeNode node in TreeDBView.SelectedNode.Nodes)
+                    {
+                        if (node.ImageIndex == 1)
+                        {
+                            node.Name = Path.Combine(node.Parent.Name, node.Text);
+                        }
+                        else
+                        {
+                            node.Name = Path.Combine(node.Parent.Name, node.Text + ".stl");
+                        }
+                    }
 
 
                     // ===
@@ -126,6 +137,14 @@ namespace STLViewer
                 }
                 
              }
+            // ==== модель
+            if (TreeDBView.SelectedNode.ImageIndex == 2)
+            {
+                string last_name = e.Node.Name;
+                e.Node.Name = Path.Combine(e.Node.Parent.Name, e.Label + ".stl");
+                TreeDBView.SelectedNode = e.Node;
+                File.Move(last_name, e.Node.Name);
+            }
 
         }
 
