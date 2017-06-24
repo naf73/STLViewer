@@ -40,8 +40,10 @@ namespace STLViewer
             color_model = Color.Blue;
             color_background = Color.White;
 
-            // === Получаем корневую папку базы моделей
-            pathDataModel = Path.Combine(Application.StartupPath, "test_db_models");
+            // === Загружаем настройки пользователя
+            pathDataModel = Properties.Settings.Default.RootDirDB;
+            color_model = Properties.Settings.Default.ColorModel;
+            color_background = Properties.Settings.Default.ColorBackground;
 
             // === Аргументы переданные приложению
             if (args.Length == 1)
@@ -51,6 +53,9 @@ namespace STLViewer
                 NameLoadModel.Text = name; // получаем имя модели
                 offset_model = ModelCenter(model); // получаем центр модели
                 SceneWidget.Show();
+                TreeDBView.Nodes.Add(args[0], Path.GetFileNameWithoutExtension(args[0]), 2);
+                contextMenuTreeView.Enabled = false;
+                Database_MenuItem.Enabled = false;
             }
             else 
             {
@@ -93,7 +98,13 @@ namespace STLViewer
         /// <param name="e"></param>
         private void Settings_MenuItem_Click(object sender, EventArgs e)
         {
-
+            SceneWidget.Hide();
+            SettingsForm sf = new SettingsForm(Text);
+            sf.ShowDialog();
+            pathDataModel = Properties.Settings.Default.RootDirDB;
+            ScanRootDir(pathDataModel);
+            contextMenuTreeView.Enabled = true;
+            Database_MenuItem.Enabled = true;
         }
 
         /// <summary>
@@ -205,7 +216,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void AddModel_MenuItem_Click(object sender, EventArgs e)
         {
-            // --- To Do
+            AddNodeModel();
         }
 
         /// <summary>
@@ -215,7 +226,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void RemoveModel_MenuItem_Click(object sender, EventArgs e)
         {
-            // --- To Do
+            RemoveNodeModel();
         }
 
         /// <summary>
@@ -295,27 +306,6 @@ namespace STLViewer
 
         #region Контекстное меню дерева
 
-        /// <summary>
-        /// Метод изменяет набор пунктов контекстного меня в зависимости от типа объекта в дереве
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void contextMenuTreeView_Opening(object sender, CancelEventArgs e)
-        {
-            if (File.Exists(TreeDBView.SelectedNode.Name))
-            {
-                AddGroup_ContextMenuTreeDBView.Enabled = false;
-                RemoveGroup_ContextMenuTreeDBView.Enabled = false;
-                RemoveModel_ContextMenuTreeDBView.Enabled = true;
-            }
-            else
-            {
-                AddGroup_ContextMenuTreeDBView.Enabled = true;
-                RemoveGroup_ContextMenuTreeDBView.Enabled = true;
-                RemoveModel_ContextMenuTreeDBView.Enabled = false;
-            }
-        }
-
         #endregion
 
         #region Методы реализации
@@ -332,10 +322,19 @@ namespace STLViewer
             }
         }
 
-
-
-
-
         #endregion
+
+        /// <summary>
+        /// Событие загрузки формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            if (TreeDBView.Nodes.Count == 0)
+            {
+                
+            }
+        }
     }
 }

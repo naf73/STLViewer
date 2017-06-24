@@ -25,7 +25,8 @@ namespace STLViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\\\Simbirsoft\\\\Summer_Intensity\\\\STLViewer\\\\test_db_models")]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Simbirsoft\\Summer_Intensity\\STLViewer\\STLViewer\\STLViewer\\bin\\Release\\test_db_" +
+            "models")]
         public string RootDirDB {
             get {
                 return ((string)(this["RootDirDB"]));

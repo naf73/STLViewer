@@ -84,7 +84,15 @@ namespace STLViewer
             //Добавляем новый узел в коллекцию Nodes
             //с именем текущей директории и указанием ключа 
             //со значением "Folder".
-            TreeNode curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, 1);
+            TreeNode curNode = null;
+            if (directoryInfo.FullName == pathDataModel)
+            {
+                curNode = addInMe.Add(directoryInfo.FullName, "ModelBase", 1);
+            }
+            else
+            {
+                curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, 1);
+            }
 
             //addInMe.Add("group", directoryInfo.Name);
             //Перебираем папки.

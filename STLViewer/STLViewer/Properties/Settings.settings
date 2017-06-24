@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="RootDirDB" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\\Simbirsoft\\Summer_Intensity\\STLViewer\\test_db_models</Value>
+      <Value Profile="(Default)">D:\Simbirsoft\Summer_Intensity\STLViewer\STLViewer\STLViewer\bin\Release\test_db_models</Value>
     </Setting>
     <Setting Name="ColorModel" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Blue</Value>

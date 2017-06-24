@@ -19,7 +19,52 @@ namespace STLViewer
         /// <param name="e"></param>
         private void TreeDBView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // --- To Do
+            // ================================================================================
+            #region Настройка отображения пунктов главного и контектсного меню
+            // ================================================================================
+
+            if (File.Exists(TreeDBView.SelectedNode.Name))
+            {
+                // === Контекстное меню
+                AddGroup_ContextMenuTreeDBView.Enabled = false;
+                RemoveGroup_ContextMenuTreeDBView.Enabled = false;
+                RemoveModel_ContextMenuTreeDBView.Enabled = true;
+                // === Главное меню
+                AddGroup_MenuItem.Enabled = AddGroup_ContextMenuTreeDBView.Enabled;
+                RemoveGroup_MenuItem.Enabled = RemoveGroup_ContextMenuTreeDBView.Enabled;
+                RemoveModel_MenuItem.Enabled = RemoveModel_ContextMenuTreeDBView.Enabled;
+            }
+            else
+            {
+                // === Контекстное меню
+                AddGroup_ContextMenuTreeDBView.Enabled = true;
+                RemoveGroup_ContextMenuTreeDBView.Enabled = true;
+                RemoveModel_ContextMenuTreeDBView.Enabled = false;
+                // === Главное меню
+                AddGroup_MenuItem.Enabled = AddGroup_ContextMenuTreeDBView.Enabled;
+                RemoveGroup_MenuItem.Enabled = RemoveGroup_ContextMenuTreeDBView.Enabled;
+                RemoveModel_MenuItem.Enabled = RemoveModel_ContextMenuTreeDBView.Enabled;
+            }
+
+            // --- Запрещаем удалять и переименовывать корневой узел
+            if (TreeDBView.SelectedNode.Name == pathDataModel)
+            {
+                RemoveGroup_ContextMenuTreeDBView.Enabled = false;
+                Rename_ContextMenuTreeDBView.Enabled = false;
+                RemoveGroup_MenuItem.Enabled = RemoveGroup_ContextMenuTreeDBView.Enabled;
+                Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;
+            } else 
+            {
+                Rename_ContextMenuTreeDBView.Enabled = true;
+                Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;
+            }
+
+            #endregion
+
+            // ================================================================================
+            #region Добавление и переименование узла
+            // ================================================================================
+
             // можно использовать под загрузку картинки
             if (TreeDBView.SelectedNode == null)
                 return;
@@ -40,11 +85,11 @@ namespace STLViewer
                 model.Clear();
                 SceneWidget.Hide();
             }
-        }
 
-        private void TreeDBView_AfterCheck(object sender, TreeViewEventArgs e)
-        {
+            // -- To Do 
+            // Добавить реакцию на переименование модели
 
+            #endregion
         }
 
         /// <summary>
@@ -67,6 +112,7 @@ namespace STLViewer
                     
                     // === Меняем все дочерним элементам поле Name
 
+                    // -- To Do
 
 
                     // ===
@@ -182,8 +228,19 @@ namespace STLViewer
             if (TreeDBView.SelectedNode == null)
                 return;
 
-            TreeDBView.LabelEdit = true;
-            TreeDBView.SelectedNode.BeginEdit();
+            // --- Запрещаем удалять и переименовывать корневой узел
+            if (TreeDBView.SelectedNode.Name == pathDataModel)
+            {
+                Rename_ContextMenuTreeDBView.Enabled = false;
+                Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;
+            }
+            else
+            {
+                Rename_ContextMenuTreeDBView.Enabled = true;
+                Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;
+                TreeDBView.LabelEdit = true;
+                TreeDBView.SelectedNode.BeginEdit();
+            }
         }
 
         /// <summary>
@@ -247,8 +304,6 @@ namespace STLViewer
             }
         }
 
-
-
         #region Методы для объекта группа моделей
 
         /// <summary>
@@ -266,7 +321,10 @@ namespace STLViewer
             }
             else
             {
-                TreeDBView.Nodes.Add(node);
+                if (TreeDBView.Nodes.Count > 0)
+                {
+                    TreeDBView.Nodes.Add(node);
+                }
             }
             TreeDBView.LabelEdit = true;
             node.BeginEdit();
@@ -297,8 +355,6 @@ namespace STLViewer
                 TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode.Name);
                 MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            SceneWidget.Show();
-
         }
         #endregion
 
@@ -373,7 +429,7 @@ namespace STLViewer
         }
 
         /// <summary>
-        /// Метод возвращает по имени объект узел
+        /// Метод возвращает по родительскому узлу и по имени объект узел
         /// </summary>
         /// <param name="root"></param>
         /// <param name="name"></param>
@@ -386,7 +442,7 @@ namespace STLViewer
         }
 
         /// <summary>
-        /// 
+        /// Метод возвращает по имени объект узел
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>

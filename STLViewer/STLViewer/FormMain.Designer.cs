@@ -64,10 +64,13 @@
             this.Database_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddGroup_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveGroup_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.AddModel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveModel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.UpLevel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DownLevel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.Rename_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowHelp_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,6 +84,7 @@
             this.NameLoadModel = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.log = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -122,7 +126,6 @@
             this.TreeDBView.Size = new System.Drawing.Size(234, 435);
             this.TreeDBView.TabIndex = 5;
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
-            this.TreeDBView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterCheck);
             this.TreeDBView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterSelect);
             this.TreeDBView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);
             // 
@@ -140,8 +143,7 @@
             this.toolStripSeparator3,
             this.Rename_ContextMenuTreeDBView});
             this.contextMenuTreeView.Name = "contextMenuTreeView";
-            this.contextMenuTreeView.Size = new System.Drawing.Size(160, 198);
-            this.contextMenuTreeView.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuTreeView_Opening);
+            this.contextMenuTreeView.Size = new System.Drawing.Size(160, 176);
             // 
             // AddGroup_ContextMenuTreeDBView
             // 
@@ -373,10 +375,13 @@
             this.Database_MenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddGroup_MenuItem,
             this.RemoveGroup_MenuItem,
+            this.toolStripSeparator4,
             this.AddModel_MenuItem,
             this.RemoveModel_MenuItem,
+            this.toolStripSeparator5,
             this.UpLevel_MenuItem,
             this.DownLevel_MenuItem,
+            this.toolStripSeparator6,
             this.Rename_MenuItem});
             this.Database_MenuItem.Name = "Database_MenuItem";
             this.Database_MenuItem.Size = new System.Drawing.Size(77, 20);
@@ -396,6 +401,11 @@
             this.RemoveGroup_MenuItem.Text = "Remove group";
             this.RemoveGroup_MenuItem.Click += new System.EventHandler(this.RemoveGroup_MenuItem_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(156, 6);
+            // 
             // AddModel_MenuItem
             // 
             this.AddModel_MenuItem.Name = "AddModel_MenuItem";
@@ -410,6 +420,11 @@
             this.RemoveModel_MenuItem.Text = "Remove model";
             this.RemoveModel_MenuItem.Click += new System.EventHandler(this.RemoveModel_MenuItem_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(156, 6);
+            // 
             // UpLevel_MenuItem
             // 
             this.UpLevel_MenuItem.Name = "UpLevel_MenuItem";
@@ -423,6 +438,11 @@
             this.DownLevel_MenuItem.Size = new System.Drawing.Size(159, 22);
             this.DownLevel_MenuItem.Text = "Down level item";
             this.DownLevel_MenuItem.Click += new System.EventHandler(this.DownLevel_MenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(156, 6);
             // 
             // Rename_MenuItem
             // 
@@ -459,7 +479,8 @@
             this.toolStripStatusLabel1,
             this.SelectLanguage,
             this.toolStripStatusLabel2,
-            this.NameLoadModel});
+            this.NameLoadModel,
+            this.log});
             this.statusLine.Location = new System.Drawing.Point(0, 545);
             this.statusLine.Name = "statusLine";
             this.statusLine.Size = new System.Drawing.Size(920, 22);
@@ -510,6 +531,12 @@
             this.NameLoadModel.Size = new System.Drawing.Size(41, 17);
             this.NameLoadModel.Text = "Empty";
             // 
+            // log
+            // 
+            this.log.Name = "log";
+            this.log.Size = new System.Drawing.Size(118, 17);
+            this.log.Text = "toolStripStatusLabel3";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,6 +552,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STLViewer";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -592,6 +620,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripStatusLabel log;
     }
 }
 

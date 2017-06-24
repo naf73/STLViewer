@@ -300,13 +300,18 @@ namespace STLViewer
         /// </summary>
         private void SetColorModel()
         {
-            SceneWidget.Hide();
-            if (colorDialog.ShowDialog() != DialogResult.Cancel)
+            if (model.Count > 0)
             {
-                color_model = colorDialog.Color;
+                SceneWidget.Hide();
+                if (colorDialog.ShowDialog() != DialogResult.Cancel)
+                {
+                    color_model = colorDialog.Color;
+                    Properties.Settings.Default.ColorModel = colorDialog.Color;
+                    Properties.Settings.Default.Save();
+                }
+                DrawScene(); // === Отрисовываем сцену
+                SceneWidget.Show();
             }
-            DrawScene(); // === Отрисовываем сцену
-            SceneWidget.Show();
         }
 
         /// <summary>
@@ -314,13 +319,18 @@ namespace STLViewer
         /// </summary>
         private void SetColorBackground()
         {
-            SceneWidget.Hide();
-            if (colorDialog.ShowDialog() != DialogResult.Cancel)
+            if (model.Count > 0)
             {
-                color_background = colorDialog.Color;
+                SceneWidget.Hide();
+                if (colorDialog.ShowDialog() != DialogResult.Cancel)
+                {
+                    color_background = colorDialog.Color;
+                    Properties.Settings.Default.ColorBackground = colorDialog.Color;
+                    Properties.Settings.Default.Save();
+                }
+                DrawScene(); // === Отрисовываем сцену 
+                SceneWidget.Show();
             }
-            DrawScene(); // === Отрисовываем сцену 
-            SceneWidget.Show();
         }
 
         /// <summary>
