@@ -30,8 +30,8 @@ namespace STLViewer
             RemoveGroup_MenuItem.Text = "Remove group";
             AddModel_MenuItem.Text = "Add model";
             RemoveModel_MenuItem.Text = "Remove model";
-            UpLevel_MenuItem.Text = "Up level element";
-            DownLevel_MenuItem.Text = "Down level element";
+            UpLevel_MenuItem.Text = "Up level item";
+            DownLevel_MenuItem.Text = "Down level item";
             Rename_MenuItem.Text = "Rename";
             Help_MenuItem.Text = "Help";
             ShowHelp_MenuItem.Text = "Show";
@@ -40,6 +40,13 @@ namespace STLViewer
             toolStripStatusLabel2.Text = "Loaded model: ";
             ShowLegend_MenuItem.Text = "Show legend";
             HideLegend_MenuItem.Text = "Hide legend";
+            AddGroup_MenuItem.Text = "Add Group";
+            RemoveGroup_ContextMenuTreeDBView.Text = "Remove group";
+            AddModel_ContextMenuTreeDBView.Text = "Add model";
+            RemoveModel_ContextMenuTreeDBView.Text = "Remove model";
+            UpLevel_ContextMenuTreeDBView.Text = "Up level item";
+            DownLevel_ContextMenuTreeDBView.Text = "Down level item";
+            Rename_ContextMenuTreeDBView.Text = "Rename";
         }
     }
 }

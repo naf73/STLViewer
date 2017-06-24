@@ -40,6 +40,13 @@ namespace STLViewer
             toolStripStatusLabel2.Text = "Загруженная модель: ";
             ShowLegend_MenuItem.Text = "Показать легенду";
             HideLegend_MenuItem.Text = "Скрыть легенду";
+            AddGroup_MenuItem.Text = "Добавить группу";
+            RemoveGroup_ContextMenuTreeDBView.Text = "Удалить группу";
+            AddModel_ContextMenuTreeDBView.Text = "Добавить модель";
+            RemoveModel_ContextMenuTreeDBView.Text = "Удалить модель";
+            UpLevel_ContextMenuTreeDBView.Text = "Переместить вверх";
+            DownLevel_ContextMenuTreeDBView.Text = "Переместить вниз";
+            Rename_ContextMenuTreeDBView.Text = "Переименовать";
         }
     }
 }

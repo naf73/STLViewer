@@ -35,10 +35,13 @@
             this.contextMenuTreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddGroup_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveGroup_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.AddModel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.RemoveModel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.UpLevel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.DownLevel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.Rename_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListDB = new System.Windows.Forms.ImageList(this.components);
             this.panelLegend = new System.Windows.Forms.Panel();
@@ -119,9 +122,8 @@
             this.TreeDBView.Size = new System.Drawing.Size(234, 435);
             this.TreeDBView.TabIndex = 5;
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
-            this.TreeDBView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeDBView_BeforeSelect);
+            this.TreeDBView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterCheck);
             this.TreeDBView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterSelect);
-            this.TreeDBView.DoubleClick += new System.EventHandler(this.TreeDBView_DoubleClick);
             this.TreeDBView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);
             // 
             // contextMenuTreeView
@@ -129,60 +131,79 @@
             this.contextMenuTreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddGroup_ContextMenuTreeDBView,
             this.RemoveGroup_ContextMenuTreeDBView,
+            this.toolStripSeparator1,
             this.AddModel_ContextMenuTreeDBView,
             this.RemoveModel_ContextMenuTreeDBView,
+            this.toolStripSeparator2,
             this.UpLevel_ContextMenuTreeDBView,
             this.DownLevel_ContextMenuTreeDBView,
+            this.toolStripSeparator3,
             this.Rename_ContextMenuTreeDBView});
             this.contextMenuTreeView.Name = "contextMenuTreeView";
-            this.contextMenuTreeView.Size = new System.Drawing.Size(155, 158);
+            this.contextMenuTreeView.Size = new System.Drawing.Size(160, 198);
+            this.contextMenuTreeView.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuTreeView_Opening);
             // 
             // AddGroup_ContextMenuTreeDBView
             // 
             this.AddGroup_ContextMenuTreeDBView.Name = "AddGroup_ContextMenuTreeDBView";
-            this.AddGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(154, 22);
+            this.AddGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
             this.AddGroup_ContextMenuTreeDBView.Text = "Add group";
             this.AddGroup_ContextMenuTreeDBView.Click += new System.EventHandler(this.AddGroup_ContextMenuTreeDBView_Click);
             // 
             // RemoveGroup_ContextMenuTreeDBView
             // 
             this.RemoveGroup_ContextMenuTreeDBView.Name = "RemoveGroup_ContextMenuTreeDBView";
-            this.RemoveGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(154, 22);
+            this.RemoveGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
             this.RemoveGroup_ContextMenuTreeDBView.Text = "Remove group";
             this.RemoveGroup_ContextMenuTreeDBView.Click += new System.EventHandler(this.RemoveGroup_ContextMenuTreeDBView_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(156, 6);
             // 
             // AddModel_ContextMenuTreeDBView
             // 
             this.AddModel_ContextMenuTreeDBView.Name = "AddModel_ContextMenuTreeDBView";
-            this.AddModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(154, 22);
+            this.AddModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
             this.AddModel_ContextMenuTreeDBView.Text = "Add model";
             this.AddModel_ContextMenuTreeDBView.Click += new System.EventHandler(this.AddModel_ContextMenuTreeDBView_Click);
             // 
             // RemoveModel_ContextMenuTreeDBView
             // 
             this.RemoveModel_ContextMenuTreeDBView.Name = "RemoveModel_ContextMenuTreeDBView";
-            this.RemoveModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(154, 22);
+            this.RemoveModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
             this.RemoveModel_ContextMenuTreeDBView.Text = "Remove model";
             this.RemoveModel_ContextMenuTreeDBView.Click += new System.EventHandler(this.RemoveModel_ContextMenuTreeDBView_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(156, 6);
             // 
             // UpLevel_ContextMenuTreeDBView
             // 
             this.UpLevel_ContextMenuTreeDBView.Name = "UpLevel_ContextMenuTreeDBView";
-            this.UpLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(154, 22);
-            this.UpLevel_ContextMenuTreeDBView.Text = "Up level";
+            this.UpLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.UpLevel_ContextMenuTreeDBView.Text = "Up level item";
             this.UpLevel_ContextMenuTreeDBView.Click += new System.EventHandler(this.UpLevel_ContextMenuTreeDBView_Click);
             // 
             // DownLevel_ContextMenuTreeDBView
             // 
             this.DownLevel_ContextMenuTreeDBView.Name = "DownLevel_ContextMenuTreeDBView";
-            this.DownLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(154, 22);
-            this.DownLevel_ContextMenuTreeDBView.Text = "Down level";
+            this.DownLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.DownLevel_ContextMenuTreeDBView.Text = "Down level item";
             this.DownLevel_ContextMenuTreeDBView.Click += new System.EventHandler(this.DownLevel_ContextMenuTreeDBView_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(156, 6);
             // 
             // Rename_ContextMenuTreeDBView
             // 
             this.Rename_ContextMenuTreeDBView.Name = "Rename_ContextMenuTreeDBView";
-            this.Rename_ContextMenuTreeDBView.Size = new System.Drawing.Size(154, 22);
+            this.Rename_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
             this.Rename_ContextMenuTreeDBView.Text = "Rename";
             this.Rename_ContextMenuTreeDBView.Click += new System.EventHandler(this.Rename_ContextMenuTreeDBView_Click);
             // 
@@ -190,10 +211,9 @@
             // 
             this.imageListDB.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListDB.ImageStream")));
             this.imageListDB.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListDB.Images.SetKeyName(0, "assembly_empty.png");
+            this.imageListDB.Images.SetKeyName(0, "Ярлык16.png");
             this.imageListDB.Images.SetKeyName(1, "assembly.png");
-            this.imageListDB.Images.SetKeyName(2, "part_empty.png");
-            this.imageListDB.Images.SetKeyName(3, "part.png");
+            this.imageListDB.Images.SetKeyName(2, "part.png");
             // 
             // panelLegend
             // 
@@ -505,7 +525,6 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STLViewer";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -570,6 +589,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem ShowLegend_MenuItem;
         private System.Windows.Forms.ToolStripMenuItem HideLegend_MenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 

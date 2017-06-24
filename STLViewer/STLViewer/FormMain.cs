@@ -15,6 +15,10 @@ namespace STLViewer
 {
     public partial class FormMain : Form
     {
+        #region Глобальные переменные
+        string pathDataModel; // Абсолютный путь к папке с базой моделей
+        #endregion
+
         /// <summary>
         /// Констуктор формы
         /// </summary>
@@ -36,30 +40,25 @@ namespace STLViewer
             color_model = Color.Blue;
             color_background = Color.White;
 
-            // === Аргументы переданные приложению
+            // === Получаем корневую папку базы моделей
+            pathDataModel = Path.Combine(Application.StartupPath, "test_db_models");
 
-            // --- To Do
+            // === Аргументы переданные приложению
             if (args.Length == 1)
             {
                 string name; // имя модели
                 model = STLFormat.LoadBinary(args[0], out name);
                 NameLoadModel.Text = name; // получаем имя модели
                 offset_model = ModelCenter(model); // получаем центр модели
+                SceneWidget.Show();
+            }
+            else 
+            {
+                ScanRootDir(pathDataModel);
             }
             // ===
 
             DrawScene();
-        }
-
-        /// <summary>
-        /// Событие происходит при загрузке формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-            string pathDataModel = Path.Combine(Application.StartupPath, "test_db_models");
-            ScanRootDir(pathDataModel);
         }
 
         #region События элементов главного меню Main Menu
@@ -74,6 +73,7 @@ namespace STLViewer
         private void OpenModel_MenuItem_Click(object sender, EventArgs e)
         {
             OpenModel();
+            SceneWidget.Show();
         }
 
         /// <summary>
@@ -293,6 +293,31 @@ namespace STLViewer
 
         #endregion
 
+        #region Контекстное меню дерева
+
+        /// <summary>
+        /// Метод изменяет набор пунктов контекстного меня в зависимости от типа объекта в дереве
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void contextMenuTreeView_Opening(object sender, CancelEventArgs e)
+        {
+            if (File.Exists(TreeDBView.SelectedNode.Name))
+            {
+                AddGroup_ContextMenuTreeDBView.Enabled = false;
+                RemoveGroup_ContextMenuTreeDBView.Enabled = false;
+                RemoveModel_ContextMenuTreeDBView.Enabled = true;
+            }
+            else
+            {
+                AddGroup_ContextMenuTreeDBView.Enabled = true;
+                RemoveGroup_ContextMenuTreeDBView.Enabled = true;
+                RemoveModel_ContextMenuTreeDBView.Enabled = false;
+            }
+        }
+
+        #endregion
+
         #region Методы реализации
 
         /// <summary>
@@ -310,8 +335,7 @@ namespace STLViewer
 
 
 
-        #endregion
 
-        
+        #endregion
     }
 }

@@ -20,6 +20,9 @@ namespace STLViewer
             //Отключаем любую перерисовку
             //иерархического представления.
             TreeDBView.BeginUpdate();
+            
+            //Очищаем дерево
+            TreeDBView.Nodes.Clear();
 
             //Инициализируем новую переменную предоставляющую методы экземпляра
             //класса для создания, перемещения и перечисления
@@ -61,8 +64,14 @@ namespace STLViewer
                 }
             }
             catch { }
+            
+            // Раскрываем все узлы
+            TreeDBView.ExpandAll();
             //Разрешаем перерисовку иерархического представления.
             TreeDBView.EndUpdate();
+
+            di = null;
+            
         }
 
         /// <summary>
@@ -95,7 +104,7 @@ namespace STLViewer
                 //curNode.Nodes.Add("Model", file.Name);
                 if (file.Extension == ".stl")
                 {
-                    curNode.Nodes.Add(file.FullName, file.Name, 3);
+                    curNode.Nodes.Add(file.FullName, Path.GetFileNameWithoutExtension(file.Name), 2);
                 }
             }
         }

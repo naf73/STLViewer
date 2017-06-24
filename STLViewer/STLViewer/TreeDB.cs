@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace STLViewer
 {
     public partial class FormMain : Form
     {
         #region События TeeDBView
-        
+
         /// <summary>
         /// Событие после выбора узла
         /// </summary>
@@ -23,8 +24,9 @@ namespace STLViewer
             if (TreeDBView.SelectedNode == null)
                 return;
 
-            if (TreeDBView.SelectedNode.ImageIndex == 3)
+            if (TreeDBView.SelectedNode.ImageIndex == 2)
             {
+                SceneWidget.Show();
                 Init();
                 string name; // имя модели
                 model = STLFormat.LoadBinary(TreeDBView.SelectedNode.Name, out name);
@@ -32,26 +34,53 @@ namespace STLViewer
                 offset_model = ModelCenter(model); // получаем центр модели
                 DrawScene();
             }
+            else
+            {
+                Init();
+                model.Clear();
+                SceneWidget.Hide();
+            }
+        }
+
+        private void TreeDBView_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+
         }
 
         /// <summary>
-        /// 
+        /// Событие после завершения переименования узла
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TreeDBView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        private void TreeBDView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-          // --- To Do
-        }
+            TreeDBView.LabelEdit = false;
+            // ====
+            if (TreeDBView.SelectedNode.ImageIndex == 1)
+            {
+                if (Directory.Exists(e.Node.Name))
+                {
+                    string last_name = e.Node.Name;
+                    e.Node.Name = Path.Combine(e.Node.Parent.Name, e.Label);
+                    TreeDBView.SelectedNode = e.Node;
+                    Directory.Move(last_name, e.Node.Name);
+                    
+                    // === Меняем все дочерним элементам поле Name
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TreeDBView_DoubleClick(object sender, EventArgs e)
-        {
-               // --- Empty Rezerv
+
+
+                    // ===
+
+                }
+                else
+                { 
+                    e.Node.Name = Path.Combine(e.Node.Parent.Name, e.Label);
+                    TreeDBView.SelectedNode = e.Node;
+                    Directory.CreateDirectory(e.Node.Name);
+                }
+                
+             }
+
         }
 
         /// <summary>
@@ -122,16 +151,6 @@ namespace STLViewer
         private void Rename_ContextMenuTreeDBView_Click(object sender, EventArgs e)
         {
             RenameNode();
-        }
-
-        /// <summary>
-        /// Событие после завершения переименования узла
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TreeBDView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
-        {
-            TreeDBView.LabelEdit = false;
         }
 
         /// <summary>
@@ -239,10 +258,9 @@ namespace STLViewer
         {
             // --- Дерево
             TreeNode node = new TreeNode("Введите текст");
-            node.ImageIndex = 0;
+            node.ImageIndex = 1;
             if (TreeDBView.SelectedNode != null)
             {
-
                 TreeDBView.SelectedNode.Nodes.Add(node);
                 TreeDBView.SelectedNode.Expand();
             }
@@ -252,8 +270,6 @@ namespace STLViewer
             }
             TreeDBView.LabelEdit = true;
             node.BeginEdit();
-            // --- БД
-            // --- To Do
         }
 
         /// <summary>
@@ -261,13 +277,27 @@ namespace STLViewer
         /// </summary>
         private void RemoveNodeGroup()
         {
-            // --- Дерево
-            if (TreeDBView.SelectedNode == null)
-                return;
-            if (MessageBox.Show("Удалить группу?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                TreeDBView.SelectedNode.Remove();
-            // --- БД
-            // --- To Do
+            Init();
+            model.Clear();
+            DrawScene();
+            SceneWidget.Hide();
+            try
+            {
+                // --- Дерево
+                if (TreeDBView.SelectedNode == null)
+                    return;
+                if (MessageBox.Show("Удалить группу?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Directory.Delete(TreeDBView.SelectedNode.Name, true);
+                    TreeDBView.SelectedNode.Remove();
+                }
+            }
+            catch (Exception ex)
+            {
+                TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode.Name);
+                MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            SceneWidget.Show();
 
         }
         #endregion
@@ -277,24 +307,47 @@ namespace STLViewer
         /// </summary>
         private void AddNodeModel()
         {
-            // --- Дерево
-            TreeNode node = new TreeNode("Введите текст");
-            node.ImageIndex = 1;
-            if (TreeDBView.SelectedNode != null)
+            // --- Поулчаем имя файла и путь к нему
+            openFileModelDialog.Filter = "STL files(*.stl)|*.stl|All files(*.*)|*.*";
+            openFileModelDialog.FileName = "";
+            if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            SceneWidget.Hide();
+            string pathToModel = null;
+            try
             {
-
-                TreeDBView.SelectedNode.Nodes.Add(node);
-                TreeDBView.SelectedNode.Expand();
-            } else 
-            {
-                TreeDBView.Nodes.Add(node);
+                // --- Дерево
+                if (TreeDBView.SelectedNode != null)
+                {
+                    if (File.Exists(TreeDBView.SelectedNode.Name))
+                    {
+                        pathToModel = Path.Combine(TreeDBView.SelectedNode.Parent.Name, Path.GetFileName(openFileModelDialog.FileName));
+                        File.Copy(openFileModelDialog.FileName, pathToModel);
+                        TreeDBView.SelectedNode.Parent.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
+                        TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode.Parent, Path.GetFileNameWithoutExtension(pathToModel));
+                    }
+                    else
+                    {
+                        pathToModel = Path.Combine(TreeDBView.SelectedNode.Name, Path.GetFileName(openFileModelDialog.FileName));
+                        File.Copy(openFileModelDialog.FileName, pathToModel);
+                        TreeDBView.SelectedNode.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
+                        TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode, Path.GetFileNameWithoutExtension(pathToModel));
+                    }
+                }
+                else
+                {
+                    pathToModel = Path.Combine(pathDataModel, Path.GetFileName(openFileModelDialog.FileName));
+                    File.Copy(openFileModelDialog.FileName, pathToModel);
+                    TreeDBView.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
+                    TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode, Path.GetFileNameWithoutExtension(pathToModel));
+                }
             }
-
-            TreeDBView.LabelEdit = true;
-            node.BeginEdit();
-            // --- БД
-            // --- To Do
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            SceneWidget.Show();
+    }
 
         /// <summary>
         /// Метод удаляет выделенный узел тип модель
@@ -306,13 +359,40 @@ namespace STLViewer
                 return;
             
             // Удаляем только узлы только типа модель
-            if (TreeDBView.SelectedNode.ImageIndex == 1)
+            if (TreeDBView.SelectedNode.ImageIndex == 2)
             {
+                
+                SceneWidget.Hide();
                 if (MessageBox.Show("Удалить модель?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    File.Delete(TreeDBView.SelectedNode.Name);
                     TreeDBView.SelectedNode.Remove();
-                // --- БД
-                // --- To Do
+                }
+                SceneWidget.Show();
             }
+        }
+
+        /// <summary>
+        /// Метод возвращает по имени объект узел
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        TreeNode FindNodeByName(TreeNode root, string name)
+        {
+            if (root == null) return null;
+            if (root.Text == name) return root;
+            return FindNodeByName(root.FirstNode, name) ?? FindNodeByName(root.NextNode, name);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        TreeNode FindNodeByName(string name)
+        {
+            return FindNodeByName(TreeDBView.TopNode, name);
         }
     }
 }
