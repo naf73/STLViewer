@@ -19,7 +19,6 @@ namespace STLViewer
         /// <param name="e"></param>
         private void TreeDBView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            log.Text = e.Node.Name;
             // ================================================================================
             #region Настройка отображения пунктов главного и контектсного меню
             // ================================================================================
@@ -124,7 +123,6 @@ namespace STLViewer
                             node.Name = Path.Combine(node.Parent.Name, node.Text + ".stl");
                         }
                     }
-
 
                     // ===
 
@@ -268,7 +266,8 @@ namespace STLViewer
         private void UpLevelNode()
         {
             if (TreeDBView.SelectedNode != null
-                && TreeDBView.SelectedNode.Parent != null)
+                && TreeDBView.SelectedNode.Parent != null
+                && TreeDBView.SelectedNode.Parent.Name != pathDataModel)
             {
 
                 // define edit collection
@@ -291,6 +290,9 @@ namespace STLViewer
 
                 // select node
                 TreeDBView.SelectedNode = selectedNode;
+
+                // ==== Move item in OS
+                MoveItem();
             }
         }
 
@@ -299,10 +301,10 @@ namespace STLViewer
         /// </summary>
         private void DownLevelNode()
         {
-            if (TreeDBView.SelectedNode != null
-                && TreeDBView.SelectedNode.PrevNode != null)
+            if (TreeDBView.SelectedNode != null && TreeDBView.SelectedNode.PrevNode != null)
             {
-
+                if (TreeDBView.SelectedNode.PrevNode != null && TreeDBView.SelectedNode.PrevNode.ImageIndex == 2)
+                    return;
                 // define edit collection
                 TreeNodeCollection editNodes;
                 if (TreeDBView.SelectedNode.Parent != null)
@@ -320,6 +322,9 @@ namespace STLViewer
 
                 // select node
                 TreeDBView.SelectedNode = selectedNode;
+
+                // ==== Move item in OS
+                MoveItem();
             }
         }
 
@@ -445,6 +450,8 @@ namespace STLViewer
             }
         }
 
+        #region Реализация вспомогательных методов
+
         /// <summary>
         /// Метод возвращает по родительскому узлу и по имени объект узел
         /// </summary>
@@ -467,5 +474,30 @@ namespace STLViewer
         {
             return FindNodeByName(TreeDBView.TopNode, name);
         }
+
+        /// <summary>
+        /// Пермещение объектов вверх/вниз
+        /// </summary>
+        private void MoveItem()
+        {
+            string last_name;
+            // === Move group
+            if (TreeDBView.SelectedNode.ImageIndex == 1)
+            {
+                last_name = TreeDBView.SelectedNode.Name;
+                TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text);
+                Directory.Move(last_name, TreeDBView.SelectedNode.Name);
+            }
+
+            // === Move model
+            if (TreeDBView.SelectedNode.ImageIndex == 2)
+            {
+                last_name = TreeDBView.SelectedNode.Name;
+                TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text + ".stl");
+                File.Move(last_name, TreeDBView.SelectedNode.Name);
+            }
+        }
+
+        #endregion
     }
 }
