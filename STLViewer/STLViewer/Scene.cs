@@ -28,11 +28,15 @@ namespace STLViewer
         // ============================================================================================
         #region Глобальные переменные
         float zoom; // масштаб модели
-        float xAxisRotation; // вращение вокруг оси x
-        float yAxisRotation; // вращение вокруг оси y
+        float xAxisRotation; // Угол вращение вокруг оси x
+        float yAxisRotation; // Угол вращение вокруг оси y
+        float xAxisTransport; // Расстояние перемещения вдоль оси x (экран)
+        float yAxisTransport; // Расстояние перемещения вдоль оси y (экран)
         float far; // глубина перспективы
-        int xAxisRotationLast;
-        int yAxisRotationLast;
+        int xAxisRotationLast; // Последнее положение мыши на экране по оси X (для вращения)
+        int yAxisRotationLast; // Последнее положение мыши на экране по оси X (для вращения)
+        int xAxisTransportLast; //
+        int yAxisTransportLast; //
         List<Face> model = new List<Face>(); // Текуща модель STL модель
         float[] offset_model = new float[3]; // Смещение от центра модели
         Color color_model = new Color(); // Цвет модели
@@ -54,6 +58,11 @@ namespace STLViewer
             yAxisRotation = 0;
             xAxisRotationLast = 0;
             yAxisRotationLast = 0;
+            // ===
+            xAxisTransport = 0;
+            yAxisTransport = 0;
+            xAxisTransportLast = 0;
+            yAxisTransportLast = 0;
             // ===
             offset_model[0] = 0;
             offset_model[1] = 0;
@@ -144,6 +153,9 @@ namespace STLViewer
             //----------------------------   
             Gl.glPushMatrix();
 
+            // Перемещение камеры
+            Glu.gluLookAt(-xAxisTransport, yAxisTransport, 1, -xAxisTransport, yAxisTransport, 0, 0, 1, 0);
+
             // Выставляем модель по центру сцены
             Gl.glTranslated(offset_model[0] / zoom, offset_model[1] / zoom, -(((offset_model[2] * 4) + 50) / zoom));
 
@@ -228,7 +240,18 @@ namespace STLViewer
         /// </summary>
         private void ViewReset() 
         {
-            Init(); // обнуляем переменные сцены
+            zoom = 1;
+            far = 200;
+            // ===
+            xAxisRotation = 0;
+            yAxisRotation = 0;
+            xAxisRotationLast = 0;
+            yAxisRotationLast = 0;
+            // ===
+            offset_model[0] = 0;
+            offset_model[1] = 0;
+            offset_model[2] = 0;
+            // ===
             offset_model = ModelCenter(model); // получаем центр модели
             DrawScene(); // отрисовываем модель
         }
@@ -238,7 +261,20 @@ namespace STLViewer
         /// </summary>
         private void ViewOptimizate()
         {
-            // -- To Do
+            zoom = 1;
+            far = 200;
+            // ===
+            xAxisTransport = 0;
+            yAxisTransport = 0;
+            xAxisTransportLast = 0;
+            yAxisTransportLast = 0;
+            // ===
+            offset_model[0] = 0;
+            offset_model[1] = 0;
+            offset_model[2] = 0;
+            // ===
+            offset_model = ModelCenter(model); // получаем центр модели
+            DrawScene(); // отрисовываем модель
         }
 
         /// <summary>
@@ -265,15 +301,12 @@ namespace STLViewer
         private void SetColorModel()
         {
             SceneWidget.Hide();
-            if (colorDialog.ShowDialog() == DialogResult.Cancel)
+            if (colorDialog.ShowDialog() != DialogResult.Cancel)
             {
-                DrawScene(); // === Отрисовываем сцену
-                return;
+                color_model = colorDialog.Color;
             }
-            SceneWidget.Show();
-
-            color_model = colorDialog.Color;
             DrawScene(); // === Отрисовываем сцену
+            SceneWidget.Show();
         }
 
         /// <summary>
@@ -282,15 +315,12 @@ namespace STLViewer
         private void SetColorBackground()
         {
             SceneWidget.Hide();
-            if (colorDialog.ShowDialog() == DialogResult.Cancel)
+            if (colorDialog.ShowDialog() != DialogResult.Cancel)
             {
-                DrawScene(); // === Отрисовываем сцену
-                return;
+                color_background = colorDialog.Color;
             }
+            DrawScene(); // === Отрисовываем сцену 
             SceneWidget.Show();
-
-            color_background = colorDialog.Color;
-            DrawScene(); // === Отрисовываем сцену
         }
 
         /// <summary>
@@ -324,7 +354,7 @@ namespace STLViewer
         }
 
         // ============================================================================================
-        // События виджета
+        #region События виджета
         // ============================================================================================
 
         /// <summary>
@@ -376,6 +406,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void SceneWidget_MouseMove(object sender, MouseEventArgs e)
         {
+            // --- ЛКМ
             if (e.Button == MouseButtons.Left)
             {
                 xAxisRotation += (180 * (e.X - xAxisRotationLast) / SceneWidget.Width);
@@ -384,11 +415,22 @@ namespace STLViewer
                 yAxisRotationLast = e.Y;
                 DrawScene();
             }
-            else
+
+            // --- ПКМ
+            if(e.Button == MouseButtons.Right)
             {
-                xAxisRotationLast = e.X;
-                yAxisRotationLast = e.Y;
+                xAxisTransport += (100 * (e.X - xAxisTransportLast) / SceneWidget.Width);
+                yAxisTransport += (100 * (e.Y - yAxisTransportLast) / SceneWidget.Height);
+                xAxisTransportLast = e.X;
+                yAxisTransportLast = e.Y;
+                DrawScene();
             }
+
+            // --- Для расчетов запоминаем последнее положение мыши
+            xAxisRotationLast = e.X;
+            yAxisRotationLast = e.Y;
+            xAxisTransportLast = e.X;
+            yAxisTransportLast = e.Y;
         }
 
         /// <summary>
@@ -441,12 +483,45 @@ namespace STLViewer
 
             #endregion
 
-            // === Вызов справки по программе
+            #region Перемещение камеры
+
+            if(e.KeyCode == Keys.R)
+            {
+                yAxisTransport -= (100 * speed / SceneWidget.Height);
+                DrawScene();
+            }
+
+            if(e.KeyCode == Keys.F)
+            {
+                yAxisTransport += (100 * speed / SceneWidget.Height);
+                DrawScene();
+            }
+
+            if (e.KeyCode == Keys.D1)
+            {
+                xAxisTransport -= (100 * speed / SceneWidget.Width);
+                DrawScene();
+            }
+
+            if (e.KeyCode == Keys.D2)
+            {
+                xAxisTransport += (100 * speed / SceneWidget.Width);
+                DrawScene();
+            }
+
+            #endregion
+
+            #region Вызов справки по программе
+
             if (e.KeyCode == Keys.F1)
             {
                 ShowHelp();
             }
-                
+
+            #endregion
+
         }
+
+        #endregion
     }
 }
