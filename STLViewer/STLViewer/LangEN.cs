@@ -22,7 +22,7 @@ namespace STLViewer
             Close_MenuItem.Text = "Close";
             View_MenuItem.Text = "View";
             ResetViiew_MenuItem.Text = "Reset view";
-            OptimizateView_MenuItem.Text = "Optimizate view";
+            OptimizateView_MenuItem.Text = "Centering View";
             ColorModel_MenuItem.Text = "Color model";
             ColorBackground_MenuItem.Text = "Color background";
             Database_MenuItem.Text = "ModelBase";

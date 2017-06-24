@@ -116,7 +116,7 @@
             this.TreeDBView.Location = new System.Drawing.Point(0, 0);
             this.TreeDBView.Name = "TreeDBView";
             this.TreeDBView.SelectedImageIndex = 0;
-            this.TreeDBView.Size = new System.Drawing.Size(234, 472);
+            this.TreeDBView.Size = new System.Drawing.Size(234, 435);
             this.TreeDBView.TabIndex = 5;
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
             this.TreeDBView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeDBView_BeforeSelect);
@@ -199,9 +199,9 @@
             // 
             this.panelLegend.Controls.Add(this.pictureBox1);
             this.panelLegend.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelLegend.Location = new System.Drawing.Point(0, 472);
+            this.panelLegend.Location = new System.Drawing.Point(0, 435);
             this.panelLegend.Name = "panelLegend";
-            this.panelLegend.Size = new System.Drawing.Size(234, 49);
+            this.panelLegend.Size = new System.Drawing.Size(234, 86);
             this.panelLegend.TabIndex = 4;
             // 
             // pictureBox1
@@ -210,7 +210,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(234, 49);
+            this.pictureBox1.Size = new System.Drawing.Size(234, 86);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -316,7 +316,7 @@
             // 
             this.OptimizateView_MenuItem.Name = "OptimizateView_MenuItem";
             this.OptimizateView_MenuItem.Size = new System.Drawing.Size(182, 22);
-            this.OptimizateView_MenuItem.Text = "Optimizate View";
+            this.OptimizateView_MenuItem.Text = "Centering View";
             this.OptimizateView_MenuItem.Click += new System.EventHandler(this.OptimizateView_MenuItem_Click);
             // 
             // ColorModel_MenuItem
