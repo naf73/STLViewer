@@ -43,7 +43,7 @@ namespace STLViewer
             {
                 string name; // имя модели
                 model = STLFormat.LoadBinary(args[0], out name);
-                this.Text = name; // получаем имя модели
+                NameLoadModel.Text = name; // получаем имя модели
                 offset_model = ModelCenter(model); // получаем центр модели
             }
             // ===
@@ -58,21 +58,8 @@ namespace STLViewer
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            #region Тестовый кусок (нужно убрать на release)
-            //string path_to_model;
-            //path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_cube.stl";
-            //path_to_model = @"C:\\Users\\naf\\Documents\\Visual Studio 2015\\Projects\\STLViewer\\test_part.stl";
-            //// Загружаем stl модель
-            //// тестовый пример
-            //string name; // имя модели
-            //model = STLFormat.LoadBinary(path_to_model, out name);
-            //this.Text = name; // получаем имя модели
-            //offset_model = ModelCenter(model); // получаем центр модели
-
-            //// Отрисовка модели
-            //DrawScene();
-            #endregion
-            ScanRootDir(@"D:\\Simbirsoft\\Summer_Intensity\\STLViewer\\test_db_models");
+            string pathDataModel = Path.Combine(Application.StartupPath, "test_db_models");
+            ScanRootDir(pathDataModel);
         }
 
         #region События элементов главного меню Main Menu
@@ -279,22 +266,24 @@ namespace STLViewer
             TranslateToRu();
         }
 
-
-
         #endregion
 
+        #region Методы реализации
+
         /// <summary>
-        /// 
+        /// Метод вызывает файл справки
         /// </summary>
         private void ShowHelp()
         {
-            String helpPath = Application.StartupPath.ToString() + "\\helperStl.chm";
+            String helpPath = Path.Combine(Application.StartupPath, "helperStl.chm");
             if (File.Exists(helpPath))
             {
-
                 Process.Start(helpPath);
             }
         }
 
+
+
+        #endregion
     }
 }
