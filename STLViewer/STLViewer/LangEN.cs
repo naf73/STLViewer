@@ -25,7 +25,7 @@ namespace STLViewer
             OptimizateView_MenuItem.Text = "Optimizate view";
             ColorModel_MenuItem.Text = "Color model";
             ColorBackground_MenuItem.Text = "Color background";
-            Database_MenuItem.Text = "DataModel";
+            Database_MenuItem.Text = "ModelBase";
             AddGroup_ContextMenuTreeDBView.Text = "Add group";
             RemoveGroup_MenuItem.Text = "Remove group";
             AddModel_MenuItem.Text = "Add model";
@@ -38,7 +38,8 @@ namespace STLViewer
             About_MenuItem.Text = "About";
             toolStripStatusLabel1.Text = "Language: ";
             toolStripStatusLabel2.Text = "Loaded model: ";
-            btnHideLegend.Text = "Hide legend";
+            ShowLegend_MenuItem.Text = "Show legend";
+            HideLegend_MenuItem.Text = "Hide legend";
         }
     }
 }

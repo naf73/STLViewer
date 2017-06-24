@@ -155,9 +155,11 @@ namespace STLViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnHideLegend_Click(object sender, EventArgs e)
+        private void HideLegend_MenuItem_Click(object sender, EventArgs e)
         {
             panelLegend.Visible = false;
+            HideLegend_MenuItem.Visible = false;
+            ShowLegend_MenuItem.Visible = true;
         }
 
         /// <summary>
@@ -168,6 +170,8 @@ namespace STLViewer
         private void ShowLegend_MenuItem_Click(object sender, EventArgs e)
         {
             panelLegend.Visible = true;
+            HideLegend_MenuItem.Visible = true;
+            ShowLegend_MenuItem.Visible = false;
         }
 
         #endregion
@@ -302,6 +306,7 @@ namespace STLViewer
                 Process.Start(helpPath);
             }
         }
+
 
 
 

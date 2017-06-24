@@ -38,7 +38,8 @@ namespace STLViewer
             About_MenuItem.Text = "О программе";
             toolStripStatusLabel1.Text = "Язык";
             toolStripStatusLabel2.Text = "Загруженная модель: ";
-            btnHideLegend.Text = "Скрыть легенду";
+            ShowLegend_MenuItem.Text = "Показать легенду";
+            HideLegend_MenuItem.Text = "Скрыть легенду";
         }
     }
 }

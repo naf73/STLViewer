@@ -43,7 +43,6 @@
             this.imageListDB = new System.Windows.Forms.ImageList(this.components);
             this.panelLegend = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnHideLegend = new System.Windows.Forms.Button();
             this.SceneWidget = new Tao.Platform.Windows.SimpleOpenGlControl();
             this.openFileModelDialog = new System.Windows.Forms.OpenFileDialog();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
@@ -57,6 +56,7 @@
             this.OptimizateView_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorModel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorBackground_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HideLegend_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowLegend_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Database_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddGroup_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +76,7 @@
             this.English_SelectItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.NameLoadModel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.testLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -103,8 +104,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.SceneWidget);
-            this.splitContainer1.Size = new System.Drawing.Size(777, 402);
-            this.splitContainer1.SplitterDistance = 259;
+            this.splitContainer1.Size = new System.Drawing.Size(920, 521);
+            this.splitContainer1.SplitterDistance = 234;
             this.splitContainer1.TabIndex = 5;
             // 
             // TreeDBView
@@ -116,7 +117,7 @@
             this.TreeDBView.Location = new System.Drawing.Point(0, 0);
             this.TreeDBView.Name = "TreeDBView";
             this.TreeDBView.SelectedImageIndex = 0;
-            this.TreeDBView.Size = new System.Drawing.Size(259, 300);
+            this.TreeDBView.Size = new System.Drawing.Size(234, 472);
             this.TreeDBView.TabIndex = 5;
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
             this.TreeDBView.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeDBView_BeforeSelect);
@@ -198,34 +199,22 @@
             // panelLegend
             // 
             this.panelLegend.Controls.Add(this.pictureBox1);
-            this.panelLegend.Controls.Add(this.btnHideLegend);
             this.panelLegend.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelLegend.Location = new System.Drawing.Point(0, 300);
+            this.panelLegend.Location = new System.Drawing.Point(0, 472);
             this.panelLegend.Name = "panelLegend";
-            this.panelLegend.Size = new System.Drawing.Size(259, 102);
+            this.panelLegend.Size = new System.Drawing.Size(234, 49);
             this.panelLegend.TabIndex = 4;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 23);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(259, 79);
+            this.pictureBox1.Size = new System.Drawing.Size(234, 49);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            // 
-            // btnHideLegend
-            // 
-            this.btnHideLegend.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnHideLegend.Location = new System.Drawing.Point(0, 0);
-            this.btnHideLegend.Name = "btnHideLegend";
-            this.btnHideLegend.Size = new System.Drawing.Size(259, 23);
-            this.btnHideLegend.TabIndex = 0;
-            this.btnHideLegend.Text = "Hide legend";
-            this.btnHideLegend.UseVisualStyleBackColor = true;
-            this.btnHideLegend.Click += new System.EventHandler(this.btnHideLegend_Click);
             // 
             // SceneWidget
             // 
@@ -240,7 +229,7 @@
             this.SceneWidget.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SceneWidget.Location = new System.Drawing.Point(0, 0);
             this.SceneWidget.Name = "SceneWidget";
-            this.SceneWidget.Size = new System.Drawing.Size(514, 402);
+            this.SceneWidget.Size = new System.Drawing.Size(682, 521);
             this.SceneWidget.StencilBits = ((byte)(0));
             this.SceneWidget.TabIndex = 5;
             this.SceneWidget.Paint += new System.Windows.Forms.PaintEventHandler(this.SceneWidget_Paint);
@@ -261,7 +250,7 @@
             this.Help_MenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(777, 24);
+            this.MainMenu.Size = new System.Drawing.Size(920, 24);
             this.MainMenu.TabIndex = 0;
             this.MainMenu.Text = "menuStrip1";
             // 
@@ -311,6 +300,7 @@
             this.OptimizateView_MenuItem,
             this.ColorModel_MenuItem,
             this.ColorBackground_MenuItem,
+            this.HideLegend_MenuItem,
             this.ShowLegend_MenuItem});
             this.View_MenuItem.Name = "View_MenuItem";
             this.View_MenuItem.Size = new System.Drawing.Size(44, 20);
@@ -344,11 +334,19 @@
             this.ColorBackground_MenuItem.Text = "Color Background ...";
             this.ColorBackground_MenuItem.Click += new System.EventHandler(this.ColorBackground_MenuItem_Click);
             // 
+            // HideLegend_MenuItem
+            // 
+            this.HideLegend_MenuItem.Name = "HideLegend_MenuItem";
+            this.HideLegend_MenuItem.Size = new System.Drawing.Size(182, 22);
+            this.HideLegend_MenuItem.Text = "Hide legend";
+            this.HideLegend_MenuItem.Click += new System.EventHandler(this.HideLegend_MenuItem_Click);
+            // 
             // ShowLegend_MenuItem
             // 
             this.ShowLegend_MenuItem.Name = "ShowLegend_MenuItem";
             this.ShowLegend_MenuItem.Size = new System.Drawing.Size(182, 22);
             this.ShowLegend_MenuItem.Text = "Show legend";
+            this.ShowLegend_MenuItem.Visible = false;
             this.ShowLegend_MenuItem.Click += new System.EventHandler(this.ShowLegend_MenuItem_Click);
             // 
             // Database_MenuItem
@@ -362,8 +360,8 @@
             this.DownLevel_MenuItem,
             this.Rename_MenuItem});
             this.Database_MenuItem.Name = "Database_MenuItem";
-            this.Database_MenuItem.Size = new System.Drawing.Size(67, 20);
-            this.Database_MenuItem.Text = "Database";
+            this.Database_MenuItem.Size = new System.Drawing.Size(77, 20);
+            this.Database_MenuItem.Text = "ModelBase";
             // 
             // AddGroup_MenuItem
             // 
@@ -442,10 +440,11 @@
             this.toolStripStatusLabel1,
             this.SelectLanguage,
             this.toolStripStatusLabel2,
-            this.NameLoadModel});
-            this.statusLine.Location = new System.Drawing.Point(0, 426);
+            this.NameLoadModel,
+            this.testLabel});
+            this.statusLine.Location = new System.Drawing.Point(0, 545);
             this.statusLine.Name = "statusLine";
-            this.statusLine.Size = new System.Drawing.Size(777, 22);
+            this.statusLine.Size = new System.Drawing.Size(920, 22);
             this.statusLine.TabIndex = 1;
             this.statusLine.Text = "statusStrip1";
             // 
@@ -493,12 +492,18 @@
             this.NameLoadModel.Size = new System.Drawing.Size(41, 17);
             this.NameLoadModel.Text = "Empty";
             // 
+            // testLabel
+            // 
+            this.testLabel.Name = "testLabel";
+            this.testLabel.Size = new System.Drawing.Size(50, 17);
+            this.testLabel.Text = "test info";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(777, 448);
+            this.ClientSize = new System.Drawing.Size(920, 567);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusLine);
             this.Controls.Add(this.MainMenu);
@@ -570,9 +575,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.TreeView TreeDBView;
         private System.Windows.Forms.Panel panelLegend;
-        private System.Windows.Forms.Button btnHideLegend;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem ShowLegend_MenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel testLabel;
+        private System.Windows.Forms.ToolStripMenuItem HideLegend_MenuItem;
     }
 }
 
