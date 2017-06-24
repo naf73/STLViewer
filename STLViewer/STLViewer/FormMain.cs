@@ -41,9 +41,7 @@ namespace STLViewer
             color_background = Color.White;
 
             // === Загружаем настройки пользователя
-            pathDataModel = Properties.Settings.Default.RootDirDB;
-            color_model = Properties.Settings.Default.ColorModel;
-            color_background = Properties.Settings.Default.ColorBackground;
+            LoadUserSettings();
 
             // === Аргументы переданные приложению
             if (args.Length == 1)
@@ -171,6 +169,8 @@ namespace STLViewer
             panelLegend.Visible = false;
             HideLegend_MenuItem.Visible = false;
             ShowLegend_MenuItem.Visible = true;
+            Properties.Settings.Default.ShowLegend = false;
+            Properties.Settings.Default.Save();
         }
 
         /// <summary>
@@ -183,6 +183,8 @@ namespace STLViewer
             panelLegend.Visible = true;
             HideLegend_MenuItem.Visible = true;
             ShowLegend_MenuItem.Visible = false;
+            Properties.Settings.Default.ShowLegend = true;
+            Properties.Settings.Default.Save();
         }
 
         #endregion
@@ -322,19 +324,29 @@ namespace STLViewer
             }
         }
 
-        #endregion
-
         /// <summary>
-        /// Событие загрузки формы
+        /// Загрузка настроек пользователя
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormMain_Load(object sender, EventArgs e)
+        private void LoadUserSettings()
         {
-            if (TreeDBView.Nodes.Count == 0)
+            pathDataModel = Properties.Settings.Default.RootDirDB;
+            color_model = Properties.Settings.Default.ColorModel;
+            color_background = Properties.Settings.Default.ColorBackground;
+            if (Properties.Settings.Default.ShowLegend)
             {
-                
+                ShowLegend_MenuItem.Visible = false;
+                HideLegend_MenuItem.Visible = true;
+                panelLegend.Visible = true;
+            }
+            else
+            {
+                ShowLegend_MenuItem.Visible = true;
+                HideLegend_MenuItem.Visible = false;
+                panelLegend.Visible = false;
             }
         }
+
+        #endregion
+
     }
 }

@@ -84,7 +84,6 @@
             this.NameLoadModel = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.log = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -479,8 +478,7 @@
             this.toolStripStatusLabel1,
             this.SelectLanguage,
             this.toolStripStatusLabel2,
-            this.NameLoadModel,
-            this.log});
+            this.NameLoadModel});
             this.statusLine.Location = new System.Drawing.Point(0, 545);
             this.statusLine.Name = "statusLine";
             this.statusLine.Size = new System.Drawing.Size(920, 22);
@@ -531,12 +529,6 @@
             this.NameLoadModel.Size = new System.Drawing.Size(41, 17);
             this.NameLoadModel.Text = "Empty";
             // 
-            // log
-            // 
-            this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(118, 17);
-            this.log.Text = "toolStripStatusLabel3";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,7 +544,6 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STLViewer";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -623,7 +614,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripStatusLabel log;
     }
 }
 

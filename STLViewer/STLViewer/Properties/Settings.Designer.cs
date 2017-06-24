@@ -59,5 +59,17 @@ namespace STLViewer.Properties {
                 this["ColorBackground"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowLegend {
+            get {
+                return ((bool)(this["ShowLegend"]));
+            }
+            set {
+                this["ShowLegend"] = value;
+            }
+        }
     }
 }

@@ -409,22 +409,20 @@ namespace STLViewer
         /// Метод удаляет выделенный узел тип модель
         /// </summary>
         private void RemoveNodeModel()
-        {
+        { 
+            SceneWidget.Hide();
             // --- Дерево
             if (TreeDBView.SelectedNode == null)
                 return;
-            
+           
             // Удаляем только узлы только типа модель
             if (TreeDBView.SelectedNode.ImageIndex == 2)
             {
-                
-                SceneWidget.Hide();
                 if (MessageBox.Show("Удалить модель?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     File.Delete(TreeDBView.SelectedNode.Name);
                     TreeDBView.SelectedNode.Remove();
                 }
-                SceneWidget.Show();
             }
         }
 
