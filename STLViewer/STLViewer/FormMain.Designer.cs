@@ -621,8 +621,7 @@
             // NameLoadModel
             // 
             this.NameLoadModel.Name = "NameLoadModel";
-            this.NameLoadModel.Size = new System.Drawing.Size(41, 17);
-            this.NameLoadModel.Text = "Empty";
+            this.NameLoadModel.Size = new System.Drawing.Size(0, 17);
             // 
             // FormMain
             // 

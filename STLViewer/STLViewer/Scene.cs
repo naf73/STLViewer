@@ -295,7 +295,8 @@ namespace STLViewer
                 temp_model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
                 model.Clear(); // очищаем текущую модель
                 model = temp_model;
-                NameLoadModel.Text = name; // получаем имя модели
+                //NameLoadModel.Text = name; // получаем имя модели
+                ShowNameModelStatusLine();
                 offset_model = ModelCenter(model); // получаем центр модели
                 DrawScene(); // отрисовываем модель
             }

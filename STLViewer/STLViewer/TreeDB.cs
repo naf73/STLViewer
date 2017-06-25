@@ -19,6 +19,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void TreeDBView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            ShowNameModelStatusLine();
             // ================================================================================
             #region Настройка отображения пунктов главного и контектсного меню
             // ================================================================================
@@ -75,7 +76,8 @@ namespace STLViewer
                 Init();
                 string name; // имя модели
                 model = STLFormat.LoadBinary(TreeDBView.SelectedNode.Name, out name);
-                NameLoadModel.Text = name; // получаем имя модели
+                //NameLoadModel.Text = name; // получаем имя модели
+                ShowNameModelStatusLine();
                 offset_model = ModelCenter(model); // получаем центр модели
                 DrawScene();
             }
@@ -543,6 +545,18 @@ namespace STLViewer
                 last_name = TreeDBView.SelectedNode.Name;
                 TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text + ".stl");
                 File.Move(last_name, TreeDBView.SelectedNode.Name);
+            }
+        }
+
+        /// <summary>
+        /// Выводим в статус линию имя загруженного файла
+        /// </summary>
+        private void ShowNameModelStatusLine()
+        {
+            NameLoadModel.Text = string.Empty;
+            if (TreeDBView.SelectedNode.ImageIndex == 2)
+            {
+                NameLoadModel.Text = Path.GetFileName(TreeDBView.SelectedNode.Name); // получаем имя модели
             }
         }
 

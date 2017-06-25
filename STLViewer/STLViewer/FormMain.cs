@@ -48,7 +48,8 @@ namespace STLViewer
             {
                 string name; // имя модели
                 model = STLFormat.LoadBinary(args[0], out name);
-                NameLoadModel.Text = name; // получаем имя модели
+                //NameLoadModel.Text = name; // получаем имя модели
+                ShowNameModelStatusLine();
                 offset_model = ModelCenter(model); // получаем центр модели
                 SceneWidget.Show();
                 TreeDBView.Nodes.Add(args[0], Path.GetFileNameWithoutExtension(args[0]), 2);
