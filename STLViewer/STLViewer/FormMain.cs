@@ -127,6 +127,7 @@ namespace STLViewer
         private void ResetViiew_MenuItem_Click(object sender, EventArgs e)
         {
             ViewReset();
+            ViewOptimizate();
         }
 
         /// <summary>
