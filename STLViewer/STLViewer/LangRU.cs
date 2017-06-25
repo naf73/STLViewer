@@ -47,6 +47,12 @@ namespace STLViewer
             UpLevel_ContextMenuTreeDBView.Text = "Переместить вверх";
             DownLevel_ContextMenuTreeDBView.Text = "Переместить вниз";
             Rename_ContextMenuTreeDBView.Text = "Переименовать";
+            // ===
+            TreeDBView.SelectedNode = FindNodeByName("ModelBase");
+            if (TreeDBView.SelectedNode != null)
+            {
+                TreeDBView.SelectedNode.Text = "База моделей"; 
+            }
         }
     }
 }

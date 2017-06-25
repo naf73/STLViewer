@@ -47,6 +47,12 @@ namespace STLViewer
             UpLevel_ContextMenuTreeDBView.Text = "Up level item";
             DownLevel_ContextMenuTreeDBView.Text = "Down level item";
             Rename_ContextMenuTreeDBView.Text = "Rename";
+            // ===
+            TreeDBView.SelectedNode = FindNodeByName("База моделей");
+            if (TreeDBView.SelectedNode != null)
+            {
+                TreeDBView.SelectedNode.Text = "ModelBase";
+            }
         }
     }
 }
