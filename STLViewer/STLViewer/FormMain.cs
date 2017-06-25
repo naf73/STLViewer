@@ -96,13 +96,19 @@ namespace STLViewer
         /// <param name="e"></param>
         private void Settings_MenuItem_Click(object sender, EventArgs e)
         {
+            GetBackground();
             SceneWidget.Hide();
+            TreeDBView.Focus();
+            TreeNode lastNode = TreeDBView.SelectedNode;
             SettingsForm sf = new SettingsForm(Text);
             sf.ShowDialog();
             pathDataModel = Properties.Settings.Default.RootDirDB;
             ScanRootDir(pathDataModel);
             contextMenuTreeView.Enabled = true;
             Database_MenuItem.Enabled = true;
+            TreeDBView.Focus();
+            TreeDBView.SelectedNode = FindNodeByName(lastNode.Text);
+            SceneWidget.Show();
         }
 
         /// <summary>
