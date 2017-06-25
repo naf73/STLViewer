@@ -319,7 +319,9 @@ namespace STLViewer
         /// <param name="e"></param>
         private void English_SelectItem_Click(object sender, EventArgs e)
         {
-            SelectLanguage.Text = English_SelectItem.Text;
+            SelectLanguage.Text = SelectLanguage.DropDownItems[1].Text;
+            Properties.Settings.Default.Language = "English";
+            Properties.Settings.Default.Save();
             TranslateToEn();
         }
 
@@ -330,7 +332,9 @@ namespace STLViewer
         /// <param name="e"></param>
         private void Rus_SelectItem_Click(object sender, EventArgs e)
         {
-            SelectLanguage.Text = Rus_SelectItem.Text;
+            SelectLanguage.Text = SelectLanguage.DropDownItems[0].Text;
+            Properties.Settings.Default.Language = "Russian";
+            Properties.Settings.Default.Save();
             TranslateToRu();
         }
 
@@ -361,10 +365,10 @@ namespace STLViewer
         /// </summary>
         private void LoadUserSettings()
         {
-            pathDataModel = Properties.Settings.Default.RootDirDB;
-            color_model = Properties.Settings.Default.ColorModel;
-            color_background = Properties.Settings.Default.ColorBackground;
-            splitContainer1.Panel2.BackColor = color_background;
+            color_model = Properties.Settings.Default.ColorModel; // цвет модели
+            color_background = Properties.Settings.Default.ColorBackground; // цвет заднего фона 3D виджета
+            splitContainer1.Panel2.BackColor = color_background; // цвет заднего фона панели для 3D виджета
+            // === Настройка пункта меню Показать/Скрыть легенду
             if (Properties.Settings.Default.ShowLegend)
             {
                 ShowLegend_MenuItem.Visible = false;
@@ -377,11 +381,30 @@ namespace STLViewer
                 HideLegend_MenuItem.Visible = false;
                 panelLegend.Visible = false;
             }
+            // === Назначаем локализацию
+            switch (Properties.Settings.Default.Language)
+            {
+                case "Russian":
+                    SelectLanguage.Text = SelectLanguage.DropDownItems[0].Text;
+                    TranslateToRu();
+                    break;
+                case "English":
+                    SelectLanguage.Text = SelectLanguage.DropDownItems[1].Text;
+                    TranslateToEn();
+                    break;
+            }
+            // === Получаем путь к папке "Мои документы"
+            if (string.IsNullOrEmpty(Properties.Settings.Default.RootDirDB))
+            {
+                pathDataModel = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ModelBase");
+                Properties.Settings.Default.RootDirDB = pathDataModel;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                pathDataModel = Properties.Settings.Default.RootDirDB;
+            }
         }
-
-
-
-
 
         #endregion
 

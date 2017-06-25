@@ -25,8 +25,7 @@ namespace STLViewer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Simbirsoft\\Summer_Intensity\\STLViewer\\STLViewer\\STLViewer\\bin\\Release\\test_db_" +
-            "models")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string RootDirDB {
             get {
                 return ((string)(this["RootDirDB"]));
@@ -69,6 +68,18 @@ namespace STLViewer.Properties {
             }
             set {
                 this["ShowLegend"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("English")]
+        public string Language {
+            get {
+                return ((string)(this["Language"]));
+            }
+            set {
+                this["Language"] = value;
             }
         }
     }

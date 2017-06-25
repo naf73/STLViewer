@@ -57,7 +57,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(txtPathRootDirDB.Text))
+            if (Directory.Exists(txtPathRootDirDB.Text) || string.IsNullOrEmpty(txtPathRootDirDB.Text))
             {
                 Properties.Settings.Default.RootDirDB = txtPathRootDirDB.Text;
                 Properties.Settings.Default.Save();
