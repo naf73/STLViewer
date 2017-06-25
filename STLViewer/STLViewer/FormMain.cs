@@ -332,6 +332,7 @@ namespace STLViewer
             pathDataModel = Properties.Settings.Default.RootDirDB;
             color_model = Properties.Settings.Default.ColorModel;
             color_background = Properties.Settings.Default.ColorBackground;
+            splitContainer1.Panel2.BackColor = color_background;
             if (Properties.Settings.Default.ShowLegend)
             {
                 ShowLegend_MenuItem.Visible = false;

@@ -82,9 +82,9 @@
             this.English_SelectItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.NameLoadModel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.log = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.log = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -125,6 +125,7 @@
             this.TreeDBView.SelectedImageIndex = 0;
             this.TreeDBView.Size = new System.Drawing.Size(234, 435);
             this.TreeDBView.TabIndex = 5;
+            this.TreeDBView.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeDBView_BeforeLabelEdit);
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
             this.TreeDBView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterSelect);
             this.TreeDBView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);

@@ -100,13 +100,23 @@ namespace STLViewer
         private void TreeBDView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             TreeDBView.LabelEdit = false;
+            string name;
+            // ===
+            if (string.IsNullOrEmpty(e.Label))
+            {
+                name = e.Node.Text;
+            }
+            else
+            {
+                name = e.Label;
+            }
             // ==== группа
             if (TreeDBView.SelectedNode.ImageIndex == 1)
             {
                 if (Directory.Exists(e.Node.Name))
                 {
                     string last_name = e.Node.Name;
-                    e.Node.Name = Path.Combine(e.Node.Parent.Name, e.Label);
+                    e.Node.Name = Path.Combine(e.Node.Parent.Name, name);
                     TreeDBView.SelectedNode = e.Node;
                     Directory.Move(last_name, e.Node.Name);
 
@@ -127,16 +137,24 @@ namespace STLViewer
                 }
                 else
                 { 
-                    e.Node.Name = Path.Combine(e.Node.Parent.Name, e.Label);
+                    e.Node.Name = Path.Combine(e.Node.Parent.Name, name);
                     TreeDBView.SelectedNode = e.Node;
-                    Directory.CreateDirectory(e.Node.Name);
+                    if (!Directory.Exists(e.Node.Name))
+                    {
+                        Directory.CreateDirectory(e.Node.Name);
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Такая группа уже существует", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        e.Node.Remove();
+                    }
                 }
              }
             // ==== модель
             if (TreeDBView.SelectedNode.ImageIndex == 2)
             {
                 string last_name = e.Node.Name;
-                e.Node.Name = Path.Combine(e.Node.Parent.Name, e.Label + ".stl");
+                e.Node.Name = Path.Combine(e.Node.Parent.Name, name + ".stl");
                 TreeDBView.SelectedNode = e.Node;
                 File.Move(last_name, e.Node.Name);
             }
@@ -230,6 +248,21 @@ namespace STLViewer
             {
                 RenameNode();
             }
+            // ---
+            if (e.KeyCode == Keys.Enter)
+            {
+                TreeDBView.SelectedNode.EndEdit(true);
+            }
+        }
+
+        /// <summary>
+        /// Событие на дереве до редактирования лейбела
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeDBView_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            TreeDBView.SelectedNode = TreeDBView.SelectedNode;
         }
 
         #endregion
@@ -240,10 +273,10 @@ namespace STLViewer
         private void RenameNode()
         {
             if (TreeDBView.SelectedNode == null)
-                return;
+                return;         
 
             // --- Запрещаем удалять и переименовывать корневой узел
-            if (TreeDBView.SelectedNode.Name == pathDataModel)
+            if (TreeDBView.SelectedNode.Name == pathDataModel || File.Exists(TreeDBView.SelectedNode.Name))
             {
                 Rename_ContextMenuTreeDBView.Enabled = false;
                 Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;

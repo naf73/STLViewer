@@ -123,13 +123,13 @@ namespace STLViewer
         /// </summary>
         private void DrawScene()
         {
-            // Выходим, если модель не загружена
-            if (model.Count == 0) return;
-
             // Задаем цвет заднего фона
             Gl.glClearColor(color_background.R / 255, color_background.G / 255, color_background.B / 255, color_background.A / 255);
             // Очищаем 
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+
+            // Выходим, если модель не загружена
+            if (model.Count == 0) return;
 
             Gl.glPushMatrix();
 
@@ -291,8 +291,10 @@ namespace STLViewer
             try
             {
                 string name; // имя модели
+                List<Face> temp_model;
+                temp_model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
                 model.Clear(); // очищаем текущую модель
-                model = STLFormat.LoadBinary(openFileModelDialog.FileName, out name);
+                model = temp_model;
                 NameLoadModel.Text = name; // получаем имя модели
                 offset_model = ModelCenter(model); // получаем центр модели
                 DrawScene(); // отрисовываем модель
@@ -333,6 +335,7 @@ namespace STLViewer
                 if (colorDialog.ShowDialog() != DialogResult.Cancel)
                 {
                     color_background = colorDialog.Color;
+                    splitContainer1.Panel2.BackColor = color_background;
                     Properties.Settings.Default.ColorBackground = colorDialog.Color;
                     Properties.Settings.Default.Save();
                 }
