@@ -348,6 +348,12 @@ namespace STLViewer
             {
                 Process.Start(helpPath);
             }
+            else 
+            {
+                SceneWidget.Hide();
+                MessageBox.Show("Файл справки отсутствует", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SceneWidget.Show();
+            }
         }
 
         /// <summary>
