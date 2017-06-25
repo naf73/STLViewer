@@ -347,6 +347,12 @@ namespace STLViewer
             }
         }
 
+        private void InitMessages()
+        {
+            
+
+        }
+
         #endregion
     }
 }

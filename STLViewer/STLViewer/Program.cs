@@ -11,7 +11,6 @@ namespace STLViewer
 {
     static class Program
     {
-
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetForegroundWindow(IntPtr hWnd);

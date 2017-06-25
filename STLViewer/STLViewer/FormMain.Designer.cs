@@ -82,7 +82,6 @@
             this.English_SelectItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.NameLoadModel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.log = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileModelDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -480,8 +479,7 @@
             this.toolStripStatusLabel1,
             this.SelectLanguage,
             this.toolStripStatusLabel2,
-            this.NameLoadModel,
-            this.log});
+            this.NameLoadModel});
             this.statusLine.Location = new System.Drawing.Point(0, 545);
             this.statusLine.Name = "statusLine";
             this.statusLine.Size = new System.Drawing.Size(920, 22);
@@ -531,12 +529,6 @@
             this.NameLoadModel.Name = "NameLoadModel";
             this.NameLoadModel.Size = new System.Drawing.Size(41, 17);
             this.NameLoadModel.Text = "Empty";
-            // 
-            // log
-            // 
-            this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(118, 17);
-            this.log.Text = "toolStripStatusLabel3";
             // 
             // FormMain
             // 
@@ -623,7 +615,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripStatusLabel log;
     }
 }
 
