@@ -449,6 +449,7 @@
             this.Rename_MenuItem.Name = "Rename_MenuItem";
             this.Rename_MenuItem.Size = new System.Drawing.Size(159, 22);
             this.Rename_MenuItem.Text = "Rename";
+            this.Rename_MenuItem.Click += new System.EventHandler(this.Rename_MenuItem_Click);
             // 
             // Help_MenuItem
             // 

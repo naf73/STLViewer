@@ -156,7 +156,10 @@ namespace STLViewer
                 string last_name = e.Node.Name;
                 e.Node.Name = Path.Combine(e.Node.Parent.Name, name + ".stl");
                 TreeDBView.SelectedNode = e.Node;
-                File.Move(last_name, e.Node.Name);
+                if (!File.Exists(e.Node.Name))
+                {
+                    File.Move(last_name, e.Node.Name);
+                }
             }
 
         }
@@ -244,11 +247,6 @@ namespace STLViewer
                 ShowHelp();
             }
             // ---
-            if (e.KeyCode == Keys.F2)
-            {
-                RenameNode();
-            }
-            // ---
             if (e.KeyCode == Keys.Enter)
             {
                 TreeDBView.SelectedNode.EndEdit(true);
@@ -276,7 +274,7 @@ namespace STLViewer
                 return;         
 
             // --- Запрещаем удалять и переименовывать корневой узел
-            if (TreeDBView.SelectedNode.Name == pathDataModel || File.Exists(TreeDBView.SelectedNode.Name))
+            if (TreeDBView.SelectedNode.Name == pathDataModel || TreeDBView.SelectedNode.Name == pathDataModel && File.Exists(TreeDBView.SelectedNode.Name))
             {
                 Rename_ContextMenuTreeDBView.Enabled = false;
                 Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;

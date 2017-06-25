@@ -251,6 +251,16 @@ namespace STLViewer
             DownLevelNode();
         }
 
+        /// <summary>
+        /// Событие переименовать выделенный элемент
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Rename_MenuItem_Click(object sender, EventArgs e)
+        {
+            RenameNode();
+        }
+
         #endregion
 
         #region Пункт меню "Help"
@@ -306,10 +316,6 @@ namespace STLViewer
 
         #endregion
 
-        #region Контекстное меню дерева
-
-        #endregion
-
         #region Методы реализации
 
         /// <summary>
@@ -345,12 +351,6 @@ namespace STLViewer
                 HideLegend_MenuItem.Visible = false;
                 panelLegend.Visible = false;
             }
-        }
-
-        private void InitMessages()
-        {
-            
-
         }
 
         #endregion
