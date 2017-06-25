@@ -403,6 +403,16 @@ namespace STLViewer
         }
 
         /// <summary>
+        /// Событие происходит при покидании виджета
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SceneWidget_Leave(object sender, EventArgs e)
+        {
+            GetBackground();
+        }
+
+        /// <summary>
         /// Событие вращения колеси мыши
         /// </summary>
         /// <param name="sender"></param>
@@ -544,5 +554,31 @@ namespace STLViewer
         }
 
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetBackground()
+        {
+            int eHeigth = SceneWidget.Height;
+            int eWidth = SceneWidget.Width;
+            Rectangle area = new Rectangle(0, 0, eWidth, eHeigth);
+            Bitmap bmp = new Bitmap(eWidth, eHeigth);
+            System.Drawing.Imaging.BitmapData data = bmp.LockBits(area, System.Drawing.Imaging.ImageLockMode.WriteOnly,
+                System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            //Gl.glReadBuffer(Gl.GL_FRONT);
+            Gl.glReadBuffer(Gl.GL_BACK);
+            Gl.glReadPixels(0, 0, eWidth, eHeigth, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, data.Scan0);
+            bmp.UnlockBits(data);
+            bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            if (model.Count > 0)
+            {
+                splitContainer1.Panel2.BackgroundImage = bmp;
+            } 
+            else 
+            {
+                splitContainer1.Panel2.BackgroundImage = null;
+            }
+        }
     }
 }

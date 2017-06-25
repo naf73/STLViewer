@@ -85,7 +85,7 @@ namespace STLViewer
                 model.Clear();
                 SceneWidget.Hide();
             }
-
+            GetBackground();
             // -- To Do 
             // Добавить реакцию на переименование модели
 
@@ -261,6 +261,26 @@ namespace STLViewer
         private void TreeDBView_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             TreeDBView.SelectedNode = TreeDBView.SelectedNode;
+        }
+
+        /// <summary>
+        /// Экспорт Базы Моделей
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportModelBase_ContextMenuTreeDBView_Click(object sender, EventArgs e)
+        {
+            ExportModelBase();
+        }
+
+        /// <summary>
+        /// Импорт Базы Моделей
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportModelBase_ContextMenuTreeDBView_Click(object sender, EventArgs e)
+        {
+            ImportModelBase();
         }
 
         #endregion
@@ -524,6 +544,30 @@ namespace STLViewer
                 TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text + ".stl");
                 File.Move(last_name, TreeDBView.SelectedNode.Name);
             }
+        }
+
+        #endregion
+
+        #region Экспорт/Импорт Базы Моделей
+
+        /// <summary>
+        /// Экспорт Базы Моделей
+        /// </summary>
+        private void ExportModelBase()
+        {
+            SceneWidget.Visible = false;
+            MessageBox.Show("В разработке", Text, MessageBoxButtons.OK,MessageBoxIcon.Information);
+            SceneWidget.Visible = true;
+        }
+
+        /// <summary>
+        /// Импорт Базы Моделей
+        /// </summary>
+        private void ImportModelBase()
+        {
+            SceneWidget.Visible = false;
+            MessageBox.Show("В разработке", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SceneWidget.Visible = true;
         }
 
         #endregion

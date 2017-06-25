@@ -261,6 +261,26 @@ namespace STLViewer
             RenameNode();
         }
 
+        /// <summary>
+        /// Экспорт Базы Моделей
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportModelBase_MenuItem_Click(object sender, EventArgs e)
+        {
+            ExportModelBase();
+        }
+
+        /// <summary>
+        /// Импорт Базы Моделей
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImportModelBase_MenuItem_Click(object sender, EventArgs e)
+        {
+            ImportModelBase();
+        }
+
         #endregion
 
         #region Пункт меню "Help"
@@ -353,6 +373,11 @@ namespace STLViewer
             }
         }
 
+
+
+
+
         #endregion
+
     }
 }

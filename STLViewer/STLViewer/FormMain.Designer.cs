@@ -43,6 +43,9 @@
             this.DownLevel_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.Rename_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.ExportModelBase_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportModelBase_ContextMenuTreeDBView = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListDB = new System.Windows.Forms.ImageList(this.components);
             this.panelLegend = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -51,14 +54,19 @@
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.File_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenModel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.ExportPicture_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.Settings_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.Close_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.View_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetViiew_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptimizateView_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.ColorModel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorBackground_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.HideLegend_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowLegend_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Database_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,8 +80,12 @@
             this.DownLevel_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.Rename_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.ExportModelBase_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportModelBase_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowHelp_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.About_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLine = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -141,73 +153,95 @@
             this.UpLevel_ContextMenuTreeDBView,
             this.DownLevel_ContextMenuTreeDBView,
             this.toolStripSeparator3,
-            this.Rename_ContextMenuTreeDBView});
+            this.Rename_ContextMenuTreeDBView,
+            this.toolStripSeparator7,
+            this.ExportModelBase_ContextMenuTreeDBView,
+            this.ImportModelBase_ContextMenuTreeDBView});
             this.contextMenuTreeView.Name = "contextMenuTreeView";
-            this.contextMenuTreeView.Size = new System.Drawing.Size(160, 176);
+            this.contextMenuTreeView.Size = new System.Drawing.Size(184, 226);
             // 
             // AddGroup_ContextMenuTreeDBView
             // 
             this.AddGroup_ContextMenuTreeDBView.Name = "AddGroup_ContextMenuTreeDBView";
-            this.AddGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.AddGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
             this.AddGroup_ContextMenuTreeDBView.Text = "Add group";
             this.AddGroup_ContextMenuTreeDBView.Click += new System.EventHandler(this.AddGroup_ContextMenuTreeDBView_Click);
             // 
             // RemoveGroup_ContextMenuTreeDBView
             // 
             this.RemoveGroup_ContextMenuTreeDBView.Name = "RemoveGroup_ContextMenuTreeDBView";
-            this.RemoveGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.RemoveGroup_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
             this.RemoveGroup_ContextMenuTreeDBView.Text = "Remove group";
             this.RemoveGroup_ContextMenuTreeDBView.Click += new System.EventHandler(this.RemoveGroup_ContextMenuTreeDBView_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
             // 
             // AddModel_ContextMenuTreeDBView
             // 
             this.AddModel_ContextMenuTreeDBView.Name = "AddModel_ContextMenuTreeDBView";
-            this.AddModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.AddModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
             this.AddModel_ContextMenuTreeDBView.Text = "Add model";
             this.AddModel_ContextMenuTreeDBView.Click += new System.EventHandler(this.AddModel_ContextMenuTreeDBView_Click);
             // 
             // RemoveModel_ContextMenuTreeDBView
             // 
             this.RemoveModel_ContextMenuTreeDBView.Name = "RemoveModel_ContextMenuTreeDBView";
-            this.RemoveModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.RemoveModel_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
             this.RemoveModel_ContextMenuTreeDBView.Text = "Remove model";
             this.RemoveModel_ContextMenuTreeDBView.Click += new System.EventHandler(this.RemoveModel_ContextMenuTreeDBView_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(180, 6);
             // 
             // UpLevel_ContextMenuTreeDBView
             // 
             this.UpLevel_ContextMenuTreeDBView.Name = "UpLevel_ContextMenuTreeDBView";
-            this.UpLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.UpLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
             this.UpLevel_ContextMenuTreeDBView.Text = "Up level item";
             this.UpLevel_ContextMenuTreeDBView.Click += new System.EventHandler(this.UpLevel_ContextMenuTreeDBView_Click);
             // 
             // DownLevel_ContextMenuTreeDBView
             // 
             this.DownLevel_ContextMenuTreeDBView.Name = "DownLevel_ContextMenuTreeDBView";
-            this.DownLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.DownLevel_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
             this.DownLevel_ContextMenuTreeDBView.Text = "Down level item";
             this.DownLevel_ContextMenuTreeDBView.Click += new System.EventHandler(this.DownLevel_ContextMenuTreeDBView_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(180, 6);
             // 
             // Rename_ContextMenuTreeDBView
             // 
             this.Rename_ContextMenuTreeDBView.Name = "Rename_ContextMenuTreeDBView";
-            this.Rename_ContextMenuTreeDBView.Size = new System.Drawing.Size(159, 22);
+            this.Rename_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
             this.Rename_ContextMenuTreeDBView.Text = "Rename";
             this.Rename_ContextMenuTreeDBView.Click += new System.EventHandler(this.Rename_ContextMenuTreeDBView_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(180, 6);
+            // 
+            // ExportModelBase_ContextMenuTreeDBView
+            // 
+            this.ExportModelBase_ContextMenuTreeDBView.Name = "ExportModelBase_ContextMenuTreeDBView";
+            this.ExportModelBase_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
+            this.ExportModelBase_ContextMenuTreeDBView.Text = "Export ModelBase ...";
+            this.ExportModelBase_ContextMenuTreeDBView.Click += new System.EventHandler(this.ExportModelBase_ContextMenuTreeDBView_Click);
+            // 
+            // ImportModelBase_ContextMenuTreeDBView
+            // 
+            this.ImportModelBase_ContextMenuTreeDBView.Name = "ImportModelBase_ContextMenuTreeDBView";
+            this.ImportModelBase_ContextMenuTreeDBView.Size = new System.Drawing.Size(183, 22);
+            this.ImportModelBase_ContextMenuTreeDBView.Text = "Import ModelBase ...";
+            this.ImportModelBase_ContextMenuTreeDBView.Click += new System.EventHandler(this.ImportModelBase_ContextMenuTreeDBView_Click);
             // 
             // imageListDB
             // 
@@ -255,6 +289,7 @@
             this.SceneWidget.TabIndex = 5;
             this.SceneWidget.Paint += new System.Windows.Forms.PaintEventHandler(this.SceneWidget_Paint);
             this.SceneWidget.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SceneWidget_KeyDown);
+            this.SceneWidget.Leave += new System.EventHandler(this.SceneWidget_Leave);
             this.SceneWidget.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SceneWidget_MouseMove);
             this.SceneWidget.Resize += new System.EventHandler(this.SceneWidget_Resize);
             // 
@@ -279,8 +314,11 @@
             // 
             this.File_MenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenModel_MenuItem,
+            this.toolStripSeparator12,
             this.ExportPicture_MenuItem,
+            this.toolStripSeparator13,
             this.Settings_MenuItem,
+            this.toolStripSeparator14,
             this.Close_MenuItem});
             this.File_MenuItem.Name = "File_MenuItem";
             this.File_MenuItem.Size = new System.Drawing.Size(37, 20);
@@ -293,6 +331,11 @@
             this.OpenModel_MenuItem.Text = "Open...";
             this.OpenModel_MenuItem.Click += new System.EventHandler(this.OpenModel_MenuItem_Click);
             // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(156, 6);
+            // 
             // ExportPicture_MenuItem
             // 
             this.ExportPicture_MenuItem.Name = "ExportPicture_MenuItem";
@@ -300,12 +343,22 @@
             this.ExportPicture_MenuItem.Text = "Export Picture ...";
             this.ExportPicture_MenuItem.Click += new System.EventHandler(this.ExportPicture_MenuItem_Click);
             // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(156, 6);
+            // 
             // Settings_MenuItem
             // 
             this.Settings_MenuItem.Name = "Settings_MenuItem";
             this.Settings_MenuItem.Size = new System.Drawing.Size(159, 22);
             this.Settings_MenuItem.Text = "Settings ...";
             this.Settings_MenuItem.Click += new System.EventHandler(this.Settings_MenuItem_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(156, 6);
             // 
             // Close_MenuItem
             // 
@@ -319,8 +372,10 @@
             this.View_MenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetViiew_MenuItem,
             this.OptimizateView_MenuItem,
+            this.toolStripSeparator10,
             this.ColorModel_MenuItem,
             this.ColorBackground_MenuItem,
+            this.toolStripSeparator11,
             this.HideLegend_MenuItem,
             this.ShowLegend_MenuItem});
             this.View_MenuItem.Name = "View_MenuItem";
@@ -341,6 +396,11 @@
             this.OptimizateView_MenuItem.Text = "Centering View";
             this.OptimizateView_MenuItem.Click += new System.EventHandler(this.OptimizateView_MenuItem_Click);
             // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(179, 6);
+            // 
             // ColorModel_MenuItem
             // 
             this.ColorModel_MenuItem.Name = "ColorModel_MenuItem";
@@ -354,6 +414,11 @@
             this.ColorBackground_MenuItem.Size = new System.Drawing.Size(182, 22);
             this.ColorBackground_MenuItem.Text = "Color Background ...";
             this.ColorBackground_MenuItem.Click += new System.EventHandler(this.ColorBackground_MenuItem_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(179, 6);
             // 
             // HideLegend_MenuItem
             // 
@@ -382,7 +447,10 @@
             this.UpLevel_MenuItem,
             this.DownLevel_MenuItem,
             this.toolStripSeparator6,
-            this.Rename_MenuItem});
+            this.Rename_MenuItem,
+            this.toolStripSeparator9,
+            this.ExportModelBase_MenuItem,
+            this.ImportModelBase_MenuItem});
             this.Database_MenuItem.Name = "Database_MenuItem";
             this.Database_MenuItem.Size = new System.Drawing.Size(77, 20);
             this.Database_MenuItem.Text = "ModelBase";
@@ -390,71 +458,91 @@
             // AddGroup_MenuItem
             // 
             this.AddGroup_MenuItem.Name = "AddGroup_MenuItem";
-            this.AddGroup_MenuItem.Size = new System.Drawing.Size(159, 22);
+            this.AddGroup_MenuItem.Size = new System.Drawing.Size(183, 22);
             this.AddGroup_MenuItem.Text = "Add group";
             this.AddGroup_MenuItem.Click += new System.EventHandler(this.AddGroup_MenuItem_Click);
             // 
             // RemoveGroup_MenuItem
             // 
             this.RemoveGroup_MenuItem.Name = "RemoveGroup_MenuItem";
-            this.RemoveGroup_MenuItem.Size = new System.Drawing.Size(159, 22);
+            this.RemoveGroup_MenuItem.Size = new System.Drawing.Size(183, 22);
             this.RemoveGroup_MenuItem.Text = "Remove group";
             this.RemoveGroup_MenuItem.Click += new System.EventHandler(this.RemoveGroup_MenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
             // 
             // AddModel_MenuItem
             // 
             this.AddModel_MenuItem.Name = "AddModel_MenuItem";
-            this.AddModel_MenuItem.Size = new System.Drawing.Size(159, 22);
+            this.AddModel_MenuItem.Size = new System.Drawing.Size(183, 22);
             this.AddModel_MenuItem.Text = "Add model";
             this.AddModel_MenuItem.Click += new System.EventHandler(this.AddModel_MenuItem_Click);
             // 
             // RemoveModel_MenuItem
             // 
             this.RemoveModel_MenuItem.Name = "RemoveModel_MenuItem";
-            this.RemoveModel_MenuItem.Size = new System.Drawing.Size(159, 22);
+            this.RemoveModel_MenuItem.Size = new System.Drawing.Size(183, 22);
             this.RemoveModel_MenuItem.Text = "Remove model";
             this.RemoveModel_MenuItem.Click += new System.EventHandler(this.RemoveModel_MenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(180, 6);
             // 
             // UpLevel_MenuItem
             // 
             this.UpLevel_MenuItem.Name = "UpLevel_MenuItem";
-            this.UpLevel_MenuItem.Size = new System.Drawing.Size(159, 22);
+            this.UpLevel_MenuItem.Size = new System.Drawing.Size(183, 22);
             this.UpLevel_MenuItem.Text = "Up level item";
             this.UpLevel_MenuItem.Click += new System.EventHandler(this.UpLevel_MenuItem_Click);
             // 
             // DownLevel_MenuItem
             // 
             this.DownLevel_MenuItem.Name = "DownLevel_MenuItem";
-            this.DownLevel_MenuItem.Size = new System.Drawing.Size(159, 22);
+            this.DownLevel_MenuItem.Size = new System.Drawing.Size(183, 22);
             this.DownLevel_MenuItem.Text = "Down level item";
             this.DownLevel_MenuItem.Click += new System.EventHandler(this.DownLevel_MenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(180, 6);
             // 
             // Rename_MenuItem
             // 
             this.Rename_MenuItem.Name = "Rename_MenuItem";
-            this.Rename_MenuItem.Size = new System.Drawing.Size(159, 22);
+            this.Rename_MenuItem.Size = new System.Drawing.Size(183, 22);
             this.Rename_MenuItem.Text = "Rename";
             this.Rename_MenuItem.Click += new System.EventHandler(this.Rename_MenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(180, 6);
+            // 
+            // ExportModelBase_MenuItem
+            // 
+            this.ExportModelBase_MenuItem.Name = "ExportModelBase_MenuItem";
+            this.ExportModelBase_MenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ExportModelBase_MenuItem.Text = "Export ModelBase ...";
+            this.ExportModelBase_MenuItem.Click += new System.EventHandler(this.ExportModelBase_MenuItem_Click);
+            // 
+            // ImportModelBase_MenuItem
+            // 
+            this.ImportModelBase_MenuItem.Name = "ImportModelBase_MenuItem";
+            this.ImportModelBase_MenuItem.Size = new System.Drawing.Size(183, 22);
+            this.ImportModelBase_MenuItem.Text = "Import ModelBase ...";
+            this.ImportModelBase_MenuItem.Click += new System.EventHandler(this.ImportModelBase_MenuItem_Click);
             // 
             // Help_MenuItem
             // 
             this.Help_MenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ShowHelp_MenuItem,
+            this.toolStripSeparator8,
             this.About_MenuItem});
             this.Help_MenuItem.Name = "Help_MenuItem";
             this.Help_MenuItem.Size = new System.Drawing.Size(44, 20);
@@ -466,6 +554,11 @@
             this.ShowHelp_MenuItem.Size = new System.Drawing.Size(143, 22);
             this.ShowHelp_MenuItem.Text = "Show Help ...";
             this.ShowHelp_MenuItem.Click += new System.EventHandler(this.ShowHelp_MenuItem_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(140, 6);
             // 
             // About_MenuItem
             // 
@@ -609,13 +702,25 @@
         private System.Windows.Forms.Panel panelLegend;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem ShowLegend_MenuItem;
-        private System.Windows.Forms.ToolStripMenuItem HideLegend_MenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem ExportModelBase_ContextMenuTreeDBView;
+        private System.Windows.Forms.ToolStripMenuItem ImportModelBase_ContextMenuTreeDBView;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem HideLegend_MenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem ExportModelBase_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ImportModelBase_MenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
 
