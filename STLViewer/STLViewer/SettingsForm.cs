@@ -98,7 +98,7 @@ namespace STLViewer
         private void TranslateToEn()
         {
             label1.Text = "Folder containing the database of models";
-            btnShowBrowser.Text = "Browser";
+            btnShowBrowser.Text = "Browser ...";
             btnSave.Text = "Save";
         }
 
@@ -108,7 +108,7 @@ namespace STLViewer
         private void TranslateToRu()
         {
             label1.Text = "Папка содержащая базу моделей";
-            btnShowBrowser.Text = "Обзор";
+            btnShowBrowser.Text = "Обзор ...";
             btnSave.Text = "Сохранить";
         }
 

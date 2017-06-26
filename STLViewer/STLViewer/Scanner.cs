@@ -87,7 +87,17 @@ namespace STLViewer
             TreeNode curNode = null;
             if (directoryInfo.FullName == pathDataModel)
             {
-                curNode = addInMe.Add(directoryInfo.FullName, "ModelBase", 1);
+                string name_root_dir = string.Empty;
+                switch(Properties.Settings.Default.Language)
+                {
+                    case "English":
+                        name_root_dir = "ModelBase";
+                        break;
+                    case "Russian":
+                        name_root_dir = "База моделей";
+                        break;
+                }
+                curNode = addInMe.Add(directoryInfo.FullName, name_root_dir, 1);
             }
             else
             {

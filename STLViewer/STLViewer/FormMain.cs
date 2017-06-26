@@ -61,6 +61,18 @@ namespace STLViewer
             {
                 ScanRootDir(pathDataModel);
             }
+            // === Назначаем локализацию
+            switch (Properties.Settings.Default.Language)
+            {
+                case "Russian":
+                    SelectLanguage.Text = SelectLanguage.DropDownItems[0].Text;
+                    TranslateToRu();
+                    break;
+                case "English":
+                    SelectLanguage.Text = SelectLanguage.DropDownItems[1].Text;
+                    TranslateToEn();
+                    break;
+            }
             // ===
 
             DrawScene();
@@ -101,7 +113,11 @@ namespace STLViewer
             GetBackground();
             SceneWidget.Hide();
             TreeDBView.Focus();
-            TreeNode lastNode = TreeDBView.SelectedNode;
+            TreeNode lastNode = null;
+            if (TreeDBView.SelectedNode != null)
+            {
+                lastNode = TreeDBView.SelectedNode;
+            }
             SettingsForm sf = new SettingsForm(Text);
             sf.ShowDialog();
             pathDataModel = Properties.Settings.Default.RootDirDB;
@@ -109,7 +125,10 @@ namespace STLViewer
             contextMenuTreeView.Enabled = true;
             Database_MenuItem.Enabled = true;
             TreeDBView.Focus();
-            TreeDBView.SelectedNode = FindNodeByName(lastNode.Text);
+            if (lastNode != null)
+            {
+                TreeDBView.SelectedNode = FindNodeByName(lastNode.Text);
+            }
             SceneWidget.Show();
         }
 
@@ -389,18 +408,6 @@ namespace STLViewer
                 ShowLegend_MenuItem.Visible = true;
                 HideLegend_MenuItem.Visible = false;
                 panelLegend.Visible = false;
-            }
-            // === Назначаем локализацию
-            switch (Properties.Settings.Default.Language)
-            {
-                case "Russian":
-                    SelectLanguage.Text = SelectLanguage.DropDownItems[0].Text;
-                    TranslateToRu();
-                    break;
-                case "English":
-                    SelectLanguage.Text = SelectLanguage.DropDownItems[1].Text;
-                    TranslateToEn();
-                    break;
             }
             // === Получаем путь к папке "Мои документы"
             if (string.IsNullOrEmpty(Properties.Settings.Default.RootDirDB))

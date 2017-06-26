@@ -539,22 +539,33 @@ namespace STLViewer
         /// </summary>
         private void MoveItem()
         {
-            string last_name;
-            // === Move group
-            if (TreeDBView.SelectedNode.ImageIndex == 1)
+            try
             {
-                last_name = TreeDBView.SelectedNode.Name;
-                TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text);
-                Directory.Move(last_name, TreeDBView.SelectedNode.Name);
+                string last_name;
+                // === Move group
+                if (TreeDBView.SelectedNode.ImageIndex == 1)
+                {
+                    last_name = TreeDBView.SelectedNode.Name;
+                    TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text);
+                    Directory.Move(last_name, TreeDBView.SelectedNode.Name);
+                }
+
+                // === Move model
+                if (TreeDBView.SelectedNode.ImageIndex == 2)
+                {
+                    last_name = TreeDBView.SelectedNode.Name;
+                    TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text + ".stl");
+                    File.Move(last_name, TreeDBView.SelectedNode.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScanRootDir(pathDataModel);
+                SceneWidget.Hide();
+                MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SceneWidget.Show();
             }
 
-            // === Move model
-            if (TreeDBView.SelectedNode.ImageIndex == 2)
-            {
-                last_name = TreeDBView.SelectedNode.Name;
-                TreeDBView.SelectedNode.Name = Path.Combine(TreeDBView.SelectedNode.Parent.Name, TreeDBView.SelectedNode.Text + ".stl");
-                File.Move(last_name, TreeDBView.SelectedNode.Name);
-            }
         }
 
         /// <summary>
@@ -619,7 +630,6 @@ namespace STLViewer
             // получаем выбранный файл
             try
             {
-                
                 if (Directory.Exists(pathDataModel))
                 {
                     Directory.Delete(pathDataModel, true);

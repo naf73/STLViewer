@@ -19,12 +19,12 @@ namespace STLViewer
             OpenModel_MenuItem.Text = "Открыть ...";
             ExportPicture_MenuItem.Text = "Экспорт картинки ...";
             Settings_MenuItem.Text = "Настройки ...";
-            Close_MenuItem.Text = "Закрыть";
+            Close_MenuItem.Text = "Выход";
             View_MenuItem.Text = "Вид";
             ResetViiew_MenuItem.Text = "Сброс вида";
             OptimizateView_MenuItem.Text = "Центрирование вида";
-            ColorModel_MenuItem.Text = "Цвет модели";
-            ColorBackground_MenuItem.Text = "Цвет фона";
+            ColorModel_MenuItem.Text = "Цвет модели ...";
+            ColorBackground_MenuItem.Text = "Цвет фона ...";
             Database_MenuItem.Text = "База моделей";
             AddGroup_ContextMenuTreeDBView.Text = "Добавить группу";
             RemoveGroup_MenuItem.Text = "Удалить группу";
@@ -53,6 +53,7 @@ namespace STLViewer
             {
                 last_node = TreeDBView.SelectedNode;
             }
+            TreeDBView.Focus();
             TreeDBView.SelectedNode = FindNodeByName("ModelBase");
             if (TreeDBView.SelectedNode != null) 
             {

@@ -57,7 +57,7 @@
             this.btnShowBrowser.Name = "btnShowBrowser";
             this.btnShowBrowser.Size = new System.Drawing.Size(75, 23);
             this.btnShowBrowser.TabIndex = 2;
-            this.btnShowBrowser.Text = "Browser";
+            this.btnShowBrowser.Text = "Browser ...";
             this.btnShowBrowser.UseVisualStyleBackColor = true;
             this.btnShowBrowser.Click += new System.EventHandler(this.btnShowBrowser_Click);
             // 

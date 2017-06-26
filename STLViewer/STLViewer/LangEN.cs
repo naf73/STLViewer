@@ -19,12 +19,12 @@ namespace STLViewer
             OpenModel_MenuItem.Text = "Open ...";
             ExportPicture_MenuItem.Text = "Export picture ...";
             Settings_MenuItem.Text = "Settings ...";
-            Close_MenuItem.Text = "Close";
+            Close_MenuItem.Text = "Exit";
             View_MenuItem.Text = "View";
             ResetViiew_MenuItem.Text = "Reset view";
             OptimizateView_MenuItem.Text = "Centering View";
-            ColorModel_MenuItem.Text = "Color model";
-            ColorBackground_MenuItem.Text = "Color background";
+            ColorModel_MenuItem.Text = "Color model ...";
+            ColorBackground_MenuItem.Text = "Color background ...";
             Database_MenuItem.Text = "ModelBase";
             AddGroup_ContextMenuTreeDBView.Text = "Add group";
             RemoveGroup_MenuItem.Text = "Remove group";
