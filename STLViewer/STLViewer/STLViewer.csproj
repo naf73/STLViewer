@@ -127,6 +127,12 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Help\helperStl.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\helperStl_en.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -145,7 +151,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Pictures\assembly.png" />
+    <Content Include="Pictures\assembly_empty.png" />
+    <Content Include="Pictures\Legenda4.png" />
+    <Content Include="Pictures\logo.png" />
     <Content Include="Pictures\part.png" />
+    <Content Include="Pictures\part_empty.png" />
+    <Content Include="Pictures\_64.ico" />
+    <Content Include="Pictures\Ярлык16.png" />
+    <Content Include="Pictures\Ярлык32.png" />
     <Content Include="_64.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

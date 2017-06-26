@@ -375,7 +375,19 @@ namespace STLViewer
         /// </summary>
         private void ShowHelp()
         {
-            String helpPath = Path.Combine(Application.StartupPath, "helperStl.chm");
+            //Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Help");
+            string helpPath = null;
+            switch (Properties.Settings.Default.Language)
+            {
+                case "Russian":
+                    helpPath = Path.Combine(Application.StartupPath, "Help", "helperStl.chm");
+                    break;
+                case "English":
+                    helpPath = Path.Combine(Application.StartupPath, "Help", "helperStl_en.chm");
+                    break;
+            }
+
+
             if (File.Exists(helpPath))
             {
                 Process.Start(helpPath);
