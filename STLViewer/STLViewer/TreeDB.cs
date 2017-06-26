@@ -438,6 +438,10 @@ namespace STLViewer
                 TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode.Name);
                 MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                SceneWidget.Show();
+            }
         }
         #endregion
 
@@ -497,15 +501,25 @@ namespace STLViewer
             // --- Дерево
             if (TreeDBView.SelectedNode == null)
                 return;
-           
-            // Удаляем только узлы только типа модель
-            if (TreeDBView.SelectedNode.ImageIndex == 2)
+            try
             {
-                if (MessageBox.Show(Language.Error("delete_model"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                // Удаляем только узлы только типа модель
+                if (TreeDBView.SelectedNode.ImageIndex == 2)
                 {
-                    File.Delete(TreeDBView.SelectedNode.Name);
-                    TreeDBView.SelectedNode.Remove();
+                    if (MessageBox.Show(Language.Error("delete_model"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        File.Delete(TreeDBView.SelectedNode.Name);
+                        TreeDBView.SelectedNode.Remove();
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                SceneWidget.Show();
             }
         }
 
