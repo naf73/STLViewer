@@ -38,22 +38,22 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 32);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.Size = new System.Drawing.Size(201, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Root Dir DB";
+            this.label1.Text = "Folder containing the database of models";
             // 
             // txtPathRootDirDB
             // 
-            this.txtPathRootDirDB.Location = new System.Drawing.Point(73, 29);
+            this.txtPathRootDirDB.Location = new System.Drawing.Point(15, 29);
             this.txtPathRootDirDB.Name = "txtPathRootDirDB";
             this.txtPathRootDirDB.Size = new System.Drawing.Size(264, 20);
             this.txtPathRootDirDB.TabIndex = 1;
             // 
             // btnShowBrowser
             // 
-            this.btnShowBrowser.Location = new System.Drawing.Point(343, 27);
+            this.btnShowBrowser.Location = new System.Drawing.Point(285, 27);
             this.btnShowBrowser.Name = "btnShowBrowser";
             this.btnShowBrowser.Size = new System.Drawing.Size(75, 23);
             this.btnShowBrowser.TabIndex = 2;
@@ -63,7 +63,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(343, 62);
+            this.btnSave.Location = new System.Drawing.Point(285, 62);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 3;
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 97);
+            this.ClientSize = new System.Drawing.Size(373, 97);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnShowBrowser);
             this.Controls.Add(this.txtPathRootDirDB);

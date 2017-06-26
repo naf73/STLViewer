@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.IO.Compression;
 
 namespace STLViewer
 {
@@ -52,12 +53,20 @@ namespace STLViewer
             {
                 RemoveGroup_ContextMenuTreeDBView.Enabled = false;
                 Rename_ContextMenuTreeDBView.Enabled = false;
+                ExportModelBase_ContextMenuTreeDBView.Enabled = true;
+                ImportModelBase_ContextMenuTreeDBView.Enabled = true;
                 RemoveGroup_MenuItem.Enabled = RemoveGroup_ContextMenuTreeDBView.Enabled;
                 Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;
+                ExportModelBase_MenuItem.Enabled = ExportModelBase_ContextMenuTreeDBView.Enabled;
+                ImportModelBase_MenuItem.Enabled = ImportModelBase_ContextMenuTreeDBView.Enabled;
             } else 
             {
                 Rename_ContextMenuTreeDBView.Enabled = true;
+                ExportModelBase_ContextMenuTreeDBView.Enabled = false;
+                ImportModelBase_ContextMenuTreeDBView.Enabled = false;
                 Rename_MenuItem.Enabled = Rename_ContextMenuTreeDBView.Enabled;
+                ExportModelBase_MenuItem.Enabled = ExportModelBase_ContextMenuTreeDBView.Enabled;
+                ImportModelBase_MenuItem.Enabled = ImportModelBase_ContextMenuTreeDBView.Enabled;
             }
 
             #endregion
@@ -569,9 +578,28 @@ namespace STLViewer
         /// </summary>
         private void ExportModelBase()
         {
-            SceneWidget.Visible = false;
-            MessageBox.Show("В разработке", Text, MessageBoxButtons.OK,MessageBoxIcon.Information);
-            SceneWidget.Visible = true;
+            //SceneWidget.Visible = false;
+            //MessageBox.Show("В разработке", Text, MessageBoxButtons.OK,MessageBoxIcon.Information);
+            //SceneWidget.Visible = true;
+            // ===
+            SceneWidget.Hide();
+            saveFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";
+            saveFileModelDialog.FileName = "";
+            if (saveFileModelDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            try
+            {
+               ZipFile.CreateFromDirectory(pathDataModel, saveFileModelDialog.FileName, CompressionLevel.Fastest, true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                SceneWidget.Show();
+            }
         }
 
         /// <summary>
@@ -579,9 +607,34 @@ namespace STLViewer
         /// </summary>
         private void ImportModelBase()
         {
-            SceneWidget.Visible = false;
-            MessageBox.Show("В разработке", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            SceneWidget.Visible = true;
+            //SceneWidget.Visible = false;
+            //MessageBox.Show("В разработке", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //SceneWidget.Visible = true;
+            // ===
+            SceneWidget.Hide();
+            openFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";
+            openFileModelDialog.FileName = "";
+            if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            try
+            {
+                
+                if (Directory.Exists(pathDataModel))
+                {
+                    Directory.Delete(pathDataModel, true);
+                }
+                ZipFile.ExtractToDirectory(openFileModelDialog.FileName, Path.GetDirectoryName(pathDataModel));
+                ScanRootDir(pathDataModel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                SceneWidget.Show();
+            }
         }
 
         #endregion

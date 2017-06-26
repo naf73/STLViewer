@@ -34,9 +34,9 @@ namespace STLViewer
         float yAxisTransport; // Расстояние перемещения вдоль оси y (экран)
         float far; // глубина перспективы
         int xAxisRotationLast; // Последнее положение мыши на экране по оси X (для вращения)
-        int yAxisRotationLast; // Последнее положение мыши на экране по оси X (для вращения)
-        int xAxisTransportLast; //
-        int yAxisTransportLast; //
+        int yAxisRotationLast; // Последнее положение мыши на экране по оси Y (для вращения)
+        int xAxisTransportLast; // Последнее положение мыши на экране по оси X (для перемещения)
+        int yAxisTransportLast; // Последнее положение мыши на экране по оси Y (для перемещения)
         List<Face> model = new List<Face>(); // Текуща модель STL модель
         float[] offset_model = new float[3]; // Смещение от центра модели
         Color color_model = new Color(); // Цвет модели
@@ -557,7 +557,7 @@ namespace STLViewer
         #endregion
 
         /// <summary>
-        /// 
+        /// Получаем картинку для заднего фона (костыль для WidgetScene)
         /// </summary>
         private void GetBackground()
         {

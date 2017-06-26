@@ -10,7 +10,7 @@ namespace STLViewer
     public partial class FormMain : Form
     {
         /// <summary>
-        /// 
+        /// Перевод интерфейса на русский язык
         /// </summary>
         private void TranslateToRu()
         {
@@ -62,6 +62,10 @@ namespace STLViewer
             {
                 TreeDBView.SelectedNode = last_node;
             }
+            ExportModelBase_ContextMenuTreeDBView.Text = "Экспорт Базы Моделей ...";
+            ImportModelBase_ContextMenuTreeDBView.Text = "Импорт Базы Моделей ...";
+            ExportModelBase_MenuItem.Text = "Экспорт Базы Моделей ...";
+            ImportModelBase_MenuItem.Text = "Импорт Базы Моделей ...";
         }
     }
 }
