@@ -35,7 +35,7 @@ namespace STLViewer
             Rename_MenuItem.Text = "Переименовать";
             Help_MenuItem.Text = "Помощь";
             ShowHelp_MenuItem.Text = "Показать справку ...";
-            About_MenuItem.Text = "О программе";
+            About_MenuItem.Text = "О программе ...";
             toolStripStatusLabel1.Text = "Язык";
             toolStripStatusLabel2.Text = "Загруженная модель: ";
             ShowLegend_MenuItem.Text = "Показать легенду";
