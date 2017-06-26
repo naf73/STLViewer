@@ -34,7 +34,7 @@ namespace STLViewer
             DownLevel_MenuItem.Text = "Down level item";
             Rename_MenuItem.Text = "Rename";
             Help_MenuItem.Text = "Help";
-            ShowHelp_MenuItem.Text = "Show";
+            ShowHelp_MenuItem.Text = "Show Help ...";
             About_MenuItem.Text = "About";
             toolStripStatusLabel1.Text = "Language: ";
             toolStripStatusLabel2.Text = "Loaded model: ";
