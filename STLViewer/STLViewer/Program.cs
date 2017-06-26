@@ -38,7 +38,7 @@ namespace STLViewer
                         if (process.Id != current.Id)
                         {
                             SetForegroundWindow(process.MainWindowHandle);
-                            MessageBox.Show("Программа уже запущена!!!", "STLViewer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            MessageBox.Show(FormMain.Language.Error("repeat_start_application"), "STLViewer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                             break;
                         }
                     }

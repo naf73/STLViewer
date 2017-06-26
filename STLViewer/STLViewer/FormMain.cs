@@ -395,7 +395,7 @@ namespace STLViewer
             else 
             {
                 SceneWidget.Hide();
-                MessageBox.Show("Файл справки отсутствует", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Language.Error("file_donot_find"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SceneWidget.Show();
             }
         }

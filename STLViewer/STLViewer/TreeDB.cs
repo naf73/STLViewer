@@ -156,7 +156,7 @@ namespace STLViewer
                     }
                     else 
                     {
-                        MessageBox.Show("Такая группа уже существует", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Language.Error("this_group_exists"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         e.Node.Remove();
                     }
                 }
@@ -427,7 +427,7 @@ namespace STLViewer
                 // --- Дерево
                 if (TreeDBView.SelectedNode == null)
                     return;
-                if (MessageBox.Show("Удалить группу?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(Language.Error("delete_group"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     Directory.Delete(TreeDBView.SelectedNode.Name, true);
                     TreeDBView.SelectedNode.Remove();
@@ -501,7 +501,7 @@ namespace STLViewer
             // Удаляем только узлы только типа модель
             if (TreeDBView.SelectedNode.ImageIndex == 2)
             {
-                if (MessageBox.Show("Удалить модель?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(Language.Error("delete_model"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     File.Delete(TreeDBView.SelectedNode.Name);
                     TreeDBView.SelectedNode.Remove();
@@ -589,9 +589,6 @@ namespace STLViewer
         /// </summary>
         private void ExportModelBase()
         {
-            //SceneWidget.Visible = false;
-            //MessageBox.Show("В разработке", Text, MessageBoxButtons.OK,MessageBoxIcon.Information);
-            //SceneWidget.Visible = true;
             // ===
             SceneWidget.Hide();
             saveFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";
@@ -618,9 +615,6 @@ namespace STLViewer
         /// </summary>
         private void ImportModelBase()
         {
-            //SceneWidget.Visible = false;
-            //MessageBox.Show("В разработке", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //SceneWidget.Visible = true;
             // ===
             SceneWidget.Hide();
             openFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";

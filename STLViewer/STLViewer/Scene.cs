@@ -302,7 +302,7 @@ namespace STLViewer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка формата файла", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Language.Error("mistake_stl_format"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

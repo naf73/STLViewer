@@ -84,7 +84,7 @@ namespace STLViewer
             }
             else 
             {
-                MessageBox.Show("Не правильно указан путь", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(FormMain.Language.Error("mistake_set_path"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
