@@ -81,6 +81,18 @@ namespace STLViewer
         /// <param name="addInMe"></param>
         private void BuildTree(System.IO.DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
         {
+
+            int type_dir; // Тип папки
+
+            if((directoryInfo.GetDirectories()).Length > 0 || (directoryInfo.GetFiles()).Length > 0)
+            {
+                type_dir = 1;
+            }
+            else 
+            {
+                type_dir = 3;
+            }
+
             //Добавляем новый узел в коллекцию Nodes
             //с именем текущей директории и указанием ключа 
             //со значением "Folder".
@@ -97,11 +109,11 @@ namespace STLViewer
                         name_root_dir = "База моделей";
                         break;
                 }
-                curNode = addInMe.Add(directoryInfo.FullName, name_root_dir, 1);
+                curNode = addInMe.Add(directoryInfo.FullName, name_root_dir, type_dir);
             }
             else
             {
-                curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, 1);
+                curNode = addInMe.Add(directoryInfo.FullName, directoryInfo.Name, type_dir);
             }
 
             //addInMe.Add("group", directoryInfo.Name);

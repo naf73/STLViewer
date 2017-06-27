@@ -44,6 +44,8 @@ namespace STLViewer
                                 return "Такая группа уже существует";
                             case "delete_group":
                                 return "Удалить группу?";
+                            case "delete_group_with_files":
+                                return "Группа содержит группы и модели!!!\nУдалить группу?";
                             case "delete_model":
                                 return "Удалить модель?";
                         }
@@ -63,6 +65,8 @@ namespace STLViewer
                                 return "This group exists";
                             case "delete_group":
                                 return "Delete group?";
+                            case "delete_group_with_files":
+                                return "Group contain groups and models!!!\nDelete group?";
                             case "delete_model":
                                 return "Delete model?";
                         }

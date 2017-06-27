@@ -250,6 +250,7 @@
             this.imageListDB.Images.SetKeyName(0, "Ярлык16.png");
             this.imageListDB.Images.SetKeyName(1, "assembly.png");
             this.imageListDB.Images.SetKeyName(2, "part.png");
+            this.imageListDB.Images.SetKeyName(3, "assembly_empty.png");
             // 
             // panelLegend
             // 

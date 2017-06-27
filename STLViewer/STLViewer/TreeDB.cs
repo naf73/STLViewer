@@ -122,6 +122,10 @@ namespace STLViewer
                 name = e.Label;
             }
             // ==== группа
+            if(TreeDBView.SelectedNode.ImageIndex == 3)
+            {
+                TreeDBView.SelectedNode.ImageIndex = 1;
+            }
             if (TreeDBView.SelectedNode.ImageIndex == 1)
             {
                 if (Directory.Exists(e.Node.Name))
@@ -343,6 +347,11 @@ namespace STLViewer
                 int indexSelectedNode = TreeDBView.SelectedNode.Index;
                 int indexParentNode = TreeDBView.SelectedNode.Parent.Index;
 
+                // ==== 
+                if (TreeDBView.SelectedNode.Parent.ImageIndex == 1 && TreeDBView.SelectedNode.Parent.Nodes.Count == 1)
+                {
+                    TreeDBView.SelectedNode.Parent.ImageIndex = 3;
+                }
                 // move node
                 TreeDBView.SelectedNode.Parent.Nodes.Remove(selectedNode);
                 editNodes.Insert(indexParentNode + 1, selectedNode);
@@ -378,12 +387,18 @@ namespace STLViewer
                 // move node
                 editNodes.Remove(selectedNode);
                 previousNode.Nodes.Add(selectedNode);
-
+ 
                 // select node
                 TreeDBView.SelectedNode = selectedNode;
 
+                // ==== 
+                if(TreeDBView.SelectedNode.Parent.ImageIndex == 3 && TreeDBView.SelectedNode.Parent.Nodes.Count >0)
+                {
+                    TreeDBView.SelectedNode.Parent.ImageIndex = 1;
+                }
+
                 // ==== Move item in OS
-                MoveItem();
+                    MoveItem();
             }
         }
 
@@ -396,7 +411,7 @@ namespace STLViewer
         {
             // --- Дерево
             TreeNode node = new TreeNode("Введите текст");
-            node.ImageIndex = 1;
+            node.ImageIndex = 3;
             if (TreeDBView.SelectedNode != null)
             {
                 TreeDBView.SelectedNode.Nodes.Add(node);
@@ -427,10 +442,21 @@ namespace STLViewer
                 // --- Дерево
                 if (TreeDBView.SelectedNode == null)
                     return;
-                if (MessageBox.Show(Language.Error("delete_group"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (TreeDBView.SelectedNode.ImageIndex == 1)
                 {
-                    Directory.Delete(TreeDBView.SelectedNode.Name, true);
-                    TreeDBView.SelectedNode.Remove();
+                    if (MessageBox.Show(Language.Error("delete_group_with_files"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    return;
+                }
+                else
+                {
+                    if (MessageBox.Show(Language.Error("delete_group"), Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        return;
+                }
+                Directory.Delete(TreeDBView.SelectedNode.Name, true);
+                TreeDBView.SelectedNode.Remove();
+                if(TreeDBView.SelectedNode.Nodes.Count == 0)
+                {
+                    TreeDBView.SelectedNode.ImageIndex = 3;
                 }
             }
             catch (Exception ex)
@@ -484,6 +510,10 @@ namespace STLViewer
                     TreeDBView.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
                     TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode, Path.GetFileNameWithoutExtension(pathToModel));
                 }
+                if(TreeDBView.SelectedNode.Parent.ImageIndex == 3)
+                {
+                    TreeDBView.SelectedNode.Parent.ImageIndex = 1;
+                }
             }
             catch (Exception ex)
             {
@@ -511,6 +541,10 @@ namespace STLViewer
                         File.Delete(TreeDBView.SelectedNode.Name);
                         TreeDBView.SelectedNode.Remove();
                     }
+                }
+                if (TreeDBView.SelectedNode.ImageIndex == 1 && TreeDBView.SelectedNode.Nodes.Count == 0)
+                {
+                    TreeDBView.SelectedNode.ImageIndex = 3;
                 }
             }
             catch(Exception ex)
