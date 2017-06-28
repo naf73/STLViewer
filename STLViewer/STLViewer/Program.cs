@@ -20,29 +20,36 @@ namespace STLViewer
         [STAThread]
         static void Main(string[] args)
         {
-            bool createdNew = true;
-            using (Mutex mutex = new Mutex(true, "STLViewer", out createdNew))
+            try
             {
-                if (createdNew)
+                bool createdNew = true;
+                using (Mutex mutex = new Mutex(true, "STLViewer", out createdNew))
                 {
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new FormMain(args));
-                }
-                else
-                {
-                    Process current = Process.GetCurrentProcess();
-
-                    foreach (Process process in Process.GetProcessesByName(current.ProcessName))
+                    if (createdNew)
                     {
-                        if (process.Id != current.Id)
-                        {
-                            SetForegroundWindow(process.MainWindowHandle);
-                            MessageBox.Show(FormMain.Language.Error("repeat_start_application"), "STLViewer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                            break;
-                        }
+                        Application.EnableVisualStyles();
+                        Application.SetCompatibleTextRenderingDefault(false);
+                        Application.Run(new FormMain(args));
+            }
+                    else
+                    {
+                Process current = Process.GetCurrentProcess();
+
+                foreach (Process process in Process.GetProcessesByName(current.ProcessName))
+                {
+                    if (process.Id != current.Id)
+                    {
+                        SetForegroundWindow(process.MainWindowHandle);
+                        MessageBox.Show(FormMain.Language.Error("repeat_start_application"), "STLViewer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        break;
                     }
                 }
+            }
+        }
+    }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Source + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, "STLViewer", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
     }

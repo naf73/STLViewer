@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.IO.Compression;
+using System.Drawing;
 
 namespace STLViewer
 {
@@ -85,7 +86,6 @@ namespace STLViewer
                 Init();
                 string name; // имя модели
                 model = STLFormat.LoadBinary(TreeDBView.SelectedNode.Name, out name);
-                //NameLoadModel.Text = name; // получаем имя модели
                 ShowNameModelStatusLine();
                 offset_model = ModelCenter(model); // получаем центр модели
                 DrawScene();
@@ -622,9 +622,9 @@ namespace STLViewer
         private void ShowNameModelStatusLine()
         {
             NameLoadModel.Text = string.Empty;
-            if (TreeDBView.SelectedNode.ImageIndex == 2)
+            if (TreeDBView.SelectedNode != null && TreeDBView.SelectedNode.ImageIndex == 2)
             {
-                NameLoadModel.Text = Path.GetFileName(TreeDBView.SelectedNode.Name); // получаем имя модели
+                 NameLoadModel.Text = Path.GetFileName(TreeDBView.SelectedNode.Name); // получаем имя модели
             }
         }
 
@@ -686,6 +686,181 @@ namespace STLViewer
             finally
             {
                 SceneWidget.Show();
+            }
+        }
+
+        #endregion
+
+        #region Перетаскивание объектов мышью в дереве Базы моделей
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeDBView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            // Move the dragged node when the left mouse button is used.
+            if (e.Button == MouseButtons.Left)
+            {
+                DoDragDrop(e.Item, DragDropEffects.Move);
+            }
+
+            // Copy the dragged node when the right mouse button is used.
+            else if (e.Button == MouseButtons.Right)
+            {
+                DoDragDrop(e.Item, DragDropEffects.Copy);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeDBView_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.AllowedEffect;
+        }
+
+        private void TreeDBView_DragDrop(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = TreeDBView.PointToClient(new Point(e.X, e.Y));
+
+            // Retrieve the node at the drop location.
+            TreeNode targetNode = TreeDBView.GetNodeAt(targetPoint);
+
+            // Retrieve the node that was dragged.
+            TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+
+            // Запрещаем перетаскивать в узел модель
+            if (targetNode.ImageIndex == 2) return;
+
+            // Confirm that the node at the drop location is not 
+            // the dragged node or a descendant of the dragged node.
+            if (!draggedNode.Equals(targetNode) && !ContainsNode(draggedNode, targetNode))
+            {
+                // If it is a move operation, remove the node from its current 
+                // location and add it to the node at the drop location.
+                if (e.Effect == DragDropEffects.Move)
+                {
+                    // === Поверяем на одноименность элементов
+                    if (targetNode.Nodes.Count > 0)
+                    {
+                        foreach (TreeNode node in targetNode.Nodes)
+                        {
+                            if (node.Text == draggedNode.Text && node.ImageIndex == draggedNode.ImageIndex) return;
+                        }
+                    }
+                    
+                    string last_name;
+                    // ==== Меняем картинку если группа опустошается
+                    if (draggedNode.Parent.ImageIndex == 1 && draggedNode.Parent.Nodes.Count == 1)
+                    {
+                        draggedNode.Parent.ImageIndex = 3;
+                    }
+
+                    draggedNode.Remove();
+
+                    last_name = draggedNode.Name;
+                    // ====
+                    if (draggedNode.ImageIndex == 1)
+                    {
+                        draggedNode.Name = Path.Combine(targetNode.Name, Path.GetFileName(draggedNode.Name));
+                        Directory.Move(last_name, draggedNode.Name);
+                    }
+                    // ====
+                    if (draggedNode.ImageIndex == 2)
+                    {
+                        draggedNode.Name = Path.Combine(targetNode.Name, Path.GetFileName(draggedNode.Name));
+                        File.Move(last_name, draggedNode.Name);
+                    }
+                    // ====
+
+                    if (draggedNode.ImageIndex == 3)
+                    {
+                        draggedNode.Name = Path.Combine(targetNode.Name, Path.GetFileName(draggedNode.Name));
+                        Directory.Move(last_name, draggedNode.Name);
+                    }
+
+                    targetNode.Nodes.Add(draggedNode);
+                    ScanRootDir(pathDataModel);
+                }
+
+                // If it is a copy operation, clone the dragged node 
+                // and add it to the node at the drop location.
+                else if (e.Effect == DragDropEffects.Copy)
+                {
+                    // === Поверяем на одноименность элементов
+                    if (targetNode.Nodes.Count > 0)
+                    {
+                        foreach (TreeNode node in targetNode.Nodes)
+                        {
+                            if (node.Text == draggedNode.Text && node.ImageIndex == draggedNode.ImageIndex) return;
+                        }
+                    }
+
+                    targetNode.Nodes.Add((TreeNode)draggedNode.Clone());
+
+                    if(draggedNode.ImageIndex == 1 || draggedNode.ImageIndex == 3)
+                    {
+                        Text = draggedNode.Name;
+                        Text = Path.Combine(targetNode.Name, draggedNode.Text);
+                        CopyDir(draggedNode.Name, Path.Combine(targetNode.Name, Path.Combine(targetNode.Name, draggedNode.Text)));
+                    }
+
+                    if(draggedNode.ImageIndex == 2)
+                    {
+                        File.Copy(draggedNode.Name, Path.Combine(targetNode.Name, Path.GetFileName(draggedNode.Name)));
+                    }
+
+                }
+
+                // Expand the node at the location 
+                // to show the dropped node.
+                targetNode.Expand();
+
+                // ====
+                TreeDBView.SelectedNode = targetNode;
+
+                if(TreeDBView.SelectedNode.ImageIndex == 3)
+                {
+                    TreeDBView.SelectedNode.ImageIndex = 1;
+                }
+            }
+        }
+
+        // Determine whether one node is a parent 
+        // or ancestor of a second node.
+        private bool ContainsNode(TreeNode node1, TreeNode node2)
+        {
+            // Check the parent node of the second node.
+            if (node2.Parent == null) return false;
+            if (node2.Parent.Equals(node1)) return true;
+
+            // If the parent node is not null or equal to the first node, 
+            // call the ContainsNode method recursively using the parent of 
+            // the second node.
+            return ContainsNode(node1, node2.Parent);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="FromDir"></param>
+        /// <param name="ToDir"></param>
+        private void CopyDir(string FromDir, string ToDir)
+        {
+            Directory.CreateDirectory(ToDir);
+            foreach (string s1 in Directory.GetFiles(FromDir))
+            {
+                string s2 = ToDir + "\\" + Path.GetFileName(s1);
+                File.Copy(s1, s2);
+            }
+            foreach (string s in Directory.GetDirectories(FromDir))
+            {
+                CopyDir(s, ToDir + "\\" + Path.GetFileName(s));
             }
         }
 

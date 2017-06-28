@@ -36,7 +36,6 @@ namespace STLViewer
             // Инициализация сцены
             InitScene();
             ResizeScene();
-
             // === Инициализация цвета
             color_model = Color.Blue;
             color_background = Color.White;
@@ -49,7 +48,6 @@ namespace STLViewer
             {
                 string name; // имя модели
                 model = STLFormat.LoadBinary(args[0], out name);
-                //NameLoadModel.Text = name; // получаем имя модели
                 ShowNameModelStatusLine();
                 offset_model = ModelCenter(model); // получаем центр модели
                 SceneWidget.Show();
@@ -434,7 +432,7 @@ namespace STLViewer
             }
         }
 
-        #endregion
 
+        #endregion
     }
 }

@@ -127,6 +127,7 @@
             // 
             // TreeDBView
             // 
+            this.TreeDBView.AllowDrop = true;
             this.TreeDBView.ContextMenuStrip = this.contextMenuTreeView;
             this.TreeDBView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TreeDBView.ImageIndex = 0;
@@ -138,7 +139,10 @@
             this.TreeDBView.TabIndex = 5;
             this.TreeDBView.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeDBView_BeforeLabelEdit);
             this.TreeDBView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeBDView_AfterLabelEdit);
+            this.TreeDBView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TreeDBView_ItemDrag);
             this.TreeDBView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeDBView_AfterSelect);
+            this.TreeDBView.DragDrop += new System.Windows.Forms.DragEventHandler(this.TreeDBView_DragDrop);
+            this.TreeDBView.DragEnter += new System.Windows.Forms.DragEventHandler(this.TreeDBView_DragEnter);
             this.TreeDBView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeBDView_KeyUp);
             // 
             // contextMenuTreeView
