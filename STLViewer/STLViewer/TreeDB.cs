@@ -785,7 +785,6 @@ namespace STLViewer
                     }
 
                     targetNode.Nodes.Add(draggedNode);
-                    ScanRootDir(pathDataModel);
                 }
 
                 // If it is a copy operation, clone the dragged node 
@@ -828,6 +827,7 @@ namespace STLViewer
                 {
                     TreeDBView.SelectedNode.ImageIndex = 1;
                 }
+                ScanRootDir(pathDataModel);
             }
         }
 
