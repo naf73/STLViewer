@@ -573,75 +573,94 @@ namespace STLViewer
         private void TreeBDView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             TreeDBView.LabelEdit = false;
-            string name;
-            // ===
-            if (string.IsNullOrEmpty(e.Label))
+            // ====
+            if (e.Label.Intersect(System.IO.Path.GetInvalidFileNameChars()).Any())
             {
-                name = e.Node.Text;
-            }
-            else
-            {
-                name = e.Label;
-            }
-            // ==== группа
-            if (TreeDBView.SelectedNode.ImageIndex == 3)
-            {
-                TreeDBView.SelectedNode.ImageIndex = 1;
-            }
-            if (TreeDBView.SelectedNode.ImageIndex == 1)
-            {
-                if (Directory.Exists(e.Node.Name))
+                SceneWidget.Hide();
+                MessageBox.Show(Language.Error("donot_use_spec_symbol"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.CancelEdit = true;
+                if (e.Node.Name.Length == 0)
                 {
-                    string last_name = e.Node.Name;
-                    e.Node.Name = Path.Combine(e.Node.Parent.Name, name);
-                    TreeDBView.SelectedNode = e.Node;
-                    Directory.Move(last_name, e.Node.Name);
-
-                    // === Меняем все дочерним элементам поле Name
-
-                    foreach (TreeNode node in TreeDBView.SelectedNode.Nodes)
-                    {
-                        if (node.ImageIndex == 1)
-                        {
-                            node.Name = Path.Combine(node.Parent.Name, node.Text);
-                        }
-                        else
-                        {
-                            node.Name = Path.Combine(node.Parent.Name, node.Text + ".stl");
-                        }
-                    }
-                    // ===
+                    e.Node.Remove();
                 }
                 else
                 {
-                    e.Node.Name = Path.Combine(e.Node.Parent.Name, name);
                     TreeDBView.SelectedNode = e.Node;
-                    if (!Directory.Exists(e.Node.Name))
+                }
+                SceneWidget.Show();
+                //ScanRootDir(pathDataModel);
+            }
+            else
+            {
+
+                string name;
+                // ===
+                if (string.IsNullOrEmpty(e.Label))
+                {
+                    name = e.Node.Text;
+                }
+                else
+                {
+                    name = e.Label;
+                }
+                // ==== группа
+                if (TreeDBView.SelectedNode.ImageIndex == 3)
+                {
+                    TreeDBView.SelectedNode.ImageIndex = 1;
+                }
+                if (TreeDBView.SelectedNode.ImageIndex == 1)
+                {
+                    if (Directory.Exists(e.Node.Name))
                     {
-                        Directory.CreateDirectory(e.Node.Name);
+                        string last_name = e.Node.Name;
+                        e.Node.Name = Path.Combine(e.Node.Parent.Name, name);
+                        TreeDBView.SelectedNode = e.Node;
+                        Directory.Move(last_name, e.Node.Name);
+
+                        // === Меняем все дочерним элементам поле Name
+
+                        foreach (TreeNode node in TreeDBView.SelectedNode.Nodes)
+                        {
+                            if (node.ImageIndex == 1)
+                            {
+                                node.Name = Path.Combine(node.Parent.Name, node.Text);
+                            }
+                            else
+                            {
+                                node.Name = Path.Combine(node.Parent.Name, node.Text + ".stl");
+                            }
+                        }
+                        // ===
                     }
                     else
                     {
-                        MessageBox.Show(Language.Error("this_group_exists"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        e.Node.Remove();
+                        e.Node.Name = Path.Combine(e.Node.Parent.Name, name);
+                        TreeDBView.SelectedNode = e.Node;
+                        if (!Directory.Exists(e.Node.Name))
+                        {
+                            Directory.CreateDirectory(e.Node.Name);
+                        }
+                        else
+                        {
+                            MessageBox.Show(Language.Error("this_group_exists"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            e.Node.Remove();
+                        }
                     }
                 }
-            }
-            // ==== модель
-            if (TreeDBView.SelectedNode.ImageIndex == 2)
-            {
-                string last_name = e.Node.Name;
-                e.Node.Name = Path.Combine(e.Node.Parent.Name, name + ".stl");
-                TreeDBView.SelectedNode = FindNodeByName(e.Node.Parent, e.Node.Name);
-                if (!File.Exists(e.Node.Name))
+                // ==== модель
+                if (TreeDBView.SelectedNode.ImageIndex == 2)
                 {
-                    File.Copy(last_name, e.Node.Name);
-                    File.Delete(last_name);
+                    string last_name = e.Node.Name;
+                    e.Node.Name = Path.Combine(e.Node.Parent.Name, name + ".stl");
+                    TreeDBView.SelectedNode = null;
+                    if (!File.Exists(e.Node.Name))
+                    {
+                        File.Copy(last_name, e.Node.Name);
+                        File.Delete(last_name);
+                    }
+                    ScanRootDir(pathDataModel);
                 }
-                ScanRootDir(pathDataModel);
-                
             }
-
         }
 
         /// <summary>
@@ -735,7 +754,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void TreeDBView_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            TreeDBView.SelectedNode = TreeDBView.SelectedNode;
+           // TreeDBView.SelectedNode = TreeDBView.SelectedNode;
         }
 
         /// <summary>
@@ -2114,6 +2133,8 @@ namespace STLViewer
                                 return "Группа содержит группы и модели!!!\nУдалить группу?";
                             case "delete_model":
                                 return "Удалить модель?";
+                            case "donot_use_spec_symbol":
+                                return "Нельзя использовать спец. символы";
                         }
                         break;
                     case "English":
@@ -2135,6 +2156,8 @@ namespace STLViewer
                                 return "Group contain groups and models!!!\nDelete group?";
                             case "delete_model":
                                 return "Delete model?";
+                            case "donot_use_spec_symbol":
+                                return "Don't use spec symbols";
                         }
                         break;
                 }
