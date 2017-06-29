@@ -21,6 +21,9 @@ using Tao.Platform.Windows;
 
 namespace STLViewer
 {
+    /// <summary>
+    /// Класс главного окна
+    /// </summary>
     public partial class FormMain : Form
     {
         #region Глобальные переменные
@@ -1120,13 +1123,19 @@ namespace STLViewer
         {
             // ===
             SceneWidget.Hide();
-            saveFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";
+            //saveFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";
+            saveFileModelDialog.Filter = "ZIP files(*.zip)|*.zip";
+
             saveFileModelDialog.FileName = "";
             if (saveFileModelDialog.ShowDialog() == DialogResult.Cancel)
                 return;
             // получаем выбранный файл
             try
             {
+                if (File.Exists(saveFileModelDialog.FileName))
+                {
+                    File.Delete(saveFileModelDialog.FileName);
+                }
                 ZipFile.CreateFromDirectory(pathDataModel, saveFileModelDialog.FileName, CompressionLevel.Fastest, true);
             }
             catch (Exception ex)
@@ -1146,7 +1155,9 @@ namespace STLViewer
         {
             // ===
             SceneWidget.Hide();
-            openFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";
+            //openFileModelDialog.Filter = "ZIP files(*.zip)|*.zip|All files(*.*)|*.*";
+            openFileModelDialog.Filter = "ZIP files(*.zip)|*.zip";
+
             openFileModelDialog.FileName = "";
             if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
                 return;
@@ -1157,7 +1168,29 @@ namespace STLViewer
                 {
                     Directory.Delete(pathDataModel, true);
                 }
-                ZipFile.ExtractToDirectory(openFileModelDialog.FileName, Path.GetDirectoryName(pathDataModel));
+
+                ZipFile.ExtractToDirectory(openFileModelDialog.FileName, pathDataModel);
+
+                DirectoryInfo tempdirectoryInfo = new DirectoryInfo(pathDataModel);
+
+                DirectoryInfo directoryInfo = new DirectoryInfo(((tempdirectoryInfo.GetDirectories())[0]).FullName);
+
+                Text = directoryInfo.FullName + " " + tempdirectoryInfo.FullName;
+
+                foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
+                {
+                    Directory.Move(subdir.FullName, Path.Combine(pathDataModel, subdir.Name));
+                }
+                foreach (FileInfo file in directoryInfo.GetFiles())
+                {
+                    File.Move(file.FullName, Path.Combine(pathDataModel, file.Name));
+                }
+
+                if (Directory.Exists(directoryInfo.FullName))
+                {
+                    Directory.Delete(directoryInfo.FullName, true);
+                }
+
                 ScanRootDir(pathDataModel);
             }
             catch (Exception ex)

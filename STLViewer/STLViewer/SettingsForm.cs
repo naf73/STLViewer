@@ -66,9 +66,9 @@ namespace STLViewer
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(Path.Combine(txtPathRootDirDB.Text, "ModelBase")))
+            if (Directory.Exists(Path.Combine(txtPathRootDirDB.Text)))
             {
-                Properties.Settings.Default.RootDirDB = Path.Combine(txtPathRootDirDB.Text, "ModelBase");
+                Properties.Settings.Default.RootDirDB = Path.Combine(txtPathRootDirDB.Text);
                 Properties.Settings.Default.Save();
                 Close();
             }
