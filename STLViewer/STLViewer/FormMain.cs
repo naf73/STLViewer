@@ -489,6 +489,8 @@ namespace STLViewer
                 AddGroup_MenuItem.Enabled = AddGroup_ContextMenuTreeDBView.Enabled;
                 RemoveGroup_MenuItem.Enabled = RemoveGroup_ContextMenuTreeDBView.Enabled;
                 RemoveModel_MenuItem.Enabled = RemoveModel_ContextMenuTreeDBView.Enabled;
+                // === 
+                ColorModel_MenuItem.Enabled = true;
             }
             else
             {
@@ -500,6 +502,8 @@ namespace STLViewer
                 AddGroup_MenuItem.Enabled = AddGroup_ContextMenuTreeDBView.Enabled;
                 RemoveGroup_MenuItem.Enabled = RemoveGroup_ContextMenuTreeDBView.Enabled;
                 RemoveModel_MenuItem.Enabled = RemoveModel_ContextMenuTreeDBView.Enabled;
+                // ===
+                ColorModel_MenuItem.Enabled = false;
             }
 
             // --- Запрещаем удалять и переименовывать корневой узел
@@ -1644,19 +1648,16 @@ namespace STLViewer
         /// </summary>
         private void SetColorBackground()
         {
-            if (model.Count > 0)
+            SceneWidget.Hide();
+            if (colorDialog.ShowDialog() != DialogResult.Cancel)
             {
-                SceneWidget.Hide();
-                if (colorDialog.ShowDialog() != DialogResult.Cancel)
-                {
-                    color_background = colorDialog.Color;
-                    splitContainer1.Panel2.BackColor = color_background;
-                    Properties.Settings.Default.ColorBackground = colorDialog.Color;
-                    Properties.Settings.Default.Save();
-                }
-                DrawScene(); // === Отрисовываем сцену 
-                SceneWidget.Show();
+                color_background = colorDialog.Color;
+                splitContainer1.Panel2.BackColor = color_background;
+                Properties.Settings.Default.ColorBackground = colorDialog.Color;
+                Properties.Settings.Default.Save();
             }
+            DrawScene(); // === Отрисовываем сцену 
+            SceneWidget.Show();
         }
 
         /// <summary>
