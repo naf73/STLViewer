@@ -1042,7 +1042,7 @@ namespace STLViewer
         /// <param name="root"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        TreeNode FindNodeByName(TreeNode root, string name)
+        private TreeNode FindNodeByName(TreeNode root, string name)
         {
             if (root == null) return null;
             if (root.Text == name) return root;
@@ -1054,7 +1054,7 @@ namespace STLViewer
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        TreeNode FindNodeByName(string name)
+        private TreeNode FindNodeByName(string name)
         {
             return FindNodeByName(TreeDBView.TopNode, name);
         }
@@ -1975,7 +1975,20 @@ namespace STLViewer
 
             if ((directoryInfo.GetDirectories()).Length > 0 || (directoryInfo.GetFiles()).Length > 0)
             {
-                type_dir = 1;
+                type_dir = 3;
+                foreach (System.IO.FileInfo file in directoryInfo.GetFiles())
+                {
+                    if (STLFormat.ValidateSTL(file.FullName))
+                    {
+                        type_dir = 1;
+                    }
+                }
+
+                if ((directoryInfo.GetDirectories()).Length > 0)
+                {
+                    type_dir = 1;
+                }
+
             }
             else
             {
