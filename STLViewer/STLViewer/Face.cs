@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STLViewer
 {
-    class Face
+    public class Face
     {
         /// <summary>
         /// Нормаль полигона
