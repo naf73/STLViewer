@@ -53,15 +53,23 @@ namespace STLViewer
             // === Аргументы переданные приложению
             if (args.Length == 1)
             {
-                model = STLFormat.LoadBinary(args[0]);
-                ShowNameModelStatusLine();
-                offset_model = ModelCenter(model); // получаем центр модели
-                SceneWidget.Show();
-                TreeDBView.Nodes.Add(args[0], Path.GetFileNameWithoutExtension(args[0]), 2);
-                contextMenuTreeView.Enabled = false;
-                Database_MenuItem.Enabled = false;
+                try
+                {
+                    OpenModel(args[0]);
+                    SceneWidget.Show();
+                    if (model.Count > 0)
+                    {
+                        TreeDBView.Nodes.Add(args[0], Path.GetFileNameWithoutExtension(args[0]), 2);
+                    }
+                    contextMenuTreeView.Enabled = false;
+                    Database_MenuItem.Enabled = false;
+                }
+                catch(Exception ex)
+                {
+                     MessageBox.Show(Language.Error("mistake_stl_format"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else 
+            else
             {
                 ScanRootDir(pathDataModel);
             }
@@ -94,21 +102,21 @@ namespace STLViewer
         private void OpenModel_MenuItem_Click(object sender, EventArgs e)
         {
             SceneWidget.Hide();
-            openFileModelDialog.Filter = "STL files(*.stl)|*.stl|All files(*.*)|*.*";
+            openFileModelDialog.Filter = "STL files(*.stl)|*.stl";
             openFileModelDialog.FileName = "";
             if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
+            {
+                SceneWidget.Show();
                 return;
+            }
+            // ===
             try
             {
                 OpenModel(openFileModelDialog.FileName);
-                ShowNameModelStatusLine();
-                offset_model = ModelCenter(model); // получаем центр модели
-                DrawScene(); // отрисовываем модель
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(Language.Error("mistake_stl_format"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
             }
             SceneWidget.Show();
         }
@@ -920,7 +928,8 @@ namespace STLViewer
         private void AddNodeModel()
         {
             // --- Поулчаем имя файла и путь к нему
-            openFileModelDialog.Filter = "STL files(*.stl)|*.stl|All files(*.*)|*.*";
+            //openFileModelDialog.Filter = "STL files(*.stl)|*.stl|All files(*.*)|*.*";
+            openFileModelDialog.Filter = "STL files(*.stl)|*.stl";
             openFileModelDialog.FileName = "";
             if (openFileModelDialog.ShowDialog() == DialogResult.Cancel)
                 return;
@@ -928,34 +937,59 @@ namespace STLViewer
             string pathToModel = null;
             try
             {
+
                 // --- Дерево
                 if (TreeDBView.SelectedNode != null)
                 {
                     if (File.Exists(TreeDBView.SelectedNode.Name))
                     {
-                        pathToModel = Path.Combine(TreeDBView.SelectedNode.Parent.Name, Path.GetFileName(openFileModelDialog.FileName));
-                        File.Copy(openFileModelDialog.FileName, pathToModel);
-                        TreeDBView.SelectedNode.Parent.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
-                        TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode.Parent, Path.GetFileNameWithoutExtension(pathToModel));
+                        if (STLFormat.ValidateSTL(openFileModelDialog.FileName))
+                        {
+                            pathToModel = Path.Combine(TreeDBView.SelectedNode.Parent.Name, Path.GetFileName(openFileModelDialog.FileName));
+                            File.Copy(openFileModelDialog.FileName, pathToModel);
+                            TreeDBView.SelectedNode.Parent.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
+                            TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode.Parent, Path.GetFileNameWithoutExtension(pathToModel));
+                        }
+                        else
+                        {
+                            MessageBox.Show(Language.Error("mistake_stl_format"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        pathToModel = Path.Combine(TreeDBView.SelectedNode.Name, Path.GetFileName(openFileModelDialog.FileName));
-                        File.Copy(openFileModelDialog.FileName, pathToModel);
-                        TreeDBView.SelectedNode.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
-                        TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode, Path.GetFileNameWithoutExtension(pathToModel));
+                        if (STLFormat.ValidateSTL(openFileModelDialog.FileName))
+                        {
+                            pathToModel = Path.Combine(TreeDBView.SelectedNode.Name, Path.GetFileName(openFileModelDialog.FileName));
+                            File.Copy(openFileModelDialog.FileName, pathToModel);
+                            TreeDBView.SelectedNode.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
+                            TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode, Path.GetFileNameWithoutExtension(pathToModel));
+                        }
+                        else
+                        {
+                            MessageBox.Show(Language.Error("mistake_stl_format"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
                 {
-                    pathToModel = Path.Combine(pathDataModel, Path.GetFileName(openFileModelDialog.FileName));
-                    File.Copy(openFileModelDialog.FileName, pathToModel);
-                    TreeDBView.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
-                    TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode, Path.GetFileNameWithoutExtension(pathToModel));
+                    if (STLFormat.ValidateSTL(openFileModelDialog.FileName))
+                    {
+                        pathToModel = Path.Combine(pathDataModel, Path.GetFileName(openFileModelDialog.FileName));
+                        File.Copy(openFileModelDialog.FileName, pathToModel);
+                        TreeDBView.Nodes.Add(pathToModel, Path.GetFileNameWithoutExtension(pathToModel), 2);
+                        TreeDBView.SelectedNode = FindNodeByName(TreeDBView.SelectedNode, Path.GetFileNameWithoutExtension(pathToModel));
+                    }
+                    else
+                    {
+                        MessageBox.Show(Language.Error("mistake_stl_format"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                if (TreeDBView.SelectedNode.Parent.ImageIndex == 3)
+                if (TreeDBView.SelectedNode != null && TreeDBView.SelectedNode.Parent != null)
                 {
-                    TreeDBView.SelectedNode.Parent.ImageIndex = 1;
+                    if (TreeDBView.SelectedNode.Parent.ImageIndex == 3)
+                    {
+                        TreeDBView.SelectedNode.Parent.ImageIndex = 1;
+                    }
                 }
             }
             catch (Exception ex)
@@ -1571,8 +1605,19 @@ namespace STLViewer
         /// </summary>
         public void OpenModel(string path)
         {
-            model.Clear(); // очищаем текущую модель
-            model = STLFormat.LoadBinary(path);
+
+            if (STLFormat.ValidateSTL(path))
+            {
+                model.Clear(); // очищаем текущую модель
+                model = STLFormat.LoadBinary(path);
+                ShowNameModelStatusLine();
+                offset_model = ModelCenter(model); // получаем центр модели
+                DrawScene(); // отрисовываем модель
+            }
+            else
+            {
+                MessageBox.Show(Language.Error("mistake_stl_format"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -1978,7 +2023,10 @@ namespace STLViewer
                 //curNode.Nodes.Add("Model", file.Name);
                 if (file.Extension == ".stl")
                 {
-                    curNode.Nodes.Add(file.FullName, Path.GetFileNameWithoutExtension(file.Name), 2);
+                    if (STLFormat.ValidateSTL(file.FullName))
+                    {
+                        curNode.Nodes.Add(file.FullName, Path.GetFileNameWithoutExtension(file.Name), 2);
+                    }
                 }
             }
         }

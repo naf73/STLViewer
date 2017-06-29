@@ -73,10 +73,39 @@ namespace STLViewer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("NAF Load Model" + Environment.NewLine + ex.StackTrace);
             }
             // Возвращаем полученный результат
             return model; 
+        }
+
+        /// <summary>
+        /// Валидация файла stl
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool ValidateSTL(string path)
+        {
+            // ===
+            try
+            {
+                List<Face> verify_model = new List<Face>();
+                verify_model.Clear();
+                verify_model = LoadBinary(path);
+                if(verify_model.Count>0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("NAF Validate" + Environment.NewLine + ex.StackTrace);
+                return false;
+            }
         }
     }
 }
