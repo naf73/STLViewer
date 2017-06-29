@@ -128,6 +128,7 @@
             // TreeDBView
             // 
             this.TreeDBView.AllowDrop = true;
+            this.TreeDBView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TreeDBView.ContextMenuStrip = this.contextMenuTreeView;
             this.TreeDBView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TreeDBView.ImageIndex = 0;

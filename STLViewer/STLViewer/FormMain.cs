@@ -494,6 +494,7 @@ namespace STLViewer
                 RemoveModel_MenuItem.Enabled = RemoveModel_ContextMenuTreeDBView.Enabled;
                 // === 
                 ColorModel_MenuItem.Enabled = true;
+                ExportPicture_MenuItem.Enabled = true;
             }
             else
             {
@@ -507,6 +508,7 @@ namespace STLViewer
                 RemoveModel_MenuItem.Enabled = RemoveModel_ContextMenuTreeDBView.Enabled;
                 // ===
                 ColorModel_MenuItem.Enabled = false;
+                ExportPicture_MenuItem.Enabled = false;
             }
 
             // --- Запрещаем удалять и переименовывать корневой узел
