@@ -361,7 +361,7 @@ namespace STLViewer
         /// <param name="e"></param>
         private void About_MenuItem_Click(object sender, EventArgs e)
         {
-            AboutSTLViewer about = new AboutSTLViewer();
+            AboutSTLViewer about = new AboutSTLViewer(Text);
             about.ShowDialog();
         }
 
