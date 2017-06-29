@@ -584,23 +584,34 @@ namespace STLViewer
                 e.Node.Remove();
             }
 
+            foreach (TreeNode node in e.Node.Parent.Nodes)
+            {
+                if (e.Label == node.Text)
+                {
+                    e.CancelEdit = true;
+                    return;
+                }
+            }
 
             // ====
-            if (e.Label.Intersect(System.IO.Path.GetInvalidFileNameChars()).Any())
+            if (e.Label != null)
             {
-                SceneWidget.Hide();
-                MessageBox.Show(Language.Error("donot_use_spec_symbol"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.CancelEdit = true;
-                if (e.Node.Name.Length == 0)
+                if (e.Label.Intersect(System.IO.Path.GetInvalidFileNameChars()).Any())
                 {
-                    e.Node.Remove();
+                    SceneWidget.Hide();
+                    MessageBox.Show(Language.Error("donot_use_spec_symbol"), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.CancelEdit = true;
+                    if (e.Node.Name.Length == 0)
+                    {
+                        e.Node.Remove();
+                    }
+                    else
+                    {
+                        TreeDBView.SelectedNode = e.Node;
+                    }
+                    SceneWidget.Show();
+                    return;
                 }
-                else
-                {
-                    TreeDBView.SelectedNode = e.Node;
-                }
-                SceneWidget.Show();
-                return;
             }
 
             // ===
